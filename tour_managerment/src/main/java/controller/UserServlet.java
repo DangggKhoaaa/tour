@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 
-@WebServlet(name = "userServlet", value = "/admin/user")
+@WebServlet(name = "userServlet", value = "/user")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserService();
 
@@ -41,8 +41,8 @@ public class UserServlet extends HttpServlet {
             case "userPage":
                 showUserPage(req, resp);
                 break;
-            default:
-                showUser(req, resp);
+//            default:
+//                showUser(req, resp);
         }
     }
 
@@ -67,18 +67,18 @@ public class UserServlet extends HttpServlet {
         req.getRequestDispatcher("/register.jsp").forward(req, resp);
     }
 
-    private void showUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String search = req.getParameter("search");
-        int page = 1;
-        if (req.getParameter("page") != null) {
-            page = Integer.parseInt(req.getParameter("page"));
-        }
-        int TOTAL_ITEMS = 5;
-        Pageable pageable = new Pageable(search, page, TOTAL_ITEMS);
-        req.setAttribute("pageable", pageable);
-        req.setAttribute("users", userService.findAll(pageable));
-        req.getRequestDispatcher("/user.jsp").forward(req, resp);
-    }
+//    private void showUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        String search = req.getParameter("search");
+//        int page = 1;
+//        if (req.getParameter("page") != null) {
+//            page = Integer.parseInt(req.getParameter("page"));
+//        }
+//        int TOTAL_ITEMS = 5;
+//        Pageable pageable = new Pageable(search, page, TOTAL_ITEMS);
+//        req.setAttribute("pageable", pageable);
+//        req.setAttribute("users", userService.findAll(pageable));
+//        req.getRequestDispatcher("/user.jsp").forward(req, resp);
+//    }
     private void showUserPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
@@ -100,8 +100,8 @@ public class UserServlet extends HttpServlet {
                 break;
             case "updateInfo":
                 updateInfo(req, resp);
-            default:
-                showUser(req, resp);
+//            default:
+//                showUser(req, resp);
         }
     }
 
@@ -117,7 +117,8 @@ public class UserServlet extends HttpServlet {
         String cccd = req.getParameter("cccd");
         User user = new User(id, name, dob, gender, phone, email, address, cccd);
         userService.updateInfo(user);
-        req.setAttribute("message", "Doi thong tin thanh cong");
+        req.setAttribute("message", "Đổi thông tin thành công!");
+        req.setAttribute("genders", Gender.values());
         req.setAttribute("user", user);
         req.getRequestDispatcher("/user.jsp").forward(req, resp);
     }
@@ -130,7 +131,7 @@ public class UserServlet extends HttpServlet {
         if (PasswordEncoder.check(oldPassword, user.getPassword())) {
             user.setPassword(newPassword);
             userService.updatePassword(user);
-            req.setAttribute("message", "Đổi mật khẩu thành công");
+            req.setAttribute("message", "Đổi mật khẩu thành công!");
             req.setAttribute("user", user);
             req.getRequestDispatcher("/user.jsp").forward(req, resp);
         } else {

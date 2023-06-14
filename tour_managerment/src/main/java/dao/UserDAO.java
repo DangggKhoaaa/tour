@@ -12,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends ConectionDatabase{
-    private final String SELECT_USERS = "SELECT * FROM user u WHERE lower(u.full_name) LIKE ? OR lower(u.user_name) LIKE ? OR lower(u.user_password) LIKE ? OR lower(u.gender) LIKE ? OR lower(u.phone) LIKE ? OR lower(u.email) LIKE ? OR lower(u.address) LIKE ? OR lower(u.cccd) LIKE ? OR lower(u.role) LIKE ? LIMIT ? OFFSET ?";
+    private final String SELECT_USERS = "SELECT * FROM user u WHERE lower(u.full_name) LIKE ? OR lower(u.user_name) LIKE ? OR lower(u.gender) LIKE ? OR lower(u.phone) LIKE ? OR lower(u.email) LIKE ? OR lower(u.address) LIKE ? OR lower(u.cccd) LIKE ? OR lower(u.role) LIKE ? LIMIT ? OFFSET ?";
     private final String SELECT_USERS_BY_ID = "SELECT * FROM user u WHERE u.user_id = ?";
     private final String SELECT_USERS_BY_USERNAME = "SELECT * FROM user u WHERE u.user_name = ?";
     private final String INSERT_USERS = "INSERT INTO user (user_name, user_password, full_name, dob, gender, phone, email, address, cccd, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String UPDATE_PASSWORD = "UPDATE user SET user_password = ? WHERE user_id = ?";
     private final String UPDATE_INFO = "UPDATE user SET full_name = ?, dob = ?, gender = ?, phone = ?, email = ?, address = ?, cccd = ? WHERE user_id = ?";
-    private final String TOTAL_USERS = "SELECT COUNT(*) AS total FROM user u WHERE lower(u.full_name) LIKE ? OR lower(u.user_name) LIKE ? OR lower(u.user_password) LIKE ? OR lower(u.gender) LIKE ? OR lower(u.phone) LIKE ? OR lower(u.email) LIKE ? OR lower(u.address) LIKE ? OR lower(u.cccd) LIKE ? OR lower(u.role) LIKE ?";
+    private final String DELETE_USERS = "DELETE FROM user WHERE user_id = ?";
+    private final String TOTAL_USERS = "SELECT COUNT(*) AS total FROM user u WHERE lower(u.full_name) LIKE ? OR lower(u.user_name) LIKE ? OR lower(u.gender) LIKE ? OR lower(u.phone) LIKE ? OR lower(u.email) LIKE ? OR lower(u.address) LIKE ? OR lower(u.cccd) LIKE ? OR lower(u.role) LIKE ?";
     public List<User> findAll(Pageable pageable) {
         List<User> users = new ArrayList<>();
         String search = pageable.getSearch();
@@ -38,9 +39,8 @@ public class UserDAO extends ConectionDatabase{
             preparedStatement.setString(6, search);
             preparedStatement.setString(7, search);
             preparedStatement.setString(8, search);
-            preparedStatement.setString(9, search);
-            preparedStatement.setInt(10, pageable.getTotalItems());
-            preparedStatement.setInt(11, (pageable.getPage() - 1) * pageable.getTotalItems());
+            preparedStatement.setInt(9, pageable.getTotalItems());
+            preparedStatement.setInt(10, (pageable.getPage() - 1) * pageable.getTotalItems());
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -73,7 +73,6 @@ public class UserDAO extends ConectionDatabase{
             statementTotalUsers.setString(6, search);
             statementTotalUsers.setString(7, search);
             statementTotalUsers.setString(8, search);
-            statementTotalUsers.setString(9, search);
             ResultSet rsTotalUser = statementTotalUsers.executeQuery();
             while (rsTotalUser.next()){
                 double totalUsers = rsTotalUser.getDouble("total");
@@ -195,6 +194,16 @@ public class UserDAO extends ConectionDatabase{
             preparedStatement.setString(6, user.getAddress());
             preparedStatement.setString(7, user.getCccd());
             preparedStatement.setInt(8, user.getId());
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void deleteUsers(int id) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USERS)) {
+            preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

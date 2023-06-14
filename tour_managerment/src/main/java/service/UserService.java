@@ -29,4 +29,7 @@ public class UserService {
     public void updateInfo(User user) {
         userDAO.updateInfo(user);
     }
+    public void deleteUsers(int id) {
+        userDAO.deleteUsers(id);
+    }
 }

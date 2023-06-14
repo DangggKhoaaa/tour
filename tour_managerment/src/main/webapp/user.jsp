@@ -13,9 +13,9 @@
 </head>
 <body>
 <h1>${message}</h1>
-<h3>CHao mung ${user.userName}</h3>
-<a href="/admin/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>
+<h3>Xin chào ${user.userName}!</h3>
+<a href="/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>
 <br>
-<a href="/admin/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
+<a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
 </body>
 </html>

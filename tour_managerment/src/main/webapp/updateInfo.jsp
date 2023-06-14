@@ -12,7 +12,7 @@
     <title>Đổi thông tin</title>
 </head>
 <body>
-<form action="/admin/user?action=updateInfo" method="post">
+<form action="/user?action=updateInfo" method="post">
     <input type="hidden" name="user_id" value="${user.id}">
 
     <label for="full_name">Tên</label>
@@ -22,9 +22,13 @@
 
     <label for="gender">Giới tính</label>
     <select name="gender" id="gender" value="${user.gender}">
-        <option>--None--</option>
         <c:forEach items="${genders}" var="gender">
-            <option value="${gender}">${gender}</option>
+            <c:if test="${gender == user.gender}">
+                <option selected value="${gender}">${gender}</option>
+            </c:if>
+            <c:if test="${gender != user.gender}">
+                <option value="${gender}">${gender}</option>
+            </c:if>
         </c:forEach>
     </select><br>
 

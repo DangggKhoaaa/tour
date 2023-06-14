@@ -12,22 +12,19 @@
     <title>INFORMATION</title>
 </head>
 <body>
-<form action="admin/user" method="get">
+<form action="admin?action=showUser" method="get">
     <label for="search">Tìm Kiếm</label>
     <input type="search" name="search" id="search" value="${pageable.search}" onsearch="onClearSearch()">
     <button id="searchBtn">Search</button>
 </form>
-
+<h3>${message}</h3>
 <c:if test="${requestScope['users'].size() != 0}">
-<%--    <button>--%>
-<%--        <a href="user?action=create">Đăng ký</a>--%>
-<%--    </button>--%>
     <form action="user" method="post">
         <table border="1">
             <tr align="center">
                 <td>ID</td>
                 <td>Tài Khoản</td>
-                <td>Mật Khẩu</td>
+<%--                <td>Mật Khẩu</td>--%>
                 <td>Tên</td>
                 <td>Ngày sinh</td>
                 <td>Giới tính</td>
@@ -36,13 +33,13 @@
                 <td>Địa chỉ</td>
                 <td>Căn cước công dân</td>
                 <td>Vai trò</td>
-                <td colspan="2">Action</td>
+                <td colspan=>Action</td>
             </tr>
             <c:forEach var="user" items="${users}">
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.userName}</td>
-                    <td>${user.password}</td>
+<%--                    <td>${user.password}</td>--%>
                     <td>${user.name}</td>
                     <td>${user.dob}</td>
                     <td>${user.gender}</td>
@@ -51,15 +48,15 @@
                     <td>${user.address}</td>
                     <td>${user.cccd}</td>
                     <td>${user.role}</td>
+<%--                    <td>--%>
+<%--                        <button>--%>
+<%--                            <a href="/admin?action=update&id=${user.id}"--%>
+<%--                               onclick="return confirm('Do you want to edit ${user.name}?')">Edit</a>--%>
+<%--                        </button>--%>
+<%--                    </td>--%>
                     <td>
                         <button>
-                            <a href="/admin/user?action=update&id=${user.id}"
-                               onclick="return confirm('Do you want to edit ${user.name}?')">Edit</a>
-                        </button>
-                    </td>
-                    <td>
-                        <button>
-                            <a href="/admin/user?action=delete&id=${user.id}"
+                            <a href="/admin?action=delete&id=${user.id}"
                                onclick="return confirm('Do you want to remove ${user.name}?')">Delete</a>
                         </button>
                     </td>
@@ -68,8 +65,8 @@
         </table>
     </form>
     <ul>
-        <c:forEach begin="1" end="${pageable.totalPages}" var="page">
-            <li><a href="/admin/user?page=${page}&search=${pageable.search}">${page}</a></li>
+        <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+            <li><a href="/admin?page=${page}&search=${pageable.search}">${page}</a></li>
         </c:forEach>
 
     </ul>

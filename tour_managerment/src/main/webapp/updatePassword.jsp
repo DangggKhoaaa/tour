@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>${message}</h1>
-<form action="/admin/user?action=updatePassword" method="post">
+<form action="/user?action=updatePassword" method="post">
     <input type="hidden" name="user_id" value="${user.id}">
 
     <label for="user_password1">Mật khẩu cũ</label>

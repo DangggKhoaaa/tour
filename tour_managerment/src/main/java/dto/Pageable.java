@@ -3,7 +3,7 @@ package dto;
 public class Pageable {
     private String search;
     private int page;
-    private int totalItems =5;
+    private int totalItems = 5;
     private int totalPage;
     private String nameField;
 
