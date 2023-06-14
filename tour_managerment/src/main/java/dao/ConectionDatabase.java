@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectionDatabase {
-    protected String jdbcURL = "jdbc:mysql://localhost:3306/case_study_md3";
+    protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
     protected String jdbcUsername = "root";
 
-    protected String jdbcPassword = "Kutronboy2701";
+    protected String jdbcPassword = "123456";
     protected Connection getConnection() {
         Connection connection = null;
         try {

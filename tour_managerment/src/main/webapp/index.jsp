@@ -194,3 +194,11 @@
 </div>
 </body>
 <jsp:include page="footer.jsp"/>
+=======
+<jsp:include page="header.jsp" />
+
+<a href="login.jsp">login</a>
+<a href="service_manager">service</a>
+
+<jsp:include page="footer.jsp" />
+>>>>>>> Stashed changes

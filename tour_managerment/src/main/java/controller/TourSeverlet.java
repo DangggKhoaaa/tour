@@ -94,7 +94,7 @@ public class TourSeverlet extends HttpServlet {
         req.setAttribute("pageable",pageAble);
         List<Tour> tours =tourService.findAll(pageAble);
         req.setAttribute("tours",tourService.findAll(pageAble));
-        req.getRequestDispatcher("show.jsp").forward(req,resp);
+        req.getRequestDispatcher("showTour.jsp").forward(req,resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
