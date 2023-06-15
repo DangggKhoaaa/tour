@@ -17,6 +17,8 @@ public class AdminServlet extends HttpServlet {
     UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         if (action == null)
             action = "";
@@ -43,11 +45,18 @@ public class AdminServlet extends HttpServlet {
         if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
-        int TOTAL_ITEMS = 5;
+        int TOTAL_ITEMS = 8;
         Pageable pageable = new Pageable(search, page, TOTAL_ITEMS);
         req.setAttribute("pageable", pageable);
         List<User> users = userService.findAll(pageable);
         req.setAttribute("users", users);
-        req.getRequestDispatcher("/adminUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        doGet(req, resp);
     }
 }

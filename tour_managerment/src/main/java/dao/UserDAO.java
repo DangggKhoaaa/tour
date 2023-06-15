@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends ConectionDatabase{
-    private final String SELECT_USERS = "SELECT * FROM user u WHERE lower(u.full_name) LIKE ? OR lower(u.user_name) LIKE ? OR lower(u.gender) LIKE ? OR lower(u.phone) LIKE ? OR lower(u.email) LIKE ? OR lower(u.address) LIKE ? OR lower(u.cccd) LIKE ? OR lower(u.role) LIKE ? LIMIT ? OFFSET ?";
-    private final String SELECT_USERS_BY_ID = "SELECT * FROM user u WHERE u.user_id = ?";
-    private final String SELECT_USERS_BY_USERNAME = "SELECT * FROM user u WHERE u.user_name = ?";
+    private final String SELECT_USERS = "SELECT * FROM user WHERE lower(full_name) LIKE ? OR lower(user_name) LIKE ? OR lower(gender) LIKE ? OR lower(phone) LIKE ? OR lower(email) LIKE ? OR lower(address) LIKE ? OR lower(cccd) LIKE ? OR lower(role) LIKE ? LIMIT ? OFFSET ?";
+    private final String SELECT_USERS_BY_ID = "SELECT * FROM user WHERE user_id = ?";
+    private final String SELECT_USERS_BY_USERNAME = "SELECT * FROM user WHERE user_name = ?";
     private final String INSERT_USERS = "INSERT INTO user (user_name, user_password, full_name, dob, gender, phone, email, address, cccd, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String UPDATE_PASSWORD = "UPDATE user SET user_password = ? WHERE user_id = ?";
     private final String UPDATE_INFO = "UPDATE user SET full_name = ?, dob = ?, gender = ?, phone = ?, email = ?, address = ?, cccd = ? WHERE user_id = ?";

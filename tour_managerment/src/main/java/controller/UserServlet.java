@@ -25,6 +25,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         if (action == null)
             action = "";
@@ -67,18 +69,6 @@ public class UserServlet extends HttpServlet {
         req.getRequestDispatcher("/register.jsp").forward(req, resp);
     }
 
-//    private void showUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String search = req.getParameter("search");
-//        int page = 1;
-//        if (req.getParameter("page") != null) {
-//            page = Integer.parseInt(req.getParameter("page"));
-//        }
-//        int TOTAL_ITEMS = 5;
-//        Pageable pageable = new Pageable(search, page, TOTAL_ITEMS);
-//        req.setAttribute("pageable", pageable);
-//        req.setAttribute("users", userService.findAll(pageable));
-//        req.getRequestDispatcher("/user.jsp").forward(req, resp);
-//    }
     private void showUserPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
@@ -88,6 +78,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         if (action == null)
             action = "";
@@ -142,6 +134,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void createUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String userName = req.getParameter("user_name");
         String userPassword = PasswordEncoder.encode(req.getParameter("user_password"));
         String name = req.getParameter("full_name");
@@ -156,6 +149,7 @@ public class UserServlet extends HttpServlet {
         User user = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
         user.setRole(Role.USER);
         userService.create(user);
+        req.setAttribute("message", "Tạo tài khoản thành công!");
         req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 

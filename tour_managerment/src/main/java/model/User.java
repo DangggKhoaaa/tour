@@ -19,6 +19,19 @@ public class User {
     public User() {
     }
 
+    public User(int id, String userName, String name, Date dob, Gender gender, String phone, String email, String address, String cccd, Role role) {
+        this.id = id;
+        this.userName = userName;
+        this.name = name;
+        this.dob = dob;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.cccd = cccd;
+        this.role = role;
+    }
+
     public User(int id, String password) {
         this.id = id;
         this.password = password;

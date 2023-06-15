@@ -24,6 +24,11 @@
     <script src="../assets/js/init-alpine.js"></script>
 </head>
 <body>
+<c:if test="${requestScope['message'] != null}"  >
+    <script>
+        alert("${message}")
+    </script>
+</c:if>
 <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
     <div
             class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
@@ -85,14 +90,6 @@
                     <hr class="my-8"/>
 
 
-                    <p class="mt-4">
-                        <a
-                                class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                                href="./forgot-password.html"
-                        >
-                            Quên mật khẩu
-                        </a>
-                    </p>
                     <p class="mt-1">
                         <a
                                 class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
