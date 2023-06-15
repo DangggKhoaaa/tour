@@ -13,6 +13,9 @@ public class ServiceSV {
     public List<ServiceModel> findAll(Pageable pageable){
         return serviceDAO.findAll(pageable);
     }
+    public List<ServiceModel> findAll(){
+        return serviceDAO.findAll();
+    }
     public ServiceModel findById(int id){
         return serviceDAO.findById(id);
     }

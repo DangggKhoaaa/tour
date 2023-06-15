@@ -6,6 +6,7 @@ import model.ServiceModel;
 import model.Transport;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,14 @@ public class ServiceDAO extends ConectionDatabase{
     private final String INSERT_SERVICE = "INSERT INTO `service` (`hotel_id`, `transport_id`) VALUES (?, ?);";
     private final String UPDATE_SERVICE = "UPDATE `service` SET `hotel_id` = ?, `transport_id` = ? WHERE (service.`service_id` = ?);";
     private final String DELETE_SERVICE_BY_ID = "delete from service where service.service_id = ?;";
+    private final String SELECT_ALL_SERVICE_NO_PAGE = "select service.service_id,service.hotel_id,hotel.`name` as hotel_name,hotel.price as hotel_price,hotel.`description` as hotel_description," +
+            "service.transport_id,transport.`name` as transport_name,transport.price as transport_price,transport.`description` as transport_description," +
+            "\t\t\tSUM(hotel.price + transport.price) as total_price,\n" +
+            "concat(hotel.`description`, ',', transport.`description`) AS `description` " +
+            "from service " +
+            "LEFT JOIN hotel ON service.hotel_id = hotel.hotel_id " +
+            "LEFT JOIN transport ON service.transport_id = transport.transport_id " +
+            "GROUP BY service.service_id;";
 
     public ServiceDAO() {
     }
@@ -120,6 +129,42 @@ public class ServiceDAO extends ConectionDatabase{
             System.out.println(e.getMessage());
         }
         return services;
+    }
+
+    public List<ServiceModel> findAll(){
+        List<ServiceModel> serviceModels = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(SELECT_ALL_SERVICE_NO_PAGE);) {
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("service_id");
+
+                int idHotel = rs.getInt("hotel_id");
+                String hotelName = rs.getString("hotel_name");
+                double hotelPrice = rs.getDouble("hotel_price");
+                String hotelDescription = rs.getString("hotel_description");
+
+                int idTransport = rs.getInt("transport_id");
+                String transportName = rs.getString("transport_name");
+                double transportPrice = rs.getDouble("transport_price");
+                String transportDescription = rs.getString("transport_description");
+
+                double total_price = rs.getDouble("total_price");
+                String description = rs.getString("description");
+
+                serviceModels.add(new ServiceModel(id, new Hotel(idHotel,hotelName,hotelPrice,hotelDescription),
+                        new Transport(idTransport,transportName,transportPrice,transportDescription),
+                        total_price, description));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return serviceModels;
     }
 
     public ServiceModel findById(int id){
