@@ -13,6 +13,18 @@
     <input type="search" name="search" id="search" value="${pageable.search}" onsearch="onClearSearch()" />
     <button id="searchButton">Search</button>
 </form>
+<td>
+    <c:if test="${pageable.sortBy== 'desc'}">
+        <a href="tours?page=${pageable.page}&search=${pageable.search}&sortby=asc&fieldName=t1.price">
+           <button> sắp xếp theo giá</button>
+        </a>
+    </c:if>
+    <c:if test="${pageable.sortBy== 'asc'}">
+        <a href="tours?page=${pageable.page}&search=${pageable.search}&sortby=desc&fieldName=t1.price">
+            <button> sắp xếp theo giá</button>
+        </a>
+    </c:if>
+</td>
 <a href="tours?action=create">Create Book</a>
 <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
@@ -90,6 +102,10 @@
         </c:forEach>
         </td>
 </tbody>
-
+            <script>
+                function onClearSearch(){
+                    searchButton.click();
+                }
+            </script>
 
 <jsp:include page="footer.jsp" />

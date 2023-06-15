@@ -39,10 +39,33 @@ public class TourSeverlet extends HttpServlet {
                 break;
             case"delete":
                 deleteTour(req,resp);
+            case"oder":
+                showOder(req,resp);
                 break;
             default:
                 showTour(req,resp);
         }
+    }
+
+    private void showOder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="t1.tour_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        req.setAttribute("pageable",pageAble);
+        List<Tour> tours =tourService.findAll(pageAble);
+        req.setAttribute("tours",tourService.findAll(pageAble));
+        req.getRequestDispatcher("oderTour.jsp").forward(req,resp);
     }
 
     private void deleteTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -84,7 +107,7 @@ public class TourSeverlet extends HttpServlet {
         }
         String fieldName="t1.tour_id";
         if(req.getParameter("fieldName") != null){
-            fieldName = req.getParameter("page");
+            fieldName = req.getParameter("fieldName");
         }
         String sortby ="desc";
         if(req.getParameter("sortby") != null){

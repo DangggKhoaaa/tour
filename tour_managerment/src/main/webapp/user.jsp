@@ -7,15 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<h1>${message}</h1>
-<h3>Xin chào ${user.userName}!</h3>
-<a href="/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>
-<br>
-<a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
-</body>
-</html>
+
+
+
