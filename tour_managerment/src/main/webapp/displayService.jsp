@@ -125,10 +125,10 @@
         <tbody
                 class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
         >
-        <c:forEach items="${services}" var="service">
+        <c:forEach items="${services}" var="ticketFalse">
             <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 text-sm">
-                        ${service.getId()}
+                        ${ticketFalse.getId()}
                 </td>
                 <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
@@ -142,9 +142,9 @@
                             <%--                            ></div>--%>
                             <%--                        </div>--%>
                         <div>
-                            <p class="font-semibold">${service.getHotelName().getName()}</p>
+                            <p class="font-semibold">${ticketFalse.getHotelName().getName()}</p>
                             <p class="text-xs text-gray-600 dark:text-gray-400">
-                                    ${service.getHotelName().getDescription()}
+                                    ${ticketFalse.getHotelName().getDescription()}
                             </p>
                         </div>
                     </div>
@@ -161,9 +161,9 @@
                             <%--                            ></div>--%>
                             <%--                        </div>--%>
                         <div>
-                            <p class="font-semibold">${service.getTransportName().getName()}</p>
+                            <p class="font-semibold">${ticketFalse.getTransportName().getName()}</p>
                             <p class="text-xs text-gray-600 dark:text-gray-400">
-                                    ${service.getTransportName().getDescription()}
+                                    ${ticketFalse.getTransportName().getDescription()}
                             </p>
                         </div>
                     </div>
@@ -173,15 +173,15 @@
                         <span
                                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
                         >
-                          ${service.getTotalPrice()} đ
+                          ${ticketFalse.getTotalPrice()} đ
                         </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
-                        ${service.getDescription()}
+                        ${ticketFalse.getDescription()}
                 </td>
                 <td class="px-4 py-3">
                     <div class="flex items-center space-x-4 text-sm">
-                        <a href="service_manager?action=edit&id=${service.getId()}">
+                        <a href="service_manager?action=edit&id=${ticketFalse.getId()}">
                             <button
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                     aria-label="Edit"
@@ -200,7 +200,7 @@
                         </a>
 
                         <a onclick="return confirm('Do you want to delete this Service?')"
-                           href="service_manager?action=delete&id=${service.getId()}">
+                           href="service_manager?action=delete&id=${ticketFalse.getId()}">
                             <button
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                     aria-label="Delete"

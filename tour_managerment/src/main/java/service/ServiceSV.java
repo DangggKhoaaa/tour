@@ -28,4 +28,7 @@ public class ServiceSV {
     public void deleteService(int id){
         serviceDAO.deleteService(id);
     }
+    public int find_id (){
+        return serviceDAO.findID();
+    }
 }

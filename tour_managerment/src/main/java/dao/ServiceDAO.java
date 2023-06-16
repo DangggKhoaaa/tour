@@ -66,6 +66,7 @@ public class ServiceDAO extends ConectionDatabase{
             "LEFT JOIN hotel ON service.hotel_id = hotel.hotel_id " +
             "LEFT JOIN transport ON service.transport_id = transport.transport_id " +
             "GROUP BY service.service_id;";
+    private final String find_id =" SELECT max(service.service_id) as id FROM service ;";
 
     public ServiceDAO() {
     }
@@ -212,6 +213,8 @@ public class ServiceDAO extends ConectionDatabase{
                      .prepareStatement(INSERT_SERVICE);) {
 
             System.out.println(preparedStatement);
+            int ht=serviceModel.getHotelName().getId();
+            int tra=serviceModel.getTransportName().getId();
             preparedStatement.setInt(1, serviceModel.getHotelName().getId());
             preparedStatement.setInt(2, serviceModel.getTransportName().getId());
 
@@ -254,5 +257,21 @@ public class ServiceDAO extends ConectionDatabase{
         }
     }
 
+    public int findID() {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(find_id);) {
+            System.out.println(preparedStatement);
 
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+
+                return id;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

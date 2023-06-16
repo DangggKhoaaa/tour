@@ -5,7 +5,11 @@ package controller;
 import dto.Pageable;
 import model.Gender;
 import model.Role;
+import model.Tour;
 import model.User;
+import service.TagService;
+import service.TourService;
+import service.Tour_tagService;
 import service.UserService;
 import ultils.PasswordEncoder;
 
@@ -17,11 +21,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 
 @WebServlet(name = "userServlet", value = "/user")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserService();
+    int totalItem=5;
+
+    TourService tourService=new TourService();
+    TagService tagService=new TagService();
+    Tour_tagService tour_tagService=new Tour_tagService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -84,6 +94,23 @@ public class UserServlet extends HttpServlet {
     private void showUserPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="t1.tour_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        req.setAttribute("pageable",pageAble);
+        List<Tour> tours =tourService.findAll(pageAble);
+        req.setAttribute("tours",tourService.findAll(pageAble));
         req.setAttribute("user", user);
         req.getRequestDispatcher("/user.jsp").forward(req, resp);
     }

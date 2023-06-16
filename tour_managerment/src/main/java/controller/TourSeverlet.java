@@ -1,13 +1,10 @@
 package controller;
 
-import model.Tag;
-import model.Tour;
-import model.Tour_tag;
+import model.*;
 import dto.Pageable;
-import service.TagService;
-import service.TourService;
-import service.Tour_tagService;
+import service.*;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +17,10 @@ import java.util.List;
 
 @WebServlet(name = "tourSeverlet", value = "/tours")
 public class TourSeverlet extends HttpServlet {
+    UserService userService=new UserService();
+    ServiceSV serviceSV = new ServiceSV();
+    TransportService transportService= new TransportService();
+    HotelService hotelService= new HotelService();
     int totalItem=5;
 
     TourService tourService=new TourService();
@@ -42,9 +43,29 @@ public class TourSeverlet extends HttpServlet {
             case"oder":
                 showOder(req,resp);
                 break;
+            case "booking":
+                bookingTour(req,resp);
+                break;
             default:
                 showTour(req,resp);
         }
+    }
+
+    private void bookingTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int tour_id= Integer.parseInt(req.getParameter("tour_id"));
+        Tour tour=tourService.findById(tour_id);
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        User user=userService.findById(user_id);
+
+
+        List<Hotel> hotels=hotelService.findAll();
+        List<Transport> transports=transportService.findAll();
+        req.setAttribute("hotels",hotelService.findAll());
+        req.setAttribute("transports",transportService.findAll());
+        req.setAttribute("tour",tour);
+        req.setAttribute("user",user);
+        req.getRequestDispatcher("booking.jsp").forward(req,resp);
+
     }
 
     private void showOder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,6 +82,7 @@ public class TourSeverlet extends HttpServlet {
         if(req.getParameter("sortby") != null){
             sortby = req.getParameter("sortby");
         }
+
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
         req.setAttribute("pageable",pageAble);
         List<Tour> tours =tourService.findAll(pageAble);
@@ -131,7 +153,7 @@ public class TourSeverlet extends HttpServlet {
             case"edit":
                 editTour(req,resp);
             default:
-                //   showProduct(req,resp);
+               showTour(req,resp);
         }
     }
 

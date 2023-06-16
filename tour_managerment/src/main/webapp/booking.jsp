@@ -140,614 +140,125 @@
 
     <div class="colorlib-wrap">
         <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="wrap-division">
-                                <div class="col-md-12 col-md-offset-0 heading2 animate-box">
-                                    <h2>${tour.name}</h2>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 animate-box">
-                                        <div class="room-wrap">
-                                            <div class="row">
-                                                <div class="col-md-6 col-sm-6">
-                                                    <div class="room-img"
-                                                         style="background-image: url(src/images/tour-1.jpg);"></div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <div class="desc">
-                                                        <span class="day-tour">Day 1</span>
-                                                        <h2>Athens, Greece</h2>
-                                                        <p>Even the all-powerful Pointing has no control about the blind
-                                                            texts it is an almost unorthographic life One day however a
-                                                            small line of blind text by the name of Lorem Ipsum decided
-                                                            to leave for the far World of Grammar.</p>
+            <form action="tour_ticket?action=create" method="post">
+                <input type="hidden" name="tour_id" value="${tour.tour_id}">
+                <input type="hidden" name="user_id" value="${user.id}">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="wrap-division">
+                                    <div class="col-md-12 col-md-offset-0 heading2 animate-box">
+                                        <h2>${tour.name}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 animate-box">
+                                            <div class="room-wrap">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="room-img"
+                                                             style="background-image: url(${tour.img});"></div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="desc">
+                                                            <span class="day-tour">Start time: ${tour.start_time}</span>
+                                                            <span class="day-tour">End time: ${tour.end_time}</span>
+
+                                                            <h2>${tour.name}</h2>
+                                                            <p>${tour.description}</p>
+                                                            <p>${tour.price}</p>
+                                                            <p>${tour.tour_tag}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-<%--                                    <div class="col-md-12 animate-box">--%>
-<%--                                        <div class="room-wrap">--%>
-<%--                                            <div class="row">--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="room-img"--%>
-<%--                                                         style="background-image: url(src/images/tour-2.jpg);"></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="desc">--%>
-<%--                                                        <span class="day-tour">Day 2</span>--%>
-<%--                                                        <h2>Thailand</h2>--%>
-<%--                                                        <p>Even the all-powerful Pointing has no control about the blind--%>
-<%--                                                            texts it is an almost unorthographic life One day however a--%>
-<%--                                                            small line of blind text by the name of Lorem Ipsum decided--%>
-<%--                                                            to leave for the far World of Grammar.</p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-
-<%--                                    <div class="col-md-12 animate-box">--%>
-<%--                                        <div class="room-wrap">--%>
-<%--                                            <div class="row">--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="room-img"--%>
-<%--                                                         style="background-image: url(src/images/tour-3.jpg);"></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="desc">--%>
-<%--                                                        <span class="day-tour">Day 3</span>--%>
-<%--                                                        <h2>Boracay, Philippines</h2>--%>
-<%--                                                        <p>Even the all-powerful Pointing has no control about the blind--%>
-<%--                                                            texts it is an almost unorthographic life One day however a--%>
-<%--                                                            small line of blind text by the name of Lorem Ipsum decided--%>
-<%--                                                            to leave for the far World of Grammar.</p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-
-<%--                                    <div class="col-md-12 animate-box">--%>
-<%--                                        <div class="room-wrap">--%>
-<%--                                            <div class="row">--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="room-img"--%>
-<%--                                                         style="background-image: url(src/images/tour-4.jpg);"></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="desc">--%>
-<%--                                                        <span class="day-tour">Day 4</span>--%>
-<%--                                                        <h2>Tokyo, Japan</h2>--%>
-<%--                                                        <p>Even the all-powerful Pointing has no control about the blind--%>
-<%--                                                            texts it is an almost unorthographic life One day however a--%>
-<%--                                                            small line of blind text by the name of Lorem Ipsum decided--%>
-<%--                                                            to leave for the far World of Grammar.</p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-
-<%--                                    <div class="col-md-12 animate-box">--%>
-<%--                                        <div class="room-wrap">--%>
-<%--                                            <div class="row">--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="room-img"--%>
-<%--                                                         style="background-image: url(src/images/tour-5.jpg);"></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="desc">--%>
-<%--                                                        <span class="day-tour">Day 5</span>--%>
-<%--                                                        <h2>Paris, Italy</h2>--%>
-<%--                                                        <p>Even the all-powerful Pointing has no control about the blind--%>
-<%--                                                            texts it is an almost unorthographic life One day however a--%>
-<%--                                                            small line of blind text by the name of Lorem Ipsum decided--%>
-<%--                                                            to leave for the far World of Grammar.</p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-
-<%--                                    <div class="col-md-12 animate-box">--%>
-<%--                                        <div class="room-wrap">--%>
-<%--                                            <div class="row">--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="room-img"--%>
-<%--                                                         style="background-image: url(src/images/tour-6.jpg);"></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="col-md-6 col-sm-6">--%>
-<%--                                                    <div class="desc">--%>
-<%--                                                        <span class="day-tour">Day 6</span>--%>
-<%--                                                        <h2>Greece</h2>--%>
-<%--                                                        <p>Even the all-powerful Pointing has no control about the blind--%>
-<%--                                                            texts it is an almost unorthographic life One day however a--%>
-<%--                                                            small line of blind text by the name of Lorem Ipsum decided--%>
-<%--                                                            to leave for the far World of Grammar.</p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <!-- SIDEBAR-->
-<%--                <div class="col-md-3">--%>
-<%--                    <div class="sidebar-wrap">--%>
-<%--                        <div class="side search-wrap animate-box">--%>
-<%--                            <h3 class="sidebar-heading">Find your hotel</h3>--%>
-<%--                            <form method="post" class="colorlib-form">--%>
-<%--                                <div class="row">--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label for="date">Check-in:</label>--%>
-<%--                                            <div class="form-field">--%>
-<%--                                                <i class="icon icon-calendar2"></i>--%>
-<%--                                                <input type="text" id="date" class="form-control date"--%>
-<%--                                                       placeholder="Check-in date">--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label for="date">Check-out:</label>--%>
-<%--                                            <div class="form-field">--%>
-<%--                                                <i class="icon icon-calendar2"></i>--%>
-<%--                                                <input type="text" id="date" class="form-control date"--%>
-<%--                                                       placeholder="Check-out date">--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label for="guests">Guest</label>--%>
-<%--                                            <div class="form-field">--%>
-<%--                                                <i class="icon icon-arrow-down3"></i>--%>
-<%--                                                <select name="people" id="people" class="form-control">--%>
-<%--                                                    <option value="#">1</option>--%>
-<%--                                                    <option value="#">2</option>--%>
-<%--                                                    <option value="#">3</option>--%>
-<%--                                                    <option value="#">4</option>--%>
-<%--                                                    <option value="#">5+</option>--%>
-<%--                                                </select>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <input type="submit" name="submit" id="submit" value="Find Hotel"--%>
-<%--                                               class="btn btn-primary btn-block">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </form>--%>
-<%--                        </div>--%>
-<%--                        <div class="side animate-box">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <h3 class="sidebar-heading">Price Range</h3>--%>
-<%--                                    <form method="post" class="colorlib-form-2">--%>
-<%--                                        <div class="row">--%>
-<%--                                            <div class="col-md-6">--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <label for="guests">Price from:</label>--%>
-<%--                                                    <div class="form-field">--%>
-<%--                                                        <i class="icon icon-arrow-down3"></i>--%>
-<%--                                                        <select name="people" id="people" class="form-control">--%>
-<%--                                                            <option value="#">1</option>--%>
-<%--                                                            <option value="#">200</option>--%>
-<%--                                                            <option value="#">300</option>--%>
-<%--                                                            <option value="#">400</option>--%>
-<%--                                                            <option value="#">1000</option>--%>
-<%--                                                        </select>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-md-6">--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <label for="guests">Price to:</label>--%>
-<%--                                                    <div class="form-field">--%>
-<%--                                                        <i class="icon icon-arrow-down3"></i>--%>
-<%--                                                        <select name="people" id="people" class="form-control">--%>
-<%--                                                            <option value="#">2000</option>--%>
-<%--                                                            <option value="#">4000</option>--%>
-<%--                                                            <option value="#">6000</option>--%>
-<%--                                                            <option value="#">8000</option>--%>
-<%--                                                            <option value="#">10000</option>--%>
-<%--                                                        </select>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="side animate-box">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <h3 class="sidebar-heading">Review Rating</h3>--%>
-<%--                                    <form method="post" class="colorlib-form-2">--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <p class="rate"><span><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i><i class="icon-star-full"></i></span>--%>
-<%--                                                </p>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <p class="rate"><span><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i></span></p>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <p class="rate"><span><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i><i class="icon-star-full"></i></span>--%>
-<%--                                                </p>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <p class="rate"><span><i class="icon-star-full"></i><i--%>
-<%--                                                        class="icon-star-full"></i></span></p>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <p class="rate"><span><i class="icon-star-full"></i></span></p>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="side animate-box">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <h3 class="sidebar-heading">Categories</h3>--%>
-<%--                                    <form method="post" class="colorlib-form-2">--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Apartment</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Hotel</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Hostel</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Inn</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Villa</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="side animate-box">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <h3 class="sidebar-heading">Location</h3>--%>
-<%--                                    <form method="post" class="colorlib-form-2">--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Greece</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Italy</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Spain</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Germany</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Japan</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="side animate-box">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <h3 class="sidebar-heading">Facilities</h3>--%>
-<%--                                    <form method="post" class="colorlib-form-2">--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Airport Transfer</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Resto Bar</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Restaurant</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Swimming Pool</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="form-check">--%>
-<%--                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">--%>
-<%--                                            <label class="form-check-label" for="exampleCheck1">--%>
-<%--                                                <h4 class="place">Japan</h4>--%>
-<%--                                            </label>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-            </div>
-        </div>
-    </div>
+                <div>
+                    <label for="quantity" > Nhập số người</label>
+                    <input type="number" name="quantity" id="quantity" >
+                </div>
+                <div>
+                    <label for="description">Nhập chú thích</label>
+                    <input type="text" name="description" id="description">
+                </div>
 
-    <div class="container">
-        <div style="font-size: 75%" class="w-full overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
-                <thead>
-                <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                <div
+                        class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
                 >
-                    <th class="px-4 py-3">
-                        ID
-                        <c:if test="${pageable.sortBy == 'desc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=service.service_id">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                        <c:if test="${pageable.sortBy == 'asc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=service.service_id">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                    </th>
-                    <th class="px-4 py-3">
-                        Hotel
-                        <c:if test="${pageable.sortBy == 'desc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=hotel_name">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                        <c:if test="${pageable.sortBy == 'asc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=hotel_name">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                    </th>
-                    <th class="px-4 py-3">
-                        Transport
-                        <c:if test="${pageable.sortBy == 'desc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=transport_name">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                        <c:if test="${pageable.sortBy == 'asc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=transport_name">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                    </th>
-                    <th class="px-4 py-3">
-                        Price
-                        <c:if test="${pageable.sortBy == 'desc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=total_price">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                        <c:if test="${pageable.sortBy == 'asc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=total_price">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                    </th>
-                    <th class="px-4 py-3">
-                        Description
-                        <c:if test="${pageable.sortBy == 'desc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                        <c:if test="${pageable.sortBy == 'asc'}">
-                            <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                                <i class="fa-solid fa-sort"></i>
-                            </a>
-                        </c:if>
-                    </th>
-                    <th class="px-4 py-3">Actions</th>
-                </tr>
-                </thead>
-                <tbody
-                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                >
-                <c:forEach items="${services}" var="service">
-                    <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3 text-sm">
-                                ${service.getId()}
-                        </td>
-                        <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                    <%--                        <div--%>
-                                    <%--                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block"--%>
-                                    <%--                        >--%>
-                                    <%--                            <div--%>
-                                    <%--                                    class="absolute inset-0 rounded-full shadow-inner"--%>
-                                    <%--                                    aria-hidden="true"--%>
-                                    <%--                            ></div>--%>
-                                    <%--                        </div>--%>
-                                <div>
-                                    <p class="font-semibold">${service.getHotelName().getName()}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            ${service.getHotelName().getDescription()}
-                                    </p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                    <%--                        <div--%>
-                                    <%--                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block"--%>
-                                    <%--                        >--%>
-                                    <%--                            <div--%>
-                                    <%--                                    class="absolute inset-0 rounded-full shadow-inner"--%>
-                                    <%--                                    aria-hidden="true"--%>
-                                    <%--                            ></div>--%>
-                                    <%--                        </div>--%>
-                                <div>
-                                    <p class="font-semibold">${service.getTransportName().getName()}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            ${service.getTransportName().getDescription()}
-                                    </p>
-                                </div>
-                            </div>
-                        </td>
 
-                        <td class="px-4 py-3 text-xs">
-                        <span
-                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                    <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Hotel
+                </span>
+                        <select
+                                name="hotel" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                         >
-                          ${service.getTotalPrice()} đ
-                        </span>
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                                ${service.getDescription()}
-                        </td>
-                        <td class="px-4 py-3">
-                            <div class="flex items-center space-x-4 text-sm">
-<%--                                <a href="service_manager?action=edit&id=${service.getId()}">--%>
-<%--                                    <button--%>
-<%--                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"--%>
-<%--                                            aria-label="Edit"--%>
-<%--                                    >--%>
-<%--                                        <svg--%>
-<%--                                                class="w-5 h-5"--%>
-<%--                                                aria-hidden="true"--%>
-<%--                                                fill="currentColor"--%>
-<%--                                                viewBox="0 0 20 20"--%>
-<%--                                        >--%>
-<%--                                            <i class="fa-solid fa-plus"></i>--%>
-<%--&lt;%&ndash;                                            <path&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            ></path>&ndash;%&gt;--%>
-<%--                                        </svg>--%>
-<%--                                    </button>--%>
-<%--                                </a>--%>
+                            <c:forEach items="${requestScope.hotels}" var="hotel">
+                                <c:if test="${service.getHotelName().id != hotel.id}">
+                                    <option value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
+                                </c:if>
+                                <c:if test="${service.getHotelName().id == hotel.id}">
+                                    <option selected value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </label>
 
-                                <a onclick="return confirm('Do you want to add this Service?')"
-                                   href="tour_ticket?action=add&id=${service.getId()}">
-                                    <button
-                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                            aria-label="Delete"
-                                    >
-                                        <svg
-                                                class="w-5 h-5"
-                                                aria-hidden="true"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                        >
-                                            <i class="fa-solid fa-plus"></i>
-<%--                                            <path--%>
-<%--                                                    fill-rule="evenodd"--%>
-<%--                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"--%>
-<%--                                                    clip-rule="evenodd"--%>
-<%--                                            ></path>--%>
-                                        </svg>
-                                    </button>
-                                </a>
+                    <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Transport
+                </span>
+                        <select
 
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-    <span class="flex items-center col-span-3">
-    Showing ${pageable.totalPage}
-    </span>
-            <span class="col-span-2"></span>
-            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-    <nav aria-label="Table navigation">
-    <ul class="inline-flex items-center">
-    <c:forEach begin="1" end="${pageable.totalPage}" var="page">
-                      <li>
-                          <a href="tour_ticket?page=${page}&search=${pageable.search}&sortBy=${pageable.sortBy}&nameField=${pageable.nameField}">
-                              <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                      ${page}
-                              </button>
-                          </a>
-                      </li>
-    </c:forEach>
-    </ul>
-    </nav>
-    </span>
+                                name="transport" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                        >
+                            <c:forEach items="${requestScope.transports}" var="transport">
+                                <c:if test="${service.getTransportName().id != transport.id}">
+                                    <option value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
+                                </c:if>
+                                <c:if test="${service.getTransportName().id == transport.id}">
+                                    <option selected value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </label>
+
+                    <div>
+                        <label for="description">Nhập chú thích</label>
+                        <input type="text" name="description" id="description">
+                    </div>
+
+
+                    <div class="flex mt-6 text-sm">
+                        <label class="flex items-center dark:text-gray-400">
+                            <input"
+                                   type="checkbox"
+                                   class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            />
+                            <span class="ml-2">
+                    I agree to the
+                    <span class="underline">privacy policy</span>
+                  </span>
+                        </label>
+                    </div>
+<%--                    <button id="btn" type="submit">Create</button>--%>
+
+
+                <div class="col-md-12 animate-box text-center">
+                    <p><a href="#" class="btn btn-primary"><button>Book Now!</button></a></p>
+                    <p>${message}</p>
+                </div>
+            </form>
 
         </div>
-        <div class="col-md-12 animate-box text-center">
-            <p><a href="#" class="btn btn-primary">Book Now!</a></p>
-        </div>
-
     </div>
 
 

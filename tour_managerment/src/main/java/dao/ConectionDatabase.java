@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectionDatabase {
-    protected String jdbcURL = "jdbc:mysql://localhost:3306/case_study_md3";
+    protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
     protected String jdbcUsername = "root";
 
     protected String jdbcPassword = "Kutronboy2701";
