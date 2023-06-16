@@ -7,28 +7,49 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Đổi mật khẩu</title>
-</head>
-<body>
-<h1>${message}</h1>
+<jsp:include page="header.jsp"/>
+<p class="mt-4" style="color: red">
+    ${message}
+</p>
+<h4
+        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+>
+    Đổi mật khẩu
+</h4>
 <form action="/user?action=updatePassword" method="post">
     <input type="hidden" name="user_id" value="${user.id}">
-
-    <label for="user_password1">Mật khẩu cũ</label>
-    <input type="password" name="old_user_password" id="user_password1">
-    <br>
-    <label for="user_password">Mật khẩu mới</label>
-    <input type="password" name="new_user_password" id="user_password">
-    <br>
-<%--    <label for="updatePassword2">Nhập lại mật khẩu mới</label>--%>
-<%--    <input type="password" name="user_password" id="updatePassword2">--%>
-<%--    <br>--%>
-    <button>Xác nhận</button>
-    <button>
-        <a href="login.jsp">Back</a>
+    <div
+            class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
+    >
+        <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Mật khẩu cũ
+                </span>
+            <input type="password" name="old_user_password"
+                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+            />
+        </label>
+        <p class="mt-4" style="color: red">
+            ${error}
+        </p>
+        <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Mật khẩu mới
+                </span>
+            <input type="password" name="new_user_password"
+                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+            />
+        </label>
+    </div>
+        <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+        >
+            Xác nhận
+        </button>
+    <button
+            class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+    >
+        <a href="user.jsp">Trở về</a>
     </button>
 </form>
-</body>
-</html>
+<jsp:include page="footer.jsp" />

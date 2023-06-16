@@ -8,7 +8,7 @@ public class ConectionDatabase {
     protected String jdbcURL = "jdbc:mysql://localhost:3306/case_study_md3";
     protected String jdbcUsername = "root";
 
-    protected String jdbcPassword = "123456";
+    protected String jdbcPassword = "Kutronboy2701";
 
     protected Connection getConnection() {
         Connection connection = null;

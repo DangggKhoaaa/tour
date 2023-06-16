@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("user", user);
                     resp.sendRedirect("/user?action=userPage");
                 } else {
-                    session.setAttribute("admin", user);
+                    session.setAttribute("user", user);
                     resp.sendRedirect("/admin?action=showUser");
                 }
             } else {

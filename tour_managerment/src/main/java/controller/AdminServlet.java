@@ -1,6 +1,7 @@
 package controller;
 
 import dto.Pageable;
+import model.Gender;
 import model.User;
 import service.UserService;
 
@@ -29,7 +30,18 @@ public class AdminServlet extends HttpServlet {
             case "delete":
                 deleteUser(req, resp);
                 break;
+            case "showInformation":
+                showInformation(req, resp);
+                break;
         }
+    }
+
+    private void showInformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        User user = userService.findById(id);
+        req.setAttribute("genders", Gender.values());
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/information.jsp").forward(req, resp);
     }
 
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

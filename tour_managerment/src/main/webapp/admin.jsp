@@ -45,7 +45,7 @@
 <h3>${message}</h3>
 <c:if test="${requestScope['users'].size() != 0}">
 <form action="/admin?action=showUser" method="post">
-
+    <input type="hidden" name="user_id" value="${user.id}">
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
@@ -62,7 +62,6 @@
                     <th class="px-4 py-3">Địa chỉ</th>
                     <th class="px-4 py-3">Căn cước công dân</th>
                     <th class="px-4 py-3">Vai trò</th>
-                    <th class="px-4 py-3">Action</th>
                 </tr>
                 </thead>
                 <tbody
@@ -76,6 +75,12 @@
                                 <div
                                         class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                                 >
+                                    <img
+                                            class="object-cover w-8 h-8 rounded-full"
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBZDa-lRYinVJyungmPN-xWhHKF6b108TBaVlA8I8&s"
+                                            alt="avatar"
+                                            aria-hidden="true"
+                                    />
                                     <div
                                             class="absolute inset-0 rounded-full shadow-inner"
                                             aria-hidden="true"

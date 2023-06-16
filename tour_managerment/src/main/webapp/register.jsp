@@ -83,7 +83,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Họ và tên
                 </span>
-                            <input name="full_name"
+                            <input name="full_name" id="full_name"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="Jane Doe"
                                    type="text"
@@ -94,7 +94,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Ngày sinh
                 </span>
-                            <input name="dob"
+                            <input name="dob" id="dob"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
 
                                    type="date"
@@ -105,7 +105,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Giới tính
                 </span>
-                            <select name="gender"
+                            <select name="gender" id="gender"
                                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
                                 <option>--None--</option>
                                 <option>Nam</option>
@@ -121,7 +121,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Số điện thoại
                 </span>
-                            <input name="phone"
+                            <input name="phone" id="phone"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="Số điện thoại gồm 10 chữ số"
                                    type="text"
@@ -132,7 +132,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Email
                 </span>
-                            <input name="email"
+                            <input name="email" id="email"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="JaneDoe@gmail.com"
                                    type="email"
@@ -143,7 +143,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Địa chỉ
                 </span>
-                            <input name="address"
+                            <input name="address" id="address"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="America"
                                    type="text"
@@ -154,7 +154,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Căn cước công dân
                 </span>
-                            <input name="cccd"
+                            <input name="cccd" id="cccd"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="CCCD gồm 12 chữ số"
                                    type="text"
@@ -186,4 +186,19 @@
     </div>
 </div>
 </body>
+<script>
+    function validateFormRegister() {
+        const name = document.getElementById("full_name").value;
+        const dob = document.getElementById("dob").value;
+        const gender = document.getElementById("gender").value;
+        const phone = document.getElementById("phone").value;
+        const email = document.getElementById("email").value;
+        const address = document.getElementById("address").value;
+        const cccd = document.getElementById("cccd").value;
+
+        let check = true;
+    //     if (name.trim().length <= 0)
+    //
+    // }
+</script>
 </html>

@@ -15,6 +15,8 @@
 <body>
 <h1>${message}</h1>
 <h3>Xin chào ${user.name}!</h3>
+<a href="information.jsp">Thông tin cá nhân</a>
+<br>
 <a href="/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>
 <br>
 <a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>

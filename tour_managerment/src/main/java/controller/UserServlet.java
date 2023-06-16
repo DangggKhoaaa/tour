@@ -43,10 +43,22 @@ public class UserServlet extends HttpServlet {
             case "userPage":
                 showUserPage(req, resp);
                 break;
+            case "showInformation":
+                showInformation(req, resp);
+                break;
 //            default:
 //                showUser(req, resp);
         }
     }
+
+    private void showInformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        User user = userService.findById(id);
+        req.setAttribute("genders", Gender.values());
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/information.jsp").forward(req, resp);
+    }
+
 
     private void showUpdateInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -92,6 +104,10 @@ public class UserServlet extends HttpServlet {
                 break;
             case "updateInfo":
                 updateInfo(req, resp);
+                break;
+//            case "showInformation":
+//                showInformation(req, resp);
+//                break;
 //            default:
 //                showUser(req, resp);
         }
@@ -112,7 +128,7 @@ public class UserServlet extends HttpServlet {
         req.setAttribute("message", "Đổi thông tin thành công!");
         req.setAttribute("genders", Gender.values());
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/user.jsp").forward(req, resp);
+        req.getRequestDispatcher("/updateInfo.jsp").forward(req, resp);
     }
 
     private void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -127,7 +143,7 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("user", user);
             req.getRequestDispatcher("/user.jsp").forward(req, resp);
         } else {
-            req.setAttribute("message", "Mật khẩu cũ không đúng!");
+            req.setAttribute("error", "Mật khẩu cũ không đúng!");
             req.setAttribute("user", user);
             req.getRequestDispatcher("/updatePassword.jsp").forward(req, resp);
         }

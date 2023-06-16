@@ -1,6 +1,8 @@
 package filter;
 
 
+import model.Role;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +19,10 @@ public class FilterAdmin implements Filter {
 
         String role = (String)session.getAttribute("role");
         //chua co thi dieu huong ve login
-        if(role == null){
+        if(role == null || role.equals(Role.USER.toString())){
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-            httpServletResponse.sendRedirect("");
+//            httpServletResponse.sendRedirect("");
+            httpServletRequest.getRequestDispatcher("login.jsp").forward(httpServletRequest,httpServletResponse);
             return;
         }
         //bo qua
