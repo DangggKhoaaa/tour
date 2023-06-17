@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
 
 <head>
@@ -173,7 +174,7 @@
                         <span
                                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
                         >
-                          ${ticketFalse.getTotalPrice()} đ
+                            <fmt:formatNumber type="number" value="${ticketFalse.getTotalPrice()}"/> VND
                         </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
@@ -257,6 +258,9 @@
 <script>
     function onClearSearch() {
         searchButton.click();
+    }
+    function formatNumber(number) {
+        return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 </script>
 </body>

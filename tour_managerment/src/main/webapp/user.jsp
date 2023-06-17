@@ -65,22 +65,22 @@
 
 </head>
 <body>
-<<<<<<< Updated upstream
-<h1>${message}</h1>
-<h3>Xin chào ${user.name}!</h3>
-<a href="information.jsp">Thông tin cá nhân</a>
-<br>
-<a href="/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>
-<br>
-<a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
-<br>
-<a href="login.jsp">Đăng xuất</a>
-</body>
-</html>
-=======
+
+<%--<h1>${message}</h1>--%>
+<%--<h3>Xin chào ${user.name}!</h3>--%>
+<%--<a href="information.jsp">Thông tin cá nhân</a>--%>
+<%--<br>--%>
+<%--<a href="/user?action=updatePassword&id=${user.id}">Đổi mật khẩu</a>--%>
+<%--<br>--%>
+<%--<a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>--%>
+<%--<br>--%>
+<%--<a href="login.jsp">Đăng xuất</a>--%>
+<%--</body>--%>
+<%--</html>--%>
+
 <input type="hidden" name="user_id" value="${user.id}">
 <div class="colorlib-loader"></div>
->>>>>>> Stashed changes
+
 
 <div id="page">
     <nav class="colorlib-nav" role="navigation">
@@ -88,25 +88,25 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="colorlib-logo"><a href="index.html">Tour</a></div>
+                        <div id="colorlib-logo"><a href="user?action=userPage">Tour</a></div>
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li class="has-dropdown active">
-                                <a href="tours.html">Tours</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Destination</a></li>
-                                    <li><a href="#">Cruises</a></li>
-                                    <li><a href="#">Hotels</a></li>
-                                    <li><a href="#">Booking</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="hotels.html">Hotels</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a>Hello ${user.name}!</a></li>
+                            <li><a href="user?action=userPage">Home</a></li>
+<%--                            <li class="has-dropdown active">--%>
+<%--                                <a href="tours.html">Tours</a>--%>
+<%--                                <ul class="dropdown">--%>
+<%--                                    <li><a href="#">Destination</a></li>--%>
+<%--                                    <li><a href="#">Cruises</a></li>--%>
+<%--                                    <li><a href="#">Hotels</a></li>--%>
+<%--                                    <li><a href="#">Booking</a></li>--%>
+<%--                                </ul>--%>
+<%--                            </li>--%>
+                            <li><a href="information.jsp">Infomation</a></li>
+                            <li><a href="/user?action=updatePassword&id=${user.id}">Change Password</a></li>
+                            <li><a href="/user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
+                            <li><a href="login.jsp">Log Out</a></li>
                         </ul>
                     </div>
                 </div>

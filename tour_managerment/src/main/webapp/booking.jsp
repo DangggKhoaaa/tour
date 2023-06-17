@@ -231,12 +231,6 @@
                         </select>
                     </label>
 
-                    <div>
-                        <label for="description">Nhập chú thích</label>
-                        <input type="text" name="description" id="description">
-                    </div>
-
-
                     <div class="flex mt-6 text-sm">
                         <label class="flex items-center dark:text-gray-400">
                             <input"

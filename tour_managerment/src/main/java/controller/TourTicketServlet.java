@@ -146,6 +146,7 @@ public class TourTicketServlet extends HttpServlet {
         double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,false,description);
 
+
         tourTicketService.createTOurTicket(tourTicket);
 
         req.setAttribute("message","Đặt thành công");
