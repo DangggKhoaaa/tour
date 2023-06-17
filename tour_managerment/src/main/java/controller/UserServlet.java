@@ -1,7 +1,6 @@
 package controller;
 
 
-
 import dto.Pageable;
 import model.Gender;
 import model.Role;
@@ -21,7 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
+
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 
 
 @WebServlet(name = "userServlet", value = "/user")
@@ -32,6 +36,11 @@ public class UserServlet extends HttpServlet {
     TourService tourService=new TourService();
     TagService tagService=new TagService();
     Tour_tagService tour_tagService=new Tour_tagService();
+
+    static {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "Tên không được để trống");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -181,6 +190,11 @@ public class UserServlet extends HttpServlet {
         String userName = req.getParameter("user_name");
         String userPassword = PasswordEncoder.encode(req.getParameter("user_password"));
         String name = req.getParameter("full_name");
+        boolean checkName = checkName(name);
+        if (!checkName) {
+            req.setAttribute("messageName", "Tên không được để trống");
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+        }
         Date dob = Date.valueOf(req.getParameter("dob"));
         String genderS = req.getParameter("gender");
         Gender gender = Gender.valueOf(genderS);
@@ -188,13 +202,17 @@ public class UserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String address = req.getParameter("address");
         String cccd = req.getParameter("cccd");
-
-        User user = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
-        user.setRole(Role.USER);
-        userService.create(user);
-        req.setAttribute("message", "Tạo tài khoản thành công!");
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        if (checkName) {
+            User user = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
+            user.setRole(Role.USER);
+            userService.create(user);
+            req.setAttribute("message", "Tạo tài khoản thành công!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
     }
 
 
+    public static boolean checkName(String name) {
+        return !Objects.equals(name, "");
+    }
 }

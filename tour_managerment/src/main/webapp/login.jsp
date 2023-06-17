@@ -72,6 +72,7 @@
                                    placeholder="***************"
                                    type="password"
                             />
+<%--                            <span class="input-group-text cursor-pointer" id="password"  onclick="togglePassword()"><i class="bx bx-hide"></i></span>--%>
                         </label>
 
                         <!-- You should use a button here, as the anchor is only used for the example  -->
@@ -104,4 +105,14 @@
     </div>
 </div>
 </body>
+<script>
+    // function togglePassword() {
+    //     var passwordInput = document.getElementById("password");
+    //     if (passwordInput.type === "password") {
+    //         passwordInput.type = "text";
+    //     } else {
+    //         passwordInput.type = "password";
+    //     }
+    // }
+</script>
 </html>

@@ -57,7 +57,7 @@
 
                         <label class="block text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Tài khoản</span>
-                            <input name="user_name"
+                            <input name="user_name" pattern="[a-z]{1,15}" title=""
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="JaneDoe"
                             />
@@ -83,11 +83,14 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Họ và tên
                 </span>
-                            <input name="full_name" id="full_name"
+                            <input name="full_name" id="full_name" pattern="[a-z]{1,15}" title=""
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="Jane Doe"
                                    type="text"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messageName}
+                            </p>
                         </label>
 
                         <label class="block mt-4 text-sm">
@@ -197,8 +200,10 @@
         const cccd = document.getElementById("cccd").value;
 
         let check = true;
-    //     if (name.trim().length <= 0)
-    //
-    // }
+        if (name.trim().length <= 0) {
+            check = false;
+            document.getElementById("name_message").innerHTML = "Tên không được để trống"
+        }
+    }
 </script>
 </html>
