@@ -167,7 +167,7 @@
                                                             <h2>${tour.name}</h2>
                                                             <p>${tour.description}</p>
                                                             <p>${tour.price}</p>
-                                                            <p>${tour.tour_tag}</p>
+                                                            <p>${tour.getTour_tag()}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -248,9 +248,14 @@
 
                 <div class="col-md-12 animate-box text-center">
                     <p><a href="#" class="btn btn-primary"><button>Book Now!</button></a></p>
-                    <p>${message}</p>
+                    <c:if test="${requestScope['message'] != null}"  >
+                        <script>
+                            alert("${message}")
+                        </script>
+                    </c:if>
                 </div>
             </form>
+            <a href="user?action=cart&user_id=${user.id}">cart</a>
 
         </div>
     </div>

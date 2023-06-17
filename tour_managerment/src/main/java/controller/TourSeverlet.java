@@ -25,6 +25,8 @@ public class TourSeverlet extends HttpServlet {
     TagService tagService=new TagService();
     Tour_tagService tour_tagService=new Tour_tagService();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         if(action == null){
             action = "";
@@ -52,6 +54,7 @@ public class TourSeverlet extends HttpServlet {
     private void bookingTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int tour_id= Integer.parseInt(req.getParameter("tour_id"));
         Tour tour=tourService.findById(tour_id);
+       String ten=tour.getTour_tag();
         int user_id = Integer.parseInt(req.getParameter("user_id"));
         User user=userService.findById(user_id);
 
@@ -140,6 +143,8 @@ public class TourSeverlet extends HttpServlet {
         req.getRequestDispatcher("showTour.jsp").forward(req,resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         if(action == null){
             action = "";
@@ -168,7 +173,8 @@ public class TourSeverlet extends HttpServlet {
         String[] selectedValues = req.getParameterValues("myCheckbox");
         if(selectedValues!=null){for (String str:selectedValues) {
             int tag_id= Integer.parseInt(str);
-            tour_tagService.create(new Tour_tag(tour.getTour_id(),tag_id));
+            Tour_tag tourTag =new Tour_tag(tour_id,tag_id);
+            tour_tagService.create(tourTag);
         }}
         req.setAttribute("tour",tour);
         req.setAttribute("message", "Created");

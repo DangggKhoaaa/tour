@@ -29,6 +29,8 @@ public class TourTicketServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
 
         if (action == null){
@@ -42,10 +44,13 @@ public class TourTicketServlet extends HttpServlet {
             case "displayFalse":
                 showTicketFalse(req,resp);
                 break;
+
             default:
                 showBookingPage(req,resp);
         }
     }
+
+
 
     private void showTicketFalse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search =req.getParameter("search");
@@ -105,6 +110,8 @@ public class TourTicketServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
 
         if (action == null){

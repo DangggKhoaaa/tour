@@ -2,14 +2,8 @@ package controller;
 
 
 import dto.Pageable;
-import model.Gender;
-import model.Role;
-import model.Tour;
-import model.User;
-import service.TagService;
-import service.TourService;
-import service.Tour_tagService;
-import service.UserService;
+import model.*;
+import service.*;
 import ultils.PasswordEncoder;
 
 import javax.servlet.ServletException;
@@ -30,6 +24,7 @@ import java.util.Objects;
 
 @WebServlet(name = "userServlet", value = "/user")
 public class UserServlet extends HttpServlet {
+    TourTicketService tourTicketService=new TourTicketService();
     UserService userService = new UserService();
     int totalItem=5;
 
@@ -65,9 +60,65 @@ public class UserServlet extends HttpServlet {
             case "showInformation":
                 showInformation(req, resp);
                 break;
+            case "home":
+                showHOme(req,resp);
+                break;
+            case"cart":
+                showCart(req,resp);
+                break;
+            case "deleteTourTicket":
+                deleteTourTicket(req,resp);
+                break;
 //            default:
 //                showUser(req, resp);
         }
+    }
+
+    public void showCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        User user=userService.findById(user_id);
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="tour_ticket_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
+        req.setAttribute("tourTickets",tourTickets);
+        req.getRequestDispatcher("cart.jsp").forward(req,resp);
+    }
+    private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
+        tourTicketService.deleteTourTicket(tour_ticket_id);
+      
+    }
+    private void showHOme(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="t1.tour_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        req.setAttribute("pageable",pageAble);
+        req.setAttribute("tours",tourService.findAll(pageAble));
+        req.getRequestDispatcher("home.jsp").forward(req,resp);
     }
 
     private void showInformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

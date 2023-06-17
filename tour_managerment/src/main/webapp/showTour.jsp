@@ -8,7 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header.jsp" />
+<style>
+    .description{
 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to three lines */
+        -webkit-box-orient: vertical;
+        max-width: 400px;
+        max-height: 77px;
+    }
+</style>
 <form action="tours" method="get">
     <input type="search" name="search" id="search" value="${pageable.search}" onsearch="onClearSearch()" />
     <button id="searchButton">Search</button>
@@ -28,7 +39,7 @@
 <a href="tours?action=create">Create Book</a>
 <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
-        <table class="w-full whitespace-no-wrap">
+        <table class="w-full ">
             <thead>
             <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
@@ -80,7 +91,7 @@
                           ${tour.start_time}
                         </span>
                 </td>
-                <td class="px-4 py-3 text-sm">
+                <td  class="description px-4 py-3 text-sm" >
                    ${tour.description}
                 </td>
                 <td class="px-4 py-3 text-sm">
