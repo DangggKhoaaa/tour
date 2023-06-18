@@ -8,6 +8,10 @@ public class ConectionDatabase {
     protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
     protected String jdbcUsername = "root";
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 
 
@@ -15,6 +19,10 @@ public class ConectionDatabase {
 
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     protected Connection getConnection() {
         Connection connection = null;
         try {

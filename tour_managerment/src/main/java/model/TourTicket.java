@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class TourTicket {
     private int tourTicketId;
     private User user;
@@ -9,8 +11,21 @@ public class TourTicket {
     private double totalPrice;
     private String status;
     private String description;
+    private LocalDate buyDay;
 
-    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description) {
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDate getBuyDay() {
+        return buyDay;
+    }
+
+    public void setBuyDay(LocalDate buyDay) {
+        this.buyDay = buyDay;
+    }
+
+    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description,LocalDate buyDay) {
         this.tourTicketId = tourTicketId;
         this.user = user;
         this.tour = tour;
@@ -19,9 +34,10 @@ public class TourTicket {
         this.totalPrice = totalPrice;
         this.status = status;
         this.description = description;
+        this.buyDay=buyDay;
     }
 
-    public TourTicket(User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description) {
+    public TourTicket(User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description,LocalDate buyDay) {
         this.user = user;
         this.tour = tour;
         this.serviceModel = serviceModel;
@@ -29,6 +45,7 @@ public class TourTicket {
         this.totalPrice = totalPrice;
         this.status = status;
         this.description = description;
+        this.buyDay=buyDay;
     }
 
     public int getTourTicketId() {

@@ -7,10 +7,7 @@ import service.ServiceSV;
 import service.TourService;
 import service.UserService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,7 @@ public class TourTicketDAO extends ConectionDatabase {
             "                             limit %d offset %d";
     private final String DELETE_TOUR_TICKET_BY_ID = "DELETE FROM `tour_ticket` WHERE (`tour_ticket_id` = ? );";
 
-    private final String INSERT_TOUR_TICKET = "INSERT INTO `tour_ticket` (`user_id`, `tour_id`, `service_id`, `quantity`, `total_price`, `status`, `decription`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String INSERT_TOUR_TICKET = "INSERT INTO `tour_ticket` (`user_id`, `tour_id`, `service_id`, `quantity`, `total_price`, `status`, `decription`,`buyDate`) VALUES (?, ?, ?, ?, ?, ?, ?,?);";
     private final String UPDATE_TOUR_TICKET = "UPDATE `tour_ticket` SET `user_id` = ?, `tour_id` = ?, `service_id` = ?, `quantity` = ? , `total_price` = ? , `status` = ? , `decription` = ? WHERE (`tour_ticket_id` = ?);";
     private final String TOTAL_TOUR_TICKET = "select count(1) as total_tour_ticket from tour_ticket left  join `user` on `user`.user_id =tour_ticket.user_id\n" +
             "\t\t\t\t\t\t\tleft join tours on tours.tour_id =tour_ticket.tour_id\n" +
@@ -48,6 +45,7 @@ public class TourTicketDAO extends ConectionDatabase {
 
     private final String ACCEPT ="UPDATE `tour_ticket` SET `status` = 'true' WHERE (`tour_ticket_id` = ?);";
     private final String PAY="UPDATE `tour_ticket` SET `status` = 'pay' WHERE (`tour_ticket_id` = ?);";
+    private final String DELETE_TOURTICKET_FALSE_2DAY="DELETE FROM `tour`.`tour_ticket` WHERE  datediff(CURDATE()-2,tour_ticket.buyDate)>0 and `tour_ticket`.`status`='false';";
     public List<TourTicket> findAllFalse(Pageable pageAble) {
         List<TourTicket> tourTickets = new ArrayList<>();
         String search = pageAble.getSearch();
@@ -76,8 +74,8 @@ public class TourTicketDAO extends ConectionDatabase {
                 int quantity = rs.getInt("quantity");
                 String status = rs.getString("status");
                 String description = rs.getString("description");
-
-                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description));
+                LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
+                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate));
             }
             PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET);
             statementTotalUsers.setString(1, search);
@@ -128,8 +126,8 @@ public class TourTicketDAO extends ConectionDatabase {
                 int quantity = rs.getInt("quantity");
                 String status = rs.getString("status");
                 String description = rs.getString("description");
-
-                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description));
+                LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
+                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate));
             }
             PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET);
             statementTotalUsers.setString(1, search);
@@ -170,6 +168,7 @@ public class TourTicketDAO extends ConectionDatabase {
             String ds = String.valueOf(tourTicket.isStatus());
             preparedStatement.setString(6, String.valueOf(tourTicket.isStatus()));
             preparedStatement.setString(7, tourTicket.getDescription());
+            preparedStatement.setDate(8, Date.valueOf(tourTicket.getBuyDay()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -223,6 +222,18 @@ public class TourTicketDAO extends ConectionDatabase {
                      .prepareStatement(PAY);) {
             System.out.println(preparedStatement);
             preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    public void deleteOutOfDate(){
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(DELETE_TOURTICKET_FALSE_2DAY);) {
+            System.out.println(preparedStatement);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

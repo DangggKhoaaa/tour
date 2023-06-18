@@ -97,6 +97,19 @@
                 </c:if>
             </th>
             <th class="px-4 py-3">
+                ORDER DAY
+                <c:if test="${pageable.sortBy == 'desc'}">
+                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
+                        <i class="fa-solid fa-sort"></i>
+                    </a>
+                </c:if>
+                <c:if test="${pageable.sortBy == 'asc'}">
+                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
+                        <i class="fa-solid fa-sort"></i>
+                    </a>
+                </c:if>
+            </th>
+            <th class="px-4 py-3">
                 STATUS
                 <c:if test="${pageable.sortBy == 'desc'}">
                     <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
@@ -156,12 +169,17 @@
                 <td class="px-4 py-3 text-sm">
                         ${tour_ticket.getQuantity()}
                 </td>
+                <td class="px-4 py-3 text-sm">
+                        ${tour_ticket.getBuyDay()}
+                </td>
                 <td class="px-4 py-3 text-xs">
         <span
                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
         >
                 ${tour_ticket.getTotalPrice()}
         </span>
+
+
                 </td>
                 <c:if test="${tour_ticket.isStatus().equals('pay')}">
                     <td class="px-4 py-3 text-xs">

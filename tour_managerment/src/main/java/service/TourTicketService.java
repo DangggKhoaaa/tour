@@ -30,4 +30,7 @@ public class TourTicketService {
     public void pay (int id ){
         tourTicketDAO.pay(id);
     }
+    public void deleteOutOfDate(){
+        tourTicketDAO.deleteOutOfDate();
+    }
 }

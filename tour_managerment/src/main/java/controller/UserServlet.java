@@ -94,6 +94,7 @@ public class UserServlet extends HttpServlet {
             sortby = req.getParameter("sortby");
         }
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        tourTicketService.deleteOutOfDate();
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
         req.setAttribute("user",user);
         req.setAttribute("tourTickets",tourTickets);
@@ -127,7 +128,27 @@ public class UserServlet extends HttpServlet {
     private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
         tourTicketService.deleteTourTicket(tour_ticket_id);
-      
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        User user=userService.findById(user_id);
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="tour_ticket_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        tourTicketService.deleteOutOfDate();
+        List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
+        req.setAttribute("user",user);
+        req.setAttribute("tourTickets",tourTickets);
+        req.getRequestDispatcher("cart.jsp").forward(req,resp);
     }
     private void showHOme(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search =req.getParameter("search");

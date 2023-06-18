@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet(name = "TourTicketServlet", value = "/tour_ticket")
@@ -84,6 +85,7 @@ public class TourTicketServlet extends HttpServlet {
         }
 
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        tourTicketService.deleteOutOfDate();
         List<TourTicket> tourTicketList =tourTicketService.findAllFalse(pageAble);
         req.setAttribute("pageable",pageAble);
         req.setAttribute("tourTickets",tourTicketService.findAllFalse(pageAble));
@@ -167,7 +169,13 @@ public class TourTicketServlet extends HttpServlet {
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         String  description = req.getParameter("description");
         double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
+<<<<<<< Updated upstream
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description);
+=======
+        LocalDate buyDate=LocalDate.now();
+        TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
+        boolean test= tourTicket.isStatus().equals("false");
+>>>>>>> Stashed changes
 
         tourTicketService.createTOurTicket(tourTicket);
 
