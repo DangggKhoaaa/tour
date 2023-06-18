@@ -20,17 +20,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static service.UserService.*;
 
 
 @WebServlet(name = "userServlet", value = "/user")
 public class UserServlet extends HttpServlet {
-    TourTicketService tourTicketService=new TourTicketService();
+    TourTicketService tourTicketService = new TourTicketService();
     UserService userService = new UserService();
-    int totalItem=5;
+    int totalItem = 5;
 
-    TourService tourService=new TourService();
-    TagService tagService=new TagService();
-    Tour_tagService tour_tagService=new Tour_tagService();
+    TourService tourService = new TourService();
+    TagService tagService = new TagService();
+    Tour_tagService tour_tagService = new Tour_tagService();
 
     static {
         Map<Integer, String> map = new HashMap<>();
@@ -61,16 +62,16 @@ public class UserServlet extends HttpServlet {
                 showInformation(req, resp);
                 break;
             case "home":
-                showHOme(req,resp);
+                showHOme(req, resp);
                 break;
-            case"cart":
-                showCart(req,resp);
+            case "cart":
+                showCart(req, resp);
                 break;
             case"pay":
                 pay(req,resp);
                 break;
             case "deleteTourTicket":
-                deleteTourTicket(req,resp);
+                deleteTourTicket(req, resp);
                 break;
 //            default:
 //                showUser(req, resp);
@@ -79,20 +80,21 @@ public class UserServlet extends HttpServlet {
 
     public void showCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int user_id = Integer.parseInt(req.getParameter("user_id"));
-        User user=userService.findById(user_id);
-        String search =req.getParameter("search");
+        User user = userService.findById(user_id);
+        String search = req.getParameter("search");
         int page = 1;
-        if(req.getParameter("page") != null){
+        if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
-        String fieldName="tour_ticket_id";
-        if(req.getParameter("fieldName") != null){
+        String fieldName = "tour_ticket_id";
+        if (req.getParameter("fieldName") != null) {
             fieldName = req.getParameter("fieldName");
         }
-        String sortby ="desc";
-        if(req.getParameter("sortby") != null){
+        String sortby = "desc";
+        if (req.getParameter("sortby") != null) {
             sortby = req.getParameter("sortby");
         }
+
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
         tourTicketService.deleteOutOfDate();
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
@@ -124,10 +126,18 @@ public class UserServlet extends HttpServlet {
         req.setAttribute("tourTickets",tourTickets);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
 
+
+        Pageable pageable = new Pageable(search, page, totalItem, fieldName, sortby);
+        List<TourTicket> tourTickets1 = tourTicketService.findAllByUserId(pageable, user);
+        req.setAttribute("tourTickets", tourTickets1);
+        req.getRequestDispatcher("cart.jsp").forward(req, resp);
+
     }
+
     private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
         tourTicketService.deleteTourTicket(tour_ticket_id);
+
         int user_id = Integer.parseInt(req.getParameter("user_id"));
         User user=userService.findById(user_id);
         String search =req.getParameter("search");
@@ -149,26 +159,28 @@ public class UserServlet extends HttpServlet {
         req.setAttribute("user",user);
         req.setAttribute("tourTickets",tourTickets);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
+
     }
+
     private void showHOme(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String search =req.getParameter("search");
+        String search = req.getParameter("search");
         int page = 1;
-        if(req.getParameter("page") != null){
+        if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
-        String fieldName="t1.tour_id";
-        if(req.getParameter("fieldName") != null){
+        String fieldName = "t1.tour_id";
+        if (req.getParameter("fieldName") != null) {
             fieldName = req.getParameter("fieldName");
         }
-        String sortby ="desc";
-        if(req.getParameter("sortby") != null){
+        String sortby = "desc";
+        if (req.getParameter("sortby") != null) {
             sortby = req.getParameter("sortby");
         }
 
-        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
-        req.setAttribute("pageable",pageAble);
-        req.setAttribute("tours",tourService.findAll(pageAble));
-        req.getRequestDispatcher("home.jsp").forward(req,resp);
+        Pageable pageAble = new Pageable(search, page, totalItem, fieldName, sortby);
+        req.setAttribute("pageable", pageAble);
+        req.setAttribute("tours", tourService.findAll(pageAble));
+        req.getRequestDispatcher("home.jsp").forward(req, resp);
     }
 
     private void showInformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -204,23 +216,23 @@ public class UserServlet extends HttpServlet {
     private void showUserPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        String search =req.getParameter("search");
+        String search = req.getParameter("search");
         int page = 1;
-        if(req.getParameter("page") != null){
+        if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
-        String fieldName="t1.tour_id";
-        if(req.getParameter("fieldName") != null){
+        String fieldName = "t1.tour_id";
+        if (req.getParameter("fieldName") != null) {
             fieldName = req.getParameter("fieldName");
         }
-        String sortby ="desc";
-        if(req.getParameter("sortby") != null){
+        String sortby = "desc";
+        if (req.getParameter("sortby") != null) {
             sortby = req.getParameter("sortby");
         }
-        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
-        req.setAttribute("pageable",pageAble);
-        List<Tour> tours =tourService.findAll(pageAble);
-        req.setAttribute("tours",tourService.findAll(pageAble));
+        Pageable pageAble = new Pageable(search, page, totalItem, fieldName, sortby);
+        req.setAttribute("pageable", pageAble);
+        List<Tour> tours = tourService.findAll(pageAble);
+        req.setAttribute("tours", tourService.findAll(pageAble));
         req.setAttribute("user", user);
         req.getRequestDispatcher("/user.jsp").forward(req, resp);
     }
@@ -253,19 +265,58 @@ public class UserServlet extends HttpServlet {
     private void updateInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("user_id"));
         String name = req.getParameter("full_name");
+        boolean checkName = checkString(name);
+        if (!checkName) {
+            req.setAttribute("messageName", "Họ và tên không được để trống");
+        }
         Date dob = Date.valueOf(req.getParameter("dob"));
         String genderS = req.getParameter("gender");
         Gender gender = Gender.valueOf(genderS);
         String phone = req.getParameter("phone");
+        boolean checkEmptyPhone = checkString(phone);
+        boolean checkPhone = isPhoneValid(phone);
+        if (!checkEmptyPhone) {
+            req.setAttribute("messagePhone", "Số điện thoại không được để trống");
+        } else if (!checkPhone) {
+            req.setAttribute("messagePhone", "Số điện thoại gồm 10 số bắt đầu bằng số 0");
+        }
         String email = req.getParameter("email");
+        boolean checkEmptyEmail = checkString(email);
+        boolean checkEmail = isEmailValid(email);
+        if (!checkEmptyEmail) {
+            req.setAttribute("messageEmail", "Email không được để trống");
+        } else if (!checkEmail) {
+            req.setAttribute("messageEmail", "Email không hợp lệ");
+        }
         String address = req.getParameter("address");
+        boolean checkEmptyAddress = checkString(address);
+        if (!checkEmptyAddress) {
+            req.setAttribute("messageAddress", "Địa chỉ không được để trống");
+        }
         String cccd = req.getParameter("cccd");
-        User user = new User(id, name, dob, gender, phone, email, address, cccd);
-        userService.updateInfo(user);
-        req.setAttribute("message", "Đổi thông tin thành công!");
-        req.setAttribute("genders", Gender.values());
-        req.setAttribute("user", user);
-        req.getRequestDispatcher("/updateInfo.jsp").forward(req, resp);
+        boolean checkEmptyCccd = checkString(cccd);
+        boolean checkCCCD = isCCCDValid(cccd);
+        if (!checkEmptyCccd) {
+            req.setAttribute("messageCccd", "Căn cước công dân không được để trống");
+        } else if (!checkCCCD) {
+            req.setAttribute("messageCccd", "Căn cước công dân gồm 12 số bắt đầu bằng số 0");
+        }
+        if (!checkName || !checkEmptyPhone || !checkPhone || !checkEmptyEmail || !checkEmail || !checkEmptyAddress || !checkEmptyCccd || !checkCCCD) {
+            req.getRequestDispatcher("/updateInfo.jsp").forward(req, resp);
+        }
+        if (checkName && checkEmptyPhone && checkPhone && checkEmptyEmail && checkEmail && checkEmptyAddress && checkEmptyCccd && checkCCCD) {
+            User user = new User(id, name, dob, gender, phone, email, address, cccd);
+            userService.updateInfo(user);
+            req.setAttribute("message", "Đổi thông tin thành công!");
+            req.setAttribute("genders", Gender.values());
+            req.setAttribute("user", user);
+            req.getRequestDispatcher("/information.jsp").forward(req, resp);
+        } else {
+            User user = userService.findById(id);
+            req.setAttribute("genders", Gender.values());
+            req.setAttribute("user", user);
+            req.getRequestDispatcher("/updateInfo.jsp").forward(req, resp);
+        }
     }
 
     private void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -289,31 +340,77 @@ public class UserServlet extends HttpServlet {
     private void createUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String userName = req.getParameter("user_name");
+        User username = userService.findByUsername(userName);
+        boolean checkEmptyUsername = checkString(userName);
+        boolean checkUsername = checkUsername(userName);
+        if (!checkEmptyUsername) {
+            req.setAttribute("messageUsername", "Tài khoản không được để trống");
+        } else if (!checkUsername) {
+            req.setAttribute("messageUsername", "Tài khoản không có kí tự đặc biệt và ngắn hơn 15 kí tự");
+        } else if (username != null) {
+            req.setAttribute("messageUsername", "Tài khoản đã tồn tại");
+        }
+
         String userPassword = PasswordEncoder.encode(req.getParameter("user_password"));
+        boolean checkEmptyPassword = checkString(userPassword);
+        if (!checkEmptyPassword) {
+            req.setAttribute("messagePassword", "Mật khẩu không được để trống");
+        }
         String name = req.getParameter("full_name");
-        boolean checkName = checkName(name);
+        boolean checkName = checkString(name);
         if (!checkName) {
-            req.setAttribute("messageName", "Tên không được để trống");
-            req.getRequestDispatcher("register.jsp").forward(req, resp);
+            req.setAttribute("messageName", "Họ và tên không được để trống");
         }
         Date dob = Date.valueOf(req.getParameter("dob"));
         String genderS = req.getParameter("gender");
         Gender gender = Gender.valueOf(genderS);
         String phone = req.getParameter("phone");
+        boolean checkEmptyPhone = checkString(phone);
+        boolean checkPhone = isPhoneValid(phone);
+        User userPhone = userService.findByPhone(phone);
+        if (!checkEmptyPhone) {
+            req.setAttribute("messagePhone", "Số điện thoại không được để trống");
+        } else if (!checkPhone) {
+            req.setAttribute("messagePhone", "Số điện thoại gồm 10 số bắt đầu bằng số 0");
+        } else if (userPhone != null) {
+            req.setAttribute("messagePhone", "Số điện thoại đã tồn tại");
+        }
         String email = req.getParameter("email");
+        boolean checkEmptyEmail = checkString(email);
+        boolean checkEmail = isEmailValid(email);
+        User userEmail = userService.findByEmail(email);
+        if (!checkEmptyEmail) {
+            req.setAttribute("messageEmail", "Email không được để trống");
+        } else if (!checkEmail) {
+            req.setAttribute("messageEmail", "Email không hợp lệ");
+        } else if (userEmail != null) {
+            req.setAttribute("messageEmail", "Email đã tồn tại");
+        }
         String address = req.getParameter("address");
+        boolean checkEmptyAddress = checkString(address);
+        if (!checkEmptyAddress) {
+            req.setAttribute("messageAddress", "Địa chỉ không được để trống");
+        }
         String cccd = req.getParameter("cccd");
-        if (checkName) {
-            User user = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
-            user.setRole(Role.USER);
-            userService.create(user);
+        boolean checkEmptyCccd = checkString(cccd);
+        boolean checkCCCD = isCCCDValid(cccd);
+        User userCccd = userService.findByCccd(cccd);
+        if (!checkEmptyCccd) {
+            req.setAttribute("messageCccd", "Căn cước công dân không được để trống");
+        } else if (!checkCCCD) {
+            req.setAttribute("messageCccd", "Căn cước công dân gồm 12 số bắt đầu bằng số 0");
+        } else if (userCccd != null) {
+            req.setAttribute("messageCccd", "Căn cước công dân đã tồn tại");
+        }
+        if (!checkEmptyUsername || !checkUsername || username != null || !checkEmptyPassword || !checkName || !checkEmptyPhone || !checkPhone || userPhone != null || !checkEmptyEmail || !checkEmail || userEmail != null || !checkEmptyAddress || !checkEmptyCccd || !checkCCCD || userCccd != null) {
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+        }
+        if (checkEmptyUsername && checkUsername && username == null && checkEmptyPassword && checkName && checkEmptyPhone && checkPhone && userPhone == null && checkEmptyEmail && checkEmail && userEmail == null && checkEmptyAddress && checkEmptyCccd && checkCCCD && userCccd == null) {
+            User newUser = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
+            newUser.setRole(Role.USER);
+            userService.create(newUser);
             req.setAttribute("message", "Tạo tài khoản thành công!");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
-    }
-
-
-    public static boolean checkName(String name) {
-        return !Objects.equals(name, "");
     }
 }

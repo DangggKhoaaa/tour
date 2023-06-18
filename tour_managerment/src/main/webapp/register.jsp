@@ -57,10 +57,13 @@
 
                         <label class="block text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Tài khoản</span>
-                            <input name="user_name" pattern="[a-z]{1,15}" title=""
+                            <input name="user_name"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="JaneDoe"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messageUsername}
+                            </p>
                         </label>
                         <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Mật khẩu</span>
@@ -69,6 +72,9 @@
                                    placeholder="***************"
                                    type="password"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messagePassword}
+                            </p>
                         </label>
 
                         <hr class="my-8"/>
@@ -83,7 +89,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                   Họ và tên
                 </span>
-                            <input name="full_name" id="full_name" pattern="[a-z]{1,15}" title=""
+                            <input name="full_name" id="full_name"
                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                    placeholder="Jane Doe"
                                    type="text"
@@ -110,7 +116,7 @@
                 </span>
                             <select name="gender" id="gender"
                                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
-                                <option>--None--</option>
+<%--                                <option>--None--</option>--%>
                                 <option>Nam</option>
                                 <option>Nữ</option>
                                 <option>LGBT</option>
@@ -129,6 +135,9 @@
                                    placeholder="Số điện thoại gồm 10 chữ số"
                                    type="text"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messagePhone}
+                            </p>
                         </label>
 
                         <label class="block mt-4 text-sm">
@@ -151,6 +160,9 @@
                                    placeholder="America"
                                    type="text"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messageAddress}
+                            </p>
                         </label>
 
                         <label class="block mt-4 text-sm">
@@ -162,6 +174,9 @@
                                    placeholder="CCCD gồm 12 chữ số"
                                    type="text"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messageCccd}
+                            </p>
                         </label>
 
                         <a

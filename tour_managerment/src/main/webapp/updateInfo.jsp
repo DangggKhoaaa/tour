@@ -13,21 +13,26 @@
 >
     Đổi thông tin cá nhân
 </h2>
+
+
 <form action="/user?action=updateInfo" method="post">
     <input type="hidden" name="user_id" value="${user.id}">
 
     <div
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Họ và tên
                 </span>
             <input type="text" name="full_name" value="${user.name}"
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+            <p class="mt-4" style="color: red">
+                ${messageName}
+            </p>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Ngày sinh
                 </span>
@@ -35,7 +40,7 @@
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Giới tính
                 </span>
@@ -50,37 +55,49 @@
                     </c:forEach>
                 </select>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Số điện thoại
                 </span>
             <input type="text" name="phone" value="${user.phone}"
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+            <p class="mt-4" style="color: red">
+                ${messagePhone}
+            </p>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Email
                 </span>
             <input type="email" name="email" value="${user.email}"
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+            <p class="mt-4" style="color: red">
+                ${messageEmail}
+            </p>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Địa chỉ
                 </span>
             <input type="text" name="address" value="${user.address}"
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+            <p class="mt-4" style="color: red">
+                ${messageAddress}
+            </p>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Căn cước công dân
                 </span>
             <input type="text" name="cccd" value="${user.cccd}"
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+            <p class="mt-4" style="color: red">
+                ${messageCccd}
+            </p>
         </label>
     </div>
     <button

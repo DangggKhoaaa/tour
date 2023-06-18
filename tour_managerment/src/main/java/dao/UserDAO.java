@@ -15,6 +15,9 @@ public class UserDAO extends ConectionDatabase{
     private final String SELECT_USERS = "SELECT * FROM user WHERE lower(full_name) LIKE ? OR lower(user_name) LIKE ? OR lower(gender) LIKE ? OR lower(phone) LIKE ? OR lower(email) LIKE ? OR lower(address) LIKE ? OR lower(cccd) LIKE ? OR lower(role) LIKE ? LIMIT ? OFFSET ?";
     private final String SELECT_USERS_BY_ID = "SELECT * FROM user WHERE user_id = ?";
     private final String SELECT_USERS_BY_USERNAME = "SELECT * FROM user WHERE user_name = ?";
+    private final String SELECT_USERS_BY_PHONE = "SELECT * FROM user WHERE phone = ?";
+    private final String SELECT_USERS_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
+    private final String SELECT_USERS_BY_CCCD = "SELECT * FROM user WHERE cccd = ?";
     private final String INSERT_USERS = "INSERT INTO user (user_name, user_password, full_name, dob, gender, phone, email, address, cccd, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String UPDATE_PASSWORD = "UPDATE user SET user_password = ? WHERE user_id = ?";
     private final String UPDATE_INFO = "UPDATE user SET full_name = ?, dob = ?, gender = ?, phone = ?, email = ?, address = ?, cccd = ? WHERE user_id = ?";
@@ -144,6 +147,102 @@ public class UserDAO extends ConectionDatabase{
                 String roleS = rs.getString("role");
                 Role role = Role.valueOf(roleS);
                 return new User(idCus, nameUser, password, name, dob, gender, phone, email, address, cccd, role);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public User findByPhone(String phone) {
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(SELECT_USERS_BY_PHONE);) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1, phone);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idCus = rs.getInt("user_id");
+                String nameUser = rs.getString("user_name");
+                String password = rs.getString("user_password");
+                String name = rs.getString("full_name");
+                Date dob = rs.getDate("dob");
+                String genderS = rs.getString("gender");
+                Gender gender = Gender.valueOf(genderS);
+                String phone2 = rs.getString("phone");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String cccd = rs.getString("cccd");
+
+                String roleS = rs.getString("role");
+                Role role = Role.valueOf(roleS);
+                return new User(idCus, nameUser, password, name, dob, gender, phone2, email, address, cccd, role);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public User findByEmail(String email) {
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(SELECT_USERS_BY_PHONE);) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1, email);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idCus = rs.getInt("user_id");
+                String nameUser = rs.getString("user_name");
+                String password = rs.getString("user_password");
+                String name = rs.getString("full_name");
+                Date dob = rs.getDate("dob");
+                String genderS = rs.getString("gender");
+                Gender gender = Gender.valueOf(genderS);
+                String phone = rs.getString("phone");
+                String email2 = rs.getString("email");
+                String address = rs.getString("address");
+                String cccd = rs.getString("cccd");
+
+                String roleS = rs.getString("role");
+                Role role = Role.valueOf(roleS);
+                return new User(idCus, nameUser, password, name, dob, gender, phone, email2, address, cccd, role);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public User findByCccd(String cccd) {
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(SELECT_USERS_BY_PHONE);) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1, cccd);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idCus = rs.getInt("user_id");
+                String nameUser = rs.getString("user_name");
+                String password = rs.getString("user_password");
+                String name = rs.getString("full_name");
+                Date dob = rs.getDate("dob");
+                String genderS = rs.getString("gender");
+                Gender gender = Gender.valueOf(genderS);
+                String phone = rs.getString("phone");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String cccd2 = rs.getString("cccd");
+
+                String roleS = rs.getString("role");
+                Role role = Role.valueOf(roleS);
+                return new User(idCus, nameUser, password, name, dob, gender, phone, email, address, cccd2, role);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

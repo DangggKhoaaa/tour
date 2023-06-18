@@ -19,44 +19,44 @@
     >
 
         <input type="hidden" name="user_id" value="${user.id}">
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Họ và tên</span>
             <input name="full_name" value="${user.name}" type="text" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Ngày sinh</span>
             <input name="dob" value="${user.dob}" type="date" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Giới tính</span>
             <input name="gender" value="${user.gender}" type="text" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Số điện thoại</span>
             <input name="phone" value="${user.phone}" type="text" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Email</span>
             <input name="email" value="${user.email}" type="email" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Địa chỉ</span>
             <input name="address" value="${user.address}" type="text" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
         </label>
-        <label class="block text-sm">
+        <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Căn cước công dân</span>
             <input name="cccd" value="${user.cccd}" type="text" disabled
                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
