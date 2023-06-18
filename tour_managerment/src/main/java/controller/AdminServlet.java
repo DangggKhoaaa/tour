@@ -33,8 +33,11 @@ public class AdminServlet extends HttpServlet {
             case "showInformation":
                 showInformation(req, resp);
                 break;
+
         }
     }
+
+
 
     private void showInformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));

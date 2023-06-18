@@ -24,7 +24,7 @@ public class TourTicketDAO extends ConectionDatabase {
             "                            left join service on service.service_id =tour_ticket.service_id\n" +
             "                            left join transport on service.transport_id =transport.transport_id\n" +
             "                            left join hotel on service.hotel_id =hotel.hotel_id\n" +
-            "                            where  `user`.user_name like '%s' or `user`.full_name like '%s' or tours.`name` like '%s' or transport.`name` like '%s' or hotel.`name` like '%s'\n" +
+            "                            where tour_ticket.`status`<> 'true' and (`user`.user_name like '%s' or `user`.full_name like '%s' or tours.`name` like '%s' or transport.`name` like '%s' or hotel.`name` like '%s')\n" +
             "                             order by %s %s \n" +
             "                             limit %d offset %d";
     private final String SELECT_TOUR_TICKET_BY_USER_ID = "select * from tour_ticket left  join `user` on `user`.user_id =tour_ticket.user_id\n" +
@@ -32,7 +32,7 @@ public class TourTicketDAO extends ConectionDatabase {
             "                            left join service on service.service_id =tour_ticket.service_id\n" +
             "                            left join transport on service.transport_id =transport.transport_id\n" +
             "                            left join hotel on service.hotel_id =hotel.hotel_id\n" +
-            "                            where `user`.user_id = %d and `user`.user_name like '%s' or `user`.full_name like '%s' or tours.`name` like '%s' or transport.`name` like '%s' or hotel.`name` like '%s'\n" +
+            "                            where tour_ticket.user_id = %d and (`user`.user_name like '%s' or `user`.full_name like '%s' or tours.`name` like '%s' or transport.`name` like '%s' or hotel.`name` like '%s')\n" +
             "                             order by %s %s \n" +
             "                             limit %d offset %d";
     private final String DELETE_TOUR_TICKET_BY_ID = "DELETE FROM `tour_ticket` WHERE (`tour_ticket_id` = ? );";
@@ -46,6 +46,8 @@ public class TourTicketDAO extends ConectionDatabase {
             "                            left join hotel on service.hotel_id =hotel.hotel_id\n" +
             "                            where tour_ticket.`status` = false and `user`.user_name like ? or `user`.full_name like ? or tours.`name` like ? or transport.`name` like ? or hotel.`name` like ?";
 
+    private final String ACCEPT ="UPDATE `tour_ticket` SET `status` = 'true' WHERE (`tour_ticket_id` = ?);";
+    private final String PAY="UPDATE `tour_ticket` SET `status` = 'pay' WHERE (`tour_ticket_id` = ?);";
     public List<TourTicket> findAllFalse(Pageable pageAble) {
         List<TourTicket> tourTickets = new ArrayList<>();
         String search = pageAble.getSearch();
@@ -72,7 +74,7 @@ public class TourTicketDAO extends ConectionDatabase {
                 ServiceModel serviceModel = serviceSV.findById(service);
                 double total_price = tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice();
                 int quantity = rs.getInt("quantity");
-                boolean status = rs.getBoolean("status");
+                String status = rs.getString("status");
                 String description = rs.getString("description");
 
                 tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description));
@@ -124,7 +126,7 @@ public class TourTicketDAO extends ConectionDatabase {
                 ServiceModel serviceModel = serviceSV.findById(service);
                 double total_price = tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice();
                 int quantity = rs.getInt("quantity");
-                boolean status = rs.getBoolean("status");
+                String status = rs.getString("status");
                 String description = rs.getString("description");
 
                 tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description));
@@ -146,6 +148,7 @@ public class TourTicketDAO extends ConectionDatabase {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        List<TourTicket> tourTickets1=tourTickets;
         return tourTickets;
     }
 
@@ -196,6 +199,28 @@ public class TourTicketDAO extends ConectionDatabase {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection
                      .prepareStatement(DELETE_TOUR_TICKET_BY_ID);) {
+            System.out.println(preparedStatement);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void accept (int id ){
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(ACCEPT);) {
+            System.out.println(preparedStatement);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void pay (int id ){
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(PAY);) {
             System.out.println(preparedStatement);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

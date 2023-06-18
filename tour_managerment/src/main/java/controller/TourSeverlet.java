@@ -19,7 +19,7 @@ public class TourSeverlet extends HttpServlet {
     ServiceSV serviceSV = new ServiceSV();
     TransportService transportService= new TransportService();
     HotelService hotelService= new HotelService();
-    int totalItem=5;
+    int totalItem=6;
 
     TourService tourService=new TourService();
     TagService tagService=new TagService();
@@ -46,9 +46,34 @@ public class TourSeverlet extends HttpServlet {
             case "booking":
                 bookingTour(req,resp);
                 break;
+            case "searchTour":
+                userSearchTour(req,resp);
+                break;
+
             default:
                 showTour(req,resp);
         }
+    }
+
+    private void userSearchTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="t1.tour_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        req.setAttribute("pageable",pageAble);
+        List<Tour> tours =tourService.findAll(pageAble);
+        req.setAttribute("tours",tourService.findAll(pageAble));
+        req.getRequestDispatcher("user.jsp").forward(req,resp);
     }
 
     private void bookingTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -155,6 +180,9 @@ public class TourSeverlet extends HttpServlet {
                 break;
             case"edit":
                 editTour(req,resp);
+            case "searchTour":
+                userSearchTour(req,resp);
+                break;
             default:
                showTour(req,resp);
         }

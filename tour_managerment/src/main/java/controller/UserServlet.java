@@ -66,6 +66,9 @@ public class UserServlet extends HttpServlet {
             case"cart":
                 showCart(req,resp);
                 break;
+            case"pay":
+                pay(req,resp);
+                break;
             case "deleteTourTicket":
                 deleteTourTicket(req,resp);
                 break;
@@ -92,8 +95,34 @@ public class UserServlet extends HttpServlet {
         }
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
+        req.setAttribute("user",user);
         req.setAttribute("tourTickets",tourTickets);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
+    }
+    private void pay(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        tourTicketService.pay(tour_ticket_id);
+
+        User user=userService.findById(user_id);
+        String search =req.getParameter("search");
+        int page = 1;
+        if(req.getParameter("page") != null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String fieldName="tour_ticket_id";
+        if(req.getParameter("fieldName") != null){
+            fieldName = req.getParameter("fieldName");
+        }
+        String sortby ="desc";
+        if(req.getParameter("sortby") != null){
+            sortby = req.getParameter("sortby");
+        }
+        Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
+        List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
+        req.setAttribute("tourTickets",tourTickets);
+        req.getRequestDispatcher("cart.jsp").forward(req,resp);
+
     }
     private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));

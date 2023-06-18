@@ -7,10 +7,10 @@ public class TourTicket {
     private ServiceModel serviceModel;
     private int quantity;
     private double totalPrice;
-    private boolean status;
+    private String status;
     private String description;
 
-    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, boolean status, String description) {
+    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description) {
         this.tourTicketId = tourTicketId;
         this.user = user;
         this.tour = tour;
@@ -21,7 +21,7 @@ public class TourTicket {
         this.description = description;
     }
 
-    public TourTicket(User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, boolean status, String description) {
+    public TourTicket(User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description) {
         this.user = user;
         this.tour = tour;
         this.serviceModel = serviceModel;
@@ -79,11 +79,11 @@ public class TourTicket {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isStatus() {
+    public String isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

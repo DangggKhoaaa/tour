@@ -24,4 +24,10 @@ public class TourTicketService {
     public List<TourTicket> findAllByUserId(Pageable pageable, User user){
       return   tourTicketDAO.findAllByUserId(pageable,user );
     }
+    public void accept(int id ){
+        tourTicketDAO.accept(id);
+    }
+    public void pay (int id ){
+        tourTicketDAO.pay(id);
+    }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class TourDao extends ConectionDatabase {
     private final String SELECT_TOUR = "select t1.*,group_concat(t2.`name` separator ',') as tags  from tours t1 left  join tour_tag tt on tt.tour_id=t1.tour_id\n" +
             "\t\t\t\t\tleft join tag t2 on tt.tag_id=t2.tag_id\t\n" +
-            "                    where t1.`name` like '%s' or  t1.start_time like '%s' or t1.price like '%s' \n" +
+            "                    where (t1.`name` like '%s' or  t1.start_time like '%s' or t1.price like '%s') and datediff(CURDATE()+7,t1.start_time)<0\n" +
             "                    group by t1.tour_id\n" +
             "                    order by %s %s \n" +
             "                    limit %d offset %d";

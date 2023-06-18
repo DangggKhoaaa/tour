@@ -172,10 +172,10 @@
                         <div class="col-md-12 text-center">
                             <ul class="pagination">
                                 <li class="disabled"><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
+
+                                <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+                                    <li class="active"><a href="tours?action=searchTour&page=${page}&search=${pageable.search}">${page}</a></li>
+                                </c:forEach>
                                 <li><a href="#">&raquo;</a></li>
                             </ul>
                         </div>
@@ -187,7 +187,7 @@
                     <div class="sidebar-wrap">
                         <div class="side search-wrap animate-box">
                             <h3 class="sidebar-heading">Find your tour</h3>
-                            <form method="get" action="tours" class="colorlib-form">
+                            <form method="post" action="/tours?action=searchTour" class="colorlib-form">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">

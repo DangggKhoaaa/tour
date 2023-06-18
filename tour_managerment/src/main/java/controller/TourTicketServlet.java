@@ -44,12 +44,28 @@ public class TourTicketServlet extends HttpServlet {
             case "displayFalse":
                 showTicketFalse(req,resp);
                 break;
-
+            case"pay":
+                pay(req,resp);
+                break;
+            case"accept":
+                acceptTourTicket(req,resp);
+                break;
             default:
                 showBookingPage(req,resp);
         }
     }
 
+    private void pay(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
+        tourTicketService.pay(tour_ticket_id);
+        showTicketFalse(req,resp);
+    }
+
+    private void acceptTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int tour_ticket_id = Integer.parseInt(req.getParameter("tour_ticket_id"));
+        tourTicketService.accept(tour_ticket_id);
+        showTicketFalse(req,resp);
+    }
 
 
     private void showTicketFalse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,8 +86,8 @@ public class TourTicketServlet extends HttpServlet {
         Pageable pageAble =new Pageable(search,page,totalItem,fieldName,sortby);
         List<TourTicket> tourTicketList =tourTicketService.findAllFalse(pageAble);
         req.setAttribute("pageable",pageAble);
-        req.setAttribute("ticketFalse",tourTicketService.findAllFalse(pageAble));
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+        req.setAttribute("tourTickets",tourTicketService.findAllFalse(pageAble));
+        req.getRequestDispatcher("tourTicketManager.jsp").forward(req,resp);
     }
 
     private void addService(HttpServletRequest req, HttpServletResponse resp) {
@@ -151,8 +167,8 @@ public class TourTicketServlet extends HttpServlet {
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         String  description = req.getParameter("description");
         double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
-        TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,false,description);
-
+        TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description);
+        boolean test= tourTicket.isStatus().equals("false");
 
         tourTicketService.createTOurTicket(tourTicket);
 

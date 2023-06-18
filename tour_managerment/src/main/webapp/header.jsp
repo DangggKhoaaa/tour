@@ -122,7 +122,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="charts.html"
+                            href="tour_ticket?action=displayFalse"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -139,7 +139,7 @@
                             ></path>
                             <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">Charts</span>
+                        <span class="ml-4">Tour Ticket</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
