@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -130,7 +131,7 @@
                <div class="col-md-6 col-sm-6 animate-box">
                   <div class="tour">
                       <a href="tour-place.html" class="tour-img" style="background-image: url(${tour.img});">
-                          <p class="price"><span>$${tour.price}</span> <small>/ ${tour.start_time}</small></p>
+                          <p class="price"><span><fmt:formatNumber type="number" value="${tour.price}"/> VND</span> <small>/ ${tour.start_time}</small></p>
                       </a>
                       <span class="desc">
                           <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>

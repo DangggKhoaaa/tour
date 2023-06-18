@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="header.jsp"/>
+<jsp:include page="headerUser.jsp"/>
 
 <h2
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"

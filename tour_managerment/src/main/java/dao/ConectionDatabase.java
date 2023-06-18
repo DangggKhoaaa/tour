@@ -9,11 +9,6 @@ public class ConectionDatabase {
     protected String jdbcUsername = "root";
     protected String jdbcPassword = "0766784418";
 
-<<<<<<< Updated upstream
-=======
-    protected String jdbcPassword = "123456";
->>>>>>> Stashed changes
-
     protected Connection getConnection() {
         Connection connection = null;
         try {

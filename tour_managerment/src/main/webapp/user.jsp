@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -14,9 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Tour Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
 
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
@@ -24,10 +25,10 @@
     <meta property="og:url" content=""/>
     <meta property="og:site_name" content=""/>
     <meta property="og:description" content=""/>
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
 
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 
@@ -94,19 +95,19 @@
                         <ul>
                             <li><a>Hello ${user.name}!</a></li>
                             <li><a href="user?action=userPage">Home</a></li>
-<%--                            <li class="has-dropdown active">--%>
-<%--                                <a href="tours.html">Tours</a>--%>
-<%--                                <ul class="dropdown">--%>
-<%--                                    <li><a href="#">Destination</a></li>--%>
-<%--                                    <li><a href="#">Cruises</a></li>--%>
-<%--                                    <li><a href="#">Hotels</a></li>--%>
-<%--                                    <li><a href="#">Booking</a></li>--%>
-<%--                                </ul>--%>
-<%--                            </li>--%>
+                            <%--                            <li class="has-dropdown active">--%>
+                            <%--                                <a href="tours.html">Tours</a>--%>
+                            <%--                                <ul class="dropdown">--%>
+                            <%--                                    <li><a href="#">Destination</a></li>--%>
+                            <%--                                    <li><a href="#">Cruises</a></li>--%>
+                            <%--                                    <li><a href="#">Hotels</a></li>--%>
+                            <%--                                    <li><a href="#">Booking</a></li>--%>
+                            <%--                                </ul>--%>
+                            <%--                            </li>--%>
                             <li><a href="information.jsp">Infomation</a></li>
-                            <li><a href="/user?action=updatePassword&id=${user.id}">Change Password</a></li>
-                            <li><a href="/user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
-                            <li><a href="login.jsp">Log Out</a></li>
+                            <li><a href="user?action=updatePassword&id=${user.id}">Change Password</a></li>
+                            <li><a href="user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
+                            <li><a href="user?action=home">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -140,111 +141,31 @@
                     <div class="row">
                         <div class="wrap-division">
                             <c:forEach items="${tours}" var="tour">
-                            <a  href="tours?action=booking&user_id=${user.id}&tour_id=${tour.tour_id}">
-                                <div class="col-md-6 col-sm-6 animate-box">
-                                    <div class="tour">
-                                        <a href="tours?action=booking&user_id=${user.id}&tour_id=${tour.tour_id}" class="tour-img" style="background-image: url(${tour.img});">
-                                            <p class="price"><span>$${tour.price}</span> <small>/ ${tour.start_time}</small></p>
-                                        </a>
-                                        <span class="desc">
-                          <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                          <h2>>${tour.name}</h2>
-                          <span class="city">${tour.description}</span>
-                        <span class="city">${tour.tour_tag}</span>
+                                <a href="tours?action=booking&user_id=${user.id}&tour_id=${tour.tour_id}">
+                                    <div class="col-md-6 col-sm-6 animate-box">
+                                        <div class="tour">
+                                            <a href="tours?action=booking&user_id=${user.id}&tour_id=${tour.tour_id}"
+                                               class="tour-img" style="background-image: url(${tour.img});">
+                                                <p class="price"><span><fmt:formatNumber type="number"
+                                                                                         value="${tour.price}"/> VND</span>
+                                                    <small>/ ${tour.start_time}</small></p>
+                                            </a>
+                                            <span class="desc">
+                          <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i
+                                  class="icon-star-full"></i><i class="icon-star-full"></i><i
+                                  class="icon-star-full"></i></span> 545 Reviews</p>
+                                                <p class="star">${tour.tour_tag}</p>
+                          <h2>${tour.name}</h2>
+                          <span class="city">
+                                  ${tour.description}
+                          </span>
+<%--                        <span class="city">${tour.tour_tag}</span>--%>
                       </span>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </a>
                             </c:forEach>
-                            <!-- <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-2.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
 
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-3.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
-
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-4.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
-
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-5.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
-
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-6.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
-
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-7.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>
-
-                             <div class="col-md-6 col-sm-6 animate-box">
-                                 <div class="tour">
-                                     <a href="tour-place.html" class="tour-img" style="background-image: url(images/tour-8.jpg);">
-                                         <p class="price"><span>$1500</span> <small>/ 3 Days</small></p>
-                                     </a>
-                                     <span class="desc">
-                                         <p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
-                                         <h2><a href="tour-place.html">Family Tour in Greece</a></h2>
-                                         <span class="city">Athens, Greece</span>
-                                     </span>
-                                 </div>
-                             </div>-->
                         </div>
                     </div>
                     <div class="row">
@@ -272,7 +193,8 @@
                                         <div class="form-group">
                                             <label for="date">Where:</label>
                                             <div class="form-field">
-                                                <input type="search" name="search" id="search" value="${pageable.search}" onsearch="onClearSearch()" />
+                                                <input type="search" name="search" id="search"
+                                                       value="${pageable.search}" onsearch="onClearSearch()"/>
                                             </div>
                                         </div>
                                     </div>
@@ -281,7 +203,8 @@
                                             <label for="date">Check-in:</label>
                                             <div class="form-field">
                                                 <i class="icon icon-calendar2"></i>
-                                                <input type="text" id="date" class="form-control date" placeholder="Check-in date">
+                                                <input type="text" id="date" class="form-control date"
+                                                       placeholder="Check-in date">
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +213,8 @@
                                             <label for="date">Check-out:</label>
                                             <div class="form-field">
                                                 <i class="icon icon-calendar2"></i>
-                                                <input type="text" id="date" class="form-control date" placeholder="Check-out date">
+                                                <input type="text" id="date" class="form-control date"
+                                                       placeholder="Check-out date">
                                             </div>
                                         </div>
                                     </div>
@@ -364,25 +288,33 @@
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span></p>
+                                                <p class="rate"><span><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i><i class="icon-star-full"></i></span>
+                                                </p>
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span></p>
+                                                <p class="rate"><span><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i></span></p>
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span></p>
+                                                <p class="rate"><span><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i><i class="icon-star-full"></i></span>
+                                                </p>
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">
-                                                <p class="rate"><span><i class="icon-star-full"></i><i class="icon-star-full"></i></span></p>
+                                                <p class="rate"><span><i class="icon-star-full"></i><i
+                                                        class="icon-star-full"></i></span></p>
                                             </label>
                                         </div>
                                         <div class="form-check">
@@ -441,7 +373,8 @@
     </div>
 
 
-    <div id="colorlib-subscribe" style="background-image: url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <div id="colorlib-subscribe" style="background-image: url(images/img_bg_2.jpg);"
+         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -468,7 +401,8 @@
             <div class="row row-pb-md">
                 <div class="col-md-3 colorlib-widget">
                     <h4>Tour Agency</h4>
-                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta
+                        adipisci architecto culpa amet.</p>
                     <p>
                     <ul class="colorlib-social-icons">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
@@ -526,9 +460,12 @@
                 <div class="col-md-12 text-center">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart2" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="icon-heart2" aria-hidden="true"></i>
+                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
-                        <span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
+                        <span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a
+                                href="http://pexels.com/" target="_blank">Pexels.com</a></span>
                     </p>
                 </div>
             </div>

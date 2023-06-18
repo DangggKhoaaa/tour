@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="headerUser.jsp"/>
 <a href="tour_ticket?action=displayFalse"> ticket</a>
 <div class="w-full overflow-x-auto">
@@ -177,7 +178,8 @@
         <span
                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
         >
-                ${tour_ticket.getTotalPrice()}
+            <fmt:formatNumber type="number" value="${tour_ticket.getTotalPrice()}"/> VND
+<%--                ${tour_ticket.getTotalPrice()}--%>
         </span>
                 </td>
                 <c:if test="${tour_ticket.isStatus()!=true}">

@@ -54,7 +54,7 @@
               ></span>
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="index.html"
+                            href="user?action=showInformation&id=${user.id}"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -78,7 +78,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="forms.html"
+                            href="user?action=cart&user_id=${user.id}"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -607,7 +607,7 @@
                                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                                             ></path>
                                         </svg>
-                                        <span>Thông tin cá nhân</span>
+                                        <span>Infomation Customer</span>
                                     </a>
                                 </li>
                                 <li class="flex">
@@ -630,7 +630,7 @@
                                             ></path>
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
-                                        <span>Đổi mật khẩu</span>
+                                        <span>Change Password</span>
                                     </a>
                                 </li>
                                 <li class="flex">

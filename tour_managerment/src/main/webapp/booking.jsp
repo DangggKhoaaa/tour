@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -93,25 +93,25 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="colorlib-logo"><a href="index.html">Tour</a></div>
+                        <div id="colorlib-logo"><a href="user?action=userPage">Tour</a></div>
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li class="has-dropdown active">
-                                <a href="tours.html">Tours</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Destination</a></li>
-                                    <li><a href="#">Cruises</a></li>
-                                    <li><a href="#">Hotels</a></li>
-                                    <li><a href="#">Booking</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="hotels.html">Hotels</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a>Hello ${user.name}!</a></li>
+                            <li><a href="user?action=userPage">Home</a></li>
+                            <%--                            <li class="has-dropdown active">--%>
+                            <%--                                <a href="tours.html">Tours</a>--%>
+                            <%--                                <ul class="dropdown">--%>
+                            <%--                                    <li><a href="#">Destination</a></li>--%>
+                            <%--                                    <li><a href="#">Cruises</a></li>--%>
+                            <%--                                    <li><a href="#">Hotels</a></li>--%>
+                            <%--                                    <li><a href="#">Booking</a></li>--%>
+                            <%--                                </ul>--%>
+                            <%--                            </li>--%>
+                            <li><a href="information.jsp">Infomation</a></li>
+                            <li><a href="/user?action=updatePassword&id=${user.id}">Change Password</a></li>
+                            <li><a href="/user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
+                            <li><a href="login.jsp">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -165,9 +165,9 @@
                                                             <span class="day-tour">End time: ${tour.end_time}</span>
 
                                                             <h2>${tour.name}</h2>
-                                                            <p>${tour.description}</p>
-                                                            <p>${tour.price}</p>
                                                             <p>${tour.getTour_tag()}</p>
+                                                            <p>${tour.description}</p>
+                                                            <fmt:formatNumber type="number" value="${tour.price}"/> VND
                                                         </div>
                                                     </div>
                                                 </div>
@@ -181,185 +181,202 @@
 
                 </div>
 
-                <div>
-                    <label for="quantity" > Nhập số người</label>
-                    <input type="number" name="quantity" id="quantity" >
-                </div>
-                <div>
-                    <label for="description">Nhập chú thích</label>
-                    <input type="text" name="description" id="description">
-                </div>
+<%--                    <input type="text" name="description" id="description">--%>
 
-                <div
-                        class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
-                >
 
-                    <label class="block mt-4 text-sm">
+                    <div
+                            class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
+                    >
+                        <label class="block text-sm" for="quantity">
+                            <span class="text-gray-700 dark:text-gray-400">Nhập số người</span>
+                            <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                   type="number" name="quantity" id="quantity">
+                        </label>
+
+                        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Hotel
                 </span>
-                        <select
-                                name="hotel" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                        >
-                            <c:forEach items="${requestScope.hotels}" var="hotel">
-                                <c:if test="${service.getHotelName().id != hotel.id}">
-                                    <option value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
-                                </c:if>
-                                <c:if test="${service.getHotelName().id == hotel.id}">
-                                    <option selected value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                    </label>
+                            <select
+                                    name="hotel"
+                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            >
+                                <c:forEach items="${requestScope.hotels}" var="hotel">
+                                    <c:if test="${service.getHotelName().id != hotel.id}">
+                                        <option value="${hotel.id}">${hotel.name} - ${hotel.price} đ
+                                            - ${hotel.description}</option>
+                                    </c:if>
+                                    <c:if test="${service.getHotelName().id == hotel.id}">
+                                        <option selected value="${hotel.id}">${hotel.name} - ${hotel.price} đ
+                                            - ${hotel.description}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </label>
 
-                    <label class="block mt-4 text-sm">
+                        <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Transport
                 </span>
-                        <select
+                            <select
 
-                                name="transport" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                        >
-                            <c:forEach items="${requestScope.transports}" var="transport">
-                                <c:if test="${service.getTransportName().id != transport.id}">
-                                    <option value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
-                                </c:if>
-                                <c:if test="${service.getTransportName().id == transport.id}">
-                                    <option selected value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                    </label>
+                                    name="transport"
+                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            >
+                                <c:forEach items="${requestScope.transports}" var="transport">
+                                    <c:if test="${service.getTransportName().id != transport.id}">
+                                        <option value="${transport.id}">${transport.name} - ${transport.price} đ
+                                            - ${transport.description}</option>
+                                    </c:if>
+                                    <c:if test="${service.getTransportName().id == transport.id}">
+                                        <option selected value="${transport.id}">${transport.name} - ${transport.price}
+                                            đ - ${transport.description}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </label>
+                        <label class="block mt-4 text-sm" for="description">
+                            <span class="text-gray-700 dark:text-gray-400">Nhập chú thích</span>
+                            <textarea
+                                    name="description" id="description"
+                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                    rows="3"
+                                    placeholder="Enter some long form content."
+                            ></textarea>
+                        </label>
 
-                    <div class="flex mt-6 text-sm">
-                        <label class="flex items-center dark:text-gray-400">
-                            <input"
-                                   type="checkbox"
-                                   class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            />
-                            <span class="ml-2">
+                        <div class="flex mt-6 text-sm">
+                            <label class="flex items-center dark:text-gray-400">
+                                <input
+                                type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none
+                                focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                />
+                                <span class="ml-2">
                     I agree to the
                     <span class="underline">privacy policy</span>
                   </span>
-                        </label>
-                    </div>
-<%--                    <button id="btn" type="submit">Create</button>--%>
+                            </label>
+                        </div>
+                        <%--                    <button id="btn" type="submit">Create</button>--%>
 
 
-                <div class="col-md-12 animate-box text-center">
-                    <p><a href="#" class="btn btn-primary"><button>Book Now!</button></a></p>
-                    <c:if test="${requestScope['message'] != null}"  >
-                        <script>
-                            alert("${message}")
-                        </script>
-                    </c:if>
-                </div>
+                        <div class="col-md-12 animate-box text-center">
+                            <p><a href="#" class="btn btn-primary">
+                                <button>Book Now!</button>
+                            </a></p>
+                            <c:if test="${requestScope['message'] != null}">
+                                <script>
+                                    alert("${message}")
+                                </script>
+                            </c:if>
+                        </div>
             </form>
-            <a href="user?action=cart&user_id=${user.id}">cart</a>
-
+            <a href="user?action=cart&user_id=${user.id}">Cart</a>
         </div>
     </div>
+</div>
 
 
-    <div id="colorlib-subscribe" style="background-image: url(src/images/img_bg_2.jpg);"
-         data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
-                    <h2>Sign Up for a Newsletter</h2>
-                    <p>Sign up for our mailing list to get latest updates and offers.</p>
-                    <form class="form-inline qbstp-header-subscribe">
-                        <div class="row">
-                            <div class="col-md-12 col-md-offset-0">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                    <button type="submit" class="btn btn-primary">Subscribe</button>
-                                </div>
+<div id="colorlib-subscribe" style="background-image: url(src/images/img_bg_2.jpg);"
+     data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+                <h2>Sign Up for a Newsletter</h2>
+                <p>Sign up for our mailing list to get latest updates and offers.</p>
+                <form class="form-inline qbstp-header-subscribe">
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <footer id="colorlib-footer" role="contentinfo">
-        <div class="container">
-            <div class="row row-pb-md">
-                <div class="col-md-3 colorlib-widget">
-                    <h4>Tour Agency</h4>
-                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta
-                        adipisci architecto culpa amet.</p>
-                    <p>
-                    <ul class="colorlib-social-icons">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                    </ul>
-                    </p>
-                </div>
-                <div class="col-md-2 colorlib-widget">
-                    <h4>Book Now</h4>
-                    <p>
-                    <ul class="colorlib-footer-links">
-                        <li><a href="#">Flight</a></li>
-                        <li><a href="#">Hotels</a></li>
-                        <li><a href="#">Tour</a></li>
-                        <li><a href="#">Car Rent</a></li>
-                        <li><a href="#">Beach &amp; Resorts</a></li>
-                        <li><a href="#">Cruises</a></li>
-                    </ul>
-                    </p>
-                </div>
-                <div class="col-md-2 colorlib-widget">
-                    <h4>Top Deals</h4>
-                    <p>
-                    <ul class="colorlib-footer-links">
-                        <li><a href="#">Edina Hotel</a></li>
-                        <li><a href="#">Quality Suites</a></li>
-                        <li><a href="#">The Hotel Zephyr</a></li>
-                        <li><a href="#">Da Vinci Villa</a></li>
-                        <li><a href="#">Hotel Epikk</a></li>
-                    </ul>
-                    </p>
-                </div>
-                <div class="col-md-2">
-                    <h4>Blog Post</h4>
-                    <ul class="colorlib-footer-links">
-                        <li><a href="#">The Ultimate Packing List For Female Travelers</a></li>
-                        <li><a href="#">How These 5 People Found The Path to Their Dream Trip</a></li>
-                        <li><a href="#">A Definitive Guide to the Best Dining and Drinking Venues in the City</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-3 col-md-push-1">
-                    <h4>Contact Information</h4>
-                    <ul class="colorlib-footer-links">
-                        <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
-                        <li><a href="tel://1234567920">+ 1235 2355 98</a></li>
-                        <li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-                        <li><a href="#">yoursite.com</a></li>
-                    </ul>
-                </div>
+<footer id="colorlib-footer" role="contentinfo">
+    <div class="container">
+        <div class="row row-pb-md">
+            <div class="col-md-3 colorlib-widget">
+                <h4>Tour Agency</h4>
+                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta
+                    adipisci architecto culpa amet.</p>
+                <p>
+                <ul class="colorlib-social-icons">
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                    <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                </ul>
+                </p>
             </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                        All rights reserved | This template is made with <i class="icon-heart2" aria-hidden="true"></i>
-                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
-                        <span class="block">Demo Images: <a href="https://unsplash.co/"
-                                                            target="_blank">Unsplash</a> , <a href="https://pexels.com/"
-                                                                                              target="_blank">Pexels.com</a></span>
-                    </p>
-                </div>
+            <div class="col-md-2 colorlib-widget">
+                <h4>Book Now</h4>
+                <p>
+                <ul class="colorlib-footer-links">
+                    <li><a href="#">Flight</a></li>
+                    <li><a href="#">Hotels</a></li>
+                    <li><a href="#">Tour</a></li>
+                    <li><a href="#">Car Rent</a></li>
+                    <li><a href="#">Beach &amp; Resorts</a></li>
+                    <li><a href="#">Cruises</a></li>
+                </ul>
+                </p>
+            </div>
+            <div class="col-md-2 colorlib-widget">
+                <h4>Top Deals</h4>
+                <p>
+                <ul class="colorlib-footer-links">
+                    <li><a href="#">Edina Hotel</a></li>
+                    <li><a href="#">Quality Suites</a></li>
+                    <li><a href="#">The Hotel Zephyr</a></li>
+                    <li><a href="#">Da Vinci Villa</a></li>
+                    <li><a href="#">Hotel Epikk</a></li>
+                </ul>
+                </p>
+            </div>
+            <div class="col-md-2">
+                <h4>Blog Post</h4>
+                <ul class="colorlib-footer-links">
+                    <li><a href="#">The Ultimate Packing List For Female Travelers</a></li>
+                    <li><a href="#">How These 5 People Found The Path to Their Dream Trip</a></li>
+                    <li><a href="#">A Definitive Guide to the Best Dining and Drinking Venues in the City</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 col-md-push-1">
+                <h4>Contact Information</h4>
+                <ul class="colorlib-footer-links">
+                    <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+                    <li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+                    <li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+                    <li><a href="#">yoursite.com</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with <i class="icon-heart2" aria-hidden="true"></i>
+                    by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+                    <span class="block">Demo Images: <a href="https://unsplash.co/"
+                                                        target="_blank">Unsplash</a> , <a href="https://pexels.com/"
+                                                                                          target="_blank">Pexels.com</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 </div>
 
 <div class="gototop js-top">
