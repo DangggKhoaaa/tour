@@ -167,7 +167,7 @@
                                                             <h2>${tour.name}</h2>
                                                             <p>${tour.getTour_tag()}</p>
                                                             <p>${tour.description}</p>
-                                                            <fmt:formatNumber type="number" value="${tour.price}"/> VND
+                                                            <h2><fmt:formatNumber type="number" value="${tour.price}"/> VND</h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,7 +190,7 @@
                         <label class="block text-sm" for="quantity">
                             <span class="text-gray-700 dark:text-gray-400">Nhập số người</span>
                             <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                   type="number" name="quantity" id="quantity">
+                                   type="number" name="quantity" id="quantity" value="${tourTicket.getQuantity()}">
                         </label>
 
                         <label class="block mt-4 text-sm">
@@ -203,12 +203,16 @@
                             >
                                 <c:forEach items="${requestScope.hotels}" var="hotel">
                                     <c:if test="${service.getHotelName().id != hotel.id}">
-                                        <option value="${hotel.id}">${hotel.name} - ${hotel.price} đ
-                                            - ${hotel.description}</option>
+                                        <option value="${hotel.id}">${hotel.name}
+                                            - ${hotel.description}
+                                            - <fmt:formatNumber type="number" value="${hotel.price}"/> VND
+                                            </option>
                                     </c:if>
                                     <c:if test="${service.getHotelName().id == hotel.id}">
-                                        <option selected value="${hotel.id}">${hotel.name} - ${hotel.price} đ
-                                            - ${hotel.description}</option>
+                                        <option selected value="${hotel.id}">${hotel.name}
+                                            - ${hotel.description}
+                                            - <fmt:formatNumber type="number" value="${hotel.price}"/> VND
+                                        </option>
                                     </c:if>
                                 </c:forEach>
                             </select>
@@ -225,12 +229,16 @@
                             >
                                 <c:forEach items="${requestScope.transports}" var="transport">
                                     <c:if test="${service.getTransportName().id != transport.id}">
-                                        <option value="${transport.id}">${transport.name} - ${transport.price} đ
-                                            - ${transport.description}</option>
+                                        <option value="${transport.id}">${transport.name}
+                                            - ${transport.description}
+                                            - <fmt:formatNumber type="number" value="${transport.price}"/> VND
+                                            </option>
                                     </c:if>
                                     <c:if test="${service.getTransportName().id == transport.id}">
-                                        <option selected value="${transport.id}">${transport.name} - ${transport.price}
-                                            đ - ${transport.description}</option>
+                                        <option selected value="${transport.id}">${transport.name}
+                                            - ${transport.description}
+                                            - <fmt:formatNumber type="number" value="${transport.price}"/> VND
+                                        </option>
                                     </c:if>
                                 </c:forEach>
                             </select>
@@ -241,29 +249,30 @@
                                     name="description" id="description"
                                     class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                     rows="3"
-                                    placeholder="Enter some long form content."
+                                    placeholder="Enter some long form description."
                             ></textarea>
                         </label>
 
-                        <div class="flex mt-6 text-sm">
-                            <label class="flex items-center dark:text-gray-400">
-                                <input
-                                type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none
-                                focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                />
-                                <span class="ml-2">
-                    I agree to the
-                    <span class="underline">privacy policy</span>
-                  </span>
-                            </label>
-                        </div>
+<%--                        <div class="flex mt-6 text-sm">--%>
+<%--                            <label class="flex items-center dark:text-gray-400">--%>
+<%--                                <input--%>
+<%--                                type="checkbox"--%>
+<%--                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none--%>
+<%--                                focus:shadow-outline-purple dark:focus:shadow-outline-gray"--%>
+<%--                                />--%>
+<%--                                <span class="ml-2">--%>
+<%--                    I agree to the--%>
+<%--                    <span class="underline">privacy policy</span>--%>
+<%--                  </span>--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
                         <%--                    <button id="btn" type="submit">Create</button>--%>
 
 
                         <div class="col-md-12 animate-box text-center">
-                            <p><a href="#" class="btn btn-primary">
-                                <button>Book Now!</button>
+                            <p><a onclick="return confirm('Are you sure booking this tour?')"
+                                  href="#" class="btn btn-primary">
+                                <button >Book Now!</button>
                             </a></p>
                             <c:if test="${requestScope['message'] != null}">
                                 <script>

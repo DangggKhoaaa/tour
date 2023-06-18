@@ -168,11 +168,15 @@ public class TourTicketServlet extends HttpServlet {
         String  description = req.getParameter("description");
         double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description);
-        boolean test= tourTicket.isStatus().equals("false");
 
         tourTicketService.createTOurTicket(tourTicket);
 
         req.setAttribute("message","Đặt thành công");
+//        req.setAttribute("quantity",quantity);
+        req.setAttribute("tour",tour);
+        req.setAttribute("service",serviceModel1);
+        req.setAttribute("hotels",hotelService.findAll());
+        req.setAttribute("transports",transportService.findAll());
         req.setAttribute("tourTicket",tourTicket);
         req.getRequestDispatcher("booking.jsp").forward(req,resp);
     }

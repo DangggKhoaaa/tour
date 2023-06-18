@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="header.jsp"/>
+<jsp:include page="headerUser.jsp"/>
 <p class="mt-4" style="color: red">
     ${message}
 </p>
@@ -49,7 +49,7 @@
     <button type="button"
             class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
     >
-        <a href="user.jsp">Trở về</a>
+        <a href="user?action=userPage">Trở về</a>
     </button>
 </form>
 <jsp:include page="footer.jsp" />
