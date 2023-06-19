@@ -249,6 +249,10 @@ public class TourTicketServlet extends HttpServlet {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         tourTicketService.createTOurTicket(tourTicket);
 
         req.setAttribute("message","Đặt thành công");

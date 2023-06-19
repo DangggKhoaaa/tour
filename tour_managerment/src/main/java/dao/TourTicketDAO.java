@@ -79,12 +79,9 @@ public class TourTicketDAO extends ConectionDatabase {
                 int service = rs.getInt("service_id");
                 ServiceModel serviceModel = serviceSV.findById(service);
                 int quantity = rs.getInt("quantity");
-<<<<<<< Updated upstream
-                double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice())*quantity;
 
-=======
                 double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice()) * quantity;
->>>>>>> Stashed changes
+
                 String status = rs.getString("status");
                 String description = rs.getString("description");
                 LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
@@ -143,12 +140,9 @@ public class TourTicketDAO extends ConectionDatabase {
                 int service = rs.getInt("service_id");
                 ServiceModel serviceModel = serviceSV.findById(service);
                 int quantity = rs.getInt("quantity");
-<<<<<<< Updated upstream
 
-                double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice())*quantity;
-=======
                 double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice()) * quantity;
->>>>>>> Stashed changes
+
                 String status = rs.getString("status");
                 String description = rs.getString("description");
                 LocalDate buyDate= rs.getDate("buyDate").toLocalDate();

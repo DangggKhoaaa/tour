@@ -10,6 +10,7 @@ public class ConectionDatabase {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes
 
@@ -25,6 +26,11 @@ public class ConectionDatabase {
     protected String jdbcPassword = "0766784418";
 >>>>>>> Stashed changes
 =======
+
+>>>>>>> Stashed changes
+=======
+
+    protected String jdbcPassword = "0766784418";
 
 >>>>>>> Stashed changes
 
