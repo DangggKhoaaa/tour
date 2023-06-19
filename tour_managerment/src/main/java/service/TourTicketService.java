@@ -33,4 +33,10 @@ public class TourTicketService {
     public void deleteOutOfDate(){
         tourTicketDAO.deleteOutOfDate();
     }
+    public List<TourTicket> findTicketByMonth(Integer month ,Integer year,Pageable pageable){
+        return tourTicketDAO.findTicketByMonth(month,year,pageable);
+    }
+    public double doanhThu(Integer month,Integer year){
+        return tourTicketDAO.doanhThu(month,year);
+    }
 }

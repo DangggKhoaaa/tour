@@ -127,10 +127,6 @@ public class UserServlet extends HttpServlet {
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
 
 
-        Pageable pageable = new Pageable(search, page, totalItem, fieldName, sortby);
-        List<TourTicket> tourTickets1 = tourTicketService.findAllByUserId(pageable, user);
-        req.setAttribute("tourTickets", tourTickets1);
-        req.getRequestDispatcher("cart.jsp").forward(req, resp);
 
     }
 

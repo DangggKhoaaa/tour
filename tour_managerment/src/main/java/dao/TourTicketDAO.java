@@ -44,8 +44,16 @@ public class TourTicketDAO extends ConectionDatabase {
             "                            where tour_ticket.`status` = false and `user`.user_name like ? or `user`.full_name like ? or tours.`name` like ? or transport.`name` like ? or hotel.`name` like ?";
 
     private final String ACCEPT ="UPDATE `tour_ticket` SET `status` = 'true' WHERE (`tour_ticket_id` = ?);";
-    private final String PAY="UPDATE `tour_ticket` SET `status` = 'pay' WHERE (`tour_ticket_id` = ?);";
+    private final String PAY="UPDATE `tour_ticket` SET `status` = 'pay',payDate = curdate()  WHERE (`tour_ticket_id` = ?);";
     private final String DELETE_TOURTICKET_FALSE_2DAY="DELETE FROM `tour`.`tour_ticket` WHERE  datediff(CURDATE()-2,tour_ticket.buyDate)>0 and `tour_ticket`.`status`='false';";
+    private final String FIND_TOUR_TICKET_BY_MONTH="select tour_ticket.*  from tour_ticket\n" +
+            " where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s' \n" +
+            " order by %s %s\n" +
+            " limit %d offset %d";
+    private final String TOTAL_FINDTOUR_TICKET_BY_MONTH="select count(1) as total_tour_ticket from tour_ticket\n" +
+            "             where `status` = 'true' and month(payDate)= '%s' and year(payDate)='%s' ";
+    private final String DOANH_THU="select sum(total_price) as total from tour_ticket\n" +
+            "             where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s'";
     public List<TourTicket> findAllFalse(Pageable pageAble) {
         List<TourTicket> tourTickets = new ArrayList<>();
         String search = pageAble.getSearch();
@@ -70,12 +78,20 @@ public class TourTicketDAO extends ConectionDatabase {
                 User user = userService.findById(user_id);
                 int service = rs.getInt("service_id");
                 ServiceModel serviceModel = serviceSV.findById(service);
-                double total_price = tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice();
                 int quantity = rs.getInt("quantity");
+                double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice())*quantity;
+
                 String status = rs.getString("status");
                 String description = rs.getString("description");
                 LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
-                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate));
+                LocalDate payDate;
+                try{
+                     payDate = rs.getDate("payDate").toLocalDate();
+                }catch (Exception e){
+                    payDate=null;
+                }
+
+                tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate,payDate));
             }
             PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET);
             statementTotalUsers.setString(1, search);
@@ -122,11 +138,13 @@ public class TourTicketDAO extends ConectionDatabase {
                 User user = userService.findById(userId);
                 int service = rs.getInt("service_id");
                 ServiceModel serviceModel = serviceSV.findById(service);
-                double total_price = tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice();
                 int quantity = rs.getInt("quantity");
+
+                double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice())*quantity;
                 String status = rs.getString("status");
                 String description = rs.getString("description");
                 LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
+
                 tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate));
             }
             PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET);
@@ -239,6 +257,110 @@ public class TourTicketDAO extends ConectionDatabase {
             System.out.println(e.getMessage());
         }
     }
+    public List<TourTicket> findTicketByMonth( Integer month , Integer year,Pageable pageAble){
+        List<TourTicket> tourTickets = new ArrayList<>();
+        String search = pageAble.getSearch();
+        if (search == null) {
+            search = "";
+        }
+        Integer mont=month;
+        Integer yer=year;
+        String months=null;
+        if(month!=null){
+          months= String.valueOf(month);
+        }else {
+            months="%%";
+        }
+        String years=null;
+        if(year!=null){
+            years= String.valueOf(year);
+        }else {
+            years="%"+2023+"%";
+        }
+        search = "%" + search + "%";
+        String sortby = pageAble.getSortBy();
+        String fieldName = pageAble.getNameField();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(String.format(FIND_TOUR_TICKET_BY_MONTH, months, years,   fieldName, sortby, pageAble.getTotalItems(), (pageAble.getPage() - 1) * pageAble.getTotalItems()))) {
+
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("tour_ticket_id");
+                int tour_id = rs.getInt("tour_id");
+                Tour tour = tourService.findById(tour_id);
+                int user_id = rs.getInt("user_id");
+                User user = userService.findById(user_id);
+                int service = rs.getInt("service_id");
+                ServiceModel serviceModel = serviceSV.findById(service);
+                int quantity = rs.getInt("quantity");
+                double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice())*quantity;
+
+                String status = rs.getString("status");
+                String description = rs.getString("decription");
+                LocalDate buyDate= rs.getDate("buyDate").toLocalDate();
+                LocalDate payDate;
+                try{
+                    payDate = rs.getDate("payDate").toLocalDate();
+                }catch (Exception e){
+                    payDate=null;
+                }
+                    TourTicket tourTicket=new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate,payDate);
+                tourTickets.add(tourTicket);
+            }
+            PreparedStatement statementTotalUsers = connection.prepareStatement(String.format(TOTAL_FINDTOUR_TICKET_BY_MONTH,months,years));
+
+
+
+
+            ResultSet rsTotalUser = statementTotalUsers.executeQuery();
+            while (rsTotalUser.next()) {
+                double total_tour = rsTotalUser.getDouble("total_tour_ticket");
+                double totalItems = Double.parseDouble(pageAble.getTotalItems() + "");
+                int totalPages = (int)
+                        Math.ceil(total_tour / totalItems);
+                pageAble.setTotalPage(totalPages);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        List<TourTicket> tourTickets1 =tourTickets;
+        return tourTickets;
+    }
+public double doanhThu(Integer month ,Integer year){
+        double total_tour = 0;
+    Integer mont=month;
+    Integer yer=year;
+    String months=null;
+    if(month!=null){
+        months= String.valueOf(month);
+    }else {
+        months="%%";
+    }
+    String years=null;
+    if(year!=null){
+        years= String.valueOf(year);
+    }else {
+        years="%"+2023+"%";
+    }
+    try (Connection connection = getConnection();
+         PreparedStatement preparedStatement = connection
+                 .prepareStatement(String.format(DOANH_THU,months,years))) {
+
+        System.out.println(preparedStatement);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+             total_tour = rs.getDouble("total");
+
+            return total_tour;
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return total_tour;
+}
 }
 
 

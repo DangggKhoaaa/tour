@@ -12,6 +12,15 @@ public class TourTicket {
     private String status;
     private String description;
     private LocalDate buyDay;
+    private LocalDate payDay;
+
+    public LocalDate getPayDay() {
+        return payDay;
+    }
+
+    public void setPayDay(LocalDate payDay) {
+        this.payDay = payDay;
+    }
 
     public String getStatus() {
         return status;
@@ -25,7 +34,32 @@ public class TourTicket {
         this.buyDay = buyDay;
     }
 
-    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description,LocalDate buyDay) {
+    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description, LocalDate buyDay, LocalDate payDay) {
+        this.tourTicketId = tourTicketId;
+        this.user = user;
+        this.tour = tour;
+        this.serviceModel = serviceModel;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.description = description;
+        this.buyDay = buyDay;
+        this.payDay = payDay;
+    }
+
+    public TourTicket(User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description, LocalDate buyDay, LocalDate payDay) {
+        this.user = user;
+        this.tour = tour;
+        this.serviceModel = serviceModel;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.description = description;
+        this.buyDay = buyDay;
+        this.payDay = payDay;
+    }
+
+    public TourTicket(int tourTicketId, User user, Tour tour, ServiceModel serviceModel, int quantity, double totalPrice, String status, String description, LocalDate buyDay) {
         this.tourTicketId = tourTicketId;
         this.user = user;
         this.tour = tour;

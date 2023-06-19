@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 17/6/2023
-  Time: 3:09 PM
+  Date: 19/6/2023
+  Time: 9:26 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -11,6 +11,11 @@
 
 <a href="tour_ticket?action=displayFalse"> ticket</a>
 <div class="w-full overflow-x-auto">
+    <form action="tour_ticket?action=revenue" method="post">
+      nhập tháng  <input type="number" name="month" id="month">
+      nhập năm    <input type="number" name="year" id="year">
+        <button type="submit">tìm kiếm</button>
+    </form>
     <table class="w-full whitespace-no-wrap">
         <td>${tourTicket.tour.getName()}</td>
 
@@ -221,9 +226,9 @@
                                     aria-label="Edit"
                             >
                                 <i class="fa-solid fa-check"></i>
-                                    <path
-                                            d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                                    ></path>
+                                <path
+                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                                ></path>
                                 </svg>
                             </button>
                         </a>
@@ -232,6 +237,8 @@
                 </td>
             </tr>
         </c:forEach>
+        <td>Tổng doanh thu:</td>
+        <td>${doanhThu}</td>
         </tbody>
     </table>
 </div>

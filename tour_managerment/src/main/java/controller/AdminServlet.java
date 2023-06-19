@@ -34,6 +34,7 @@ public class AdminServlet extends HttpServlet {
                 showInformation(req, resp);
                 break;
 
+
         }
     }
 
