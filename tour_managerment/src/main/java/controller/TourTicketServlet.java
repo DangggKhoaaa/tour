@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet(name = "TourTicketServlet", value = "/tour_ticket")
 public class TourTicketServlet extends HttpServlet {
@@ -216,12 +217,15 @@ public class TourTicketServlet extends HttpServlet {
         int idsv=serviceSV.find_id();
         ServiceModel serviceModel1 = serviceSV.findById(idsv);
         int quantity = Integer.parseInt(req.getParameter("quantity"));
+        if (quantity <= 0 || quantity > 100) {
+            req.setAttribute("messageQuantity", "Số người phải lớn hơn 0 và bé hơn 100");
+        }
         String  description = req.getParameter("description");
         double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
 
         LocalDate buyDate=LocalDate.now();
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
-        boolean test= tourTicket.isStatus().equals("false");
+
 
 
         tourTicketService.createTOurTicket(tourTicket);

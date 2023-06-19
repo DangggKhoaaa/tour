@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import static service.UserService.checkString;
 
 @WebServlet(name = "tourSeverlet", value = "/tours")
 public class TourSeverlet extends HttpServlet {
@@ -190,11 +193,23 @@ public class TourSeverlet extends HttpServlet {
 
     private void createTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
+        boolean checkEmptyName = checkString(name);
+        if (!checkEmptyName) {
+            req.setAttribute("messageTourName", "Tên tour không được để trống");
+        }
         Double price= Double.valueOf(req.getParameter("price"));
+        if (Objects.equals(price.toString(), "")) {
+            req.setAttribute("messagePrice", "Giá tour không được để trống");
+        } else if (price <= 0) {
+            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+        }
         LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
         LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
         String img =req.getParameter("img");
         String description =req.getParameter("description");
+        if (description == null) {
+            description = "";
+        }
         Tour tour=new Tour(name,price,start_time,end_time,img,description);
         tourService.create(tour);
         int tour_id =tourService.findId();

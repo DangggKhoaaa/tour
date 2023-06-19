@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DELL
@@ -13,6 +14,11 @@
 >
     Thông tin cá nhân
 </h2>
+<c:if test="${requestScope['message'] != null}"  >
+    <script>
+        alert("${message}")
+    </script>
+</c:if>
 <form action="/user?action=showInformation" method="post">
     <div
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"

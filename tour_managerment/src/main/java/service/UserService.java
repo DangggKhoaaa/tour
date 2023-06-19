@@ -51,6 +51,9 @@ public class UserService {
         return Pattern.compile(USERNAME_REGEX).matcher(username).matches();
     }
     public static final String DATE_REGEX = "\\d{2}\\\\d{2}\\\\d{4}";
+    public static boolean isDateValid(String date) {
+        return Pattern.compile(DATE_REGEX).matcher(date).matches();
+    }
     
     public static final String PHONE_REGEX = "^[0][0-9]{9}$";
 

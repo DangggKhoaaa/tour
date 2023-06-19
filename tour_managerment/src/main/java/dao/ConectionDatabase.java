@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class ConectionDatabase {
     protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
     protected String jdbcUsername = "root";
+<<<<<<< Updated upstream
 
 
 
@@ -15,6 +16,9 @@ public class ConectionDatabase {
 
 
 
+=======
+    protected String jdbcPassword = "Kutronboy2701";
+>>>>>>> Stashed changes
 
     protected Connection getConnection() {
         Connection connection = null;
