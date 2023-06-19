@@ -226,10 +226,6 @@ public class TourTicketServlet extends HttpServlet {
         LocalDate buyDate=LocalDate.now();
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
         tourTicketService.createTOurTicket(tourTicket);
 
