@@ -73,13 +73,13 @@
     <button
             class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
     >
-        <a href="/user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
+        <a href="user?action=updateInfo&id=${user.id}">Đổi thông tin cá nhân</a>
     </button>
 
     <button type="button"
             class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
     >
-        <a href="user.jsp">Trở về</a>
+        <a href="user?action=userPage">Trở về</a>
     </button>
 </form>
 <jsp:include page="footer.jsp"/>

@@ -8,6 +8,7 @@ public class ConectionDatabase {
     protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
     protected String jdbcUsername = "root";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 
@@ -18,6 +19,10 @@ public class ConectionDatabase {
 
 =======
     protected String jdbcPassword = "Kutronboy2701";
+>>>>>>> Stashed changes
+=======
+
+    protected String jdbcPassword = "0766784418";
 >>>>>>> Stashed changes
 
     protected Connection getConnection() {

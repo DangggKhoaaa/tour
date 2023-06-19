@@ -15,7 +15,9 @@ public class TourDao extends ConectionDatabase {
             "                    group by t1.tour_id\n" +
             "                    order by %s %s \n" +
             "                    limit %d offset %d";
-    private final String TOTAL_TOUR = "select count(1) as total_tour from tours where tours.`name` like ? or tours.price like ? or tours.start_time like ? ";
+    private final String TOTAL_TOUR = "select count(1) as total_tour  from tours t1 left  join tour_tag tt on tt.tour_id=t1.tour_id " +
+            "            left join tag t2 on tt.tag_id=t2.tag_id " +
+            "                           where (t1.`name` like ? or  t1.start_time like ? or t1.price like ?) and datediff(CURDATE()+7,t1.start_time)<0 ;  ";
     private final String SELECT_TOUR_BY_ID = "SELECT * FROM tours where tour_id=?";
     private final String INSERT_TOUR = "INSERT INTO `tours` (`name`, `price`, `start_time`, `end_time`, `img`, `description`) VALUES (?, ?, ?, ?, ?,?);";
     private final String FIND_ID = "SELECT max(tours.tour_id) as id FROM tours ";

@@ -126,6 +126,11 @@ public class UserServlet extends HttpServlet {
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
         req.setAttribute("tourTickets",tourTickets);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     }
 
     private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

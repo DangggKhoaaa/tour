@@ -7,9 +7,10 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
 
-<a href="tour_ticket?action=displayFalse"> ticket</a>
+<%--<a href="tour_ticket?action=displayFalse"> ticket</a>--%>
 <div class="w-full overflow-x-auto">
     <table class="w-full whitespace-no-wrap">
         <td>${tourTicket.tour.getName()}</td>
@@ -20,26 +21,26 @@
         >
             <th class="px-4 py-3">
                 ID TICKET
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=service.service_id">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=service.service_id">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=service.service_id">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=service.service_id">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 TOUR NAME
                 <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=hotel_name">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=tours.`name`">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
                 <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=hotel_name">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=tours.`name`">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
@@ -47,12 +48,12 @@
             <th class="px-4 py-3">
                 CUSTOMER NAME
                 <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=transport_name">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=`user`.full_name">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
                 <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=transport_name">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=`user`.full_name">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
@@ -60,54 +61,54 @@
             <th class="px-4 py-3">
                 HOTEL - TRANSPORT
                 <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=total_price">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=hotel.`name`">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
                 <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=total_price">
+                    <a href="tour_ticket?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=hotel.`name`">
                         <i class="fa-solid fa-sort"></i>
                     </a>
                 </c:if>
             </th>
             <th class="px-4 py-3">
                 QUANTITY
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 TOTAL PRICE
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 ORDER DAY
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 PAY DAY
@@ -124,16 +125,16 @@
             </th>
             <th class="px-4 py-3">
                 STATUS
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">NOTE</th>
         </tr>
@@ -182,6 +183,7 @@
                 <td class="px-4 py-3 text-sm">
                         ${tour_ticket.getQuantity()}
                 </td>
+<<<<<<< Updated upstream
                 <td class="px-4 py-3 text-sm">
                         ${tour_ticket.getTotalPrice()}
                 </td>
@@ -194,28 +196,49 @@
                 <c:if test="${tour_ticket.getPayDay()== null}">
                     <td>----------- </td>
                 </c:if>
+=======
+                <td class="px-4 py-3 text-xs">
+        <span
+                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+        >
+                <fmt:formatNumber type="number" value="${tour_ticket.getTotalPrice()}"/> VND
+        </span>
+
+
+                </td>
+                <td class="px-4 py-3 text-xs">
+        <span
+                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+        >
+                ${tour_ticket.getBuyDay()}
+        </span>
+
+
+                </td>
+>>>>>>> Stashed changes
                 <c:if test="${tour_ticket.isStatus().equals('pay')}">
                     <td class="px-4 py-3 text-xs">
         <span
                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
         >
-                đã thanh toán
+                Paid
         </span>
                     </td>
                 </c:if>
                 <c:if test="${tour_ticket.isStatus().equals('false')}">
                     <td class="px-4 py-3 text-xs">
         <span
-                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
         >
-                chưa thanh toán
+                Unpaid
         </span>
                     </td>
                 </c:if>
 
                 <td class="px-4 py-3">
                     <div class="flex items-center space-x-4 text-sm">
-                        <a href="tour_ticket?action=accept&tour_ticket_id=${tour_ticket.getTourTicketId()}">
+                        <a onclick="return confirm('Do you want accept this Ticket?')"
+                                href="tour_ticket?action=accept&tour_ticket_id=${tour_ticket.getTourTicketId()}">
                             <button
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                     aria-label="Edit"

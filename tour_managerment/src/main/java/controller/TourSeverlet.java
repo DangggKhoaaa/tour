@@ -22,7 +22,7 @@ public class TourSeverlet extends HttpServlet {
     ServiceSV serviceSV = new ServiceSV();
     TransportService transportService= new TransportService();
     HotelService hotelService= new HotelService();
-    int totalItem=6;
+    int totalItem=5;
 
     TourService tourService=new TourService();
     TagService tagService=new TagService();
@@ -183,6 +183,7 @@ public class TourSeverlet extends HttpServlet {
                 break;
             case"edit":
                 editTour(req,resp);
+                break;
             case "searchTour":
                 userSearchTour(req,resp);
                 break;

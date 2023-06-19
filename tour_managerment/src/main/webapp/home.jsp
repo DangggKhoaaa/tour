@@ -74,7 +74,7 @@
 </head>
 <body>
 
-<br>
+
 <%--<a href="login.jsp">Đăng nhập</a>--%>
 
 
@@ -93,7 +93,9 @@
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
                             <li><a href="login.jsp">Login</a></li>
-                            <%--              <li class="has-dropdown active">--%>
+                            <li><a href="user?action=create">Register</a></li>
+
+                        <%--              <li class="has-dropdown active">--%>
                             <%--                <a href="tours.html">Login</a>--%>
                             <%--                <ul class="dropdown">--%>
                             <%--                  <li><a href="#">Destination</a></li>--%>
@@ -168,12 +170,14 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <ul class="pagination">
-                                <li class="disabled"><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">&raquo;</a></li>
+                                <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+<%--                                <li class="disabled"><a href="#">&laquo;</a></li>--%>
+                                <li class="active"><a href="tours?action=searchTour&page=${page}&search=${pageable.search}&sortby=${pageable.sortBy}&fieldName=${pageable.nameField}">${page}</a></li>
+<%--                                <li><a href="#">2</a></li>--%>
+<%--                                <li><a href="#">3</a></li>--%>
+<%--                                <li><a href="#">4</a></li>--%>
+<%--                                <li><a href="#">&raquo;</a></li>--%>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -184,7 +188,7 @@
                     <div class="sidebar-wrap">
                         <div class="side search-wrap animate-box">
                             <h3 class="sidebar-heading">Find your tour</h3>
-                            <form method="get" action="tours" class="colorlib-form">
+                            <form method="post" action="tours?action=searchTour" class="colorlib-form">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -231,7 +235,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button id="searchButton">Search</button>
+                                        <button id="searchButton" type="submit">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -474,6 +478,11 @@
     <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 </div>
 
+<script>
+    function onClearSearch() {
+        searchButton.click();
+    }
+</script>
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
 <!-- jQuery Easing -->

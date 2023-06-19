@@ -10,6 +10,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
     />
+
     <link rel="stylesheet" href="./assets/css/tailwind.output.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -41,10 +42,11 @@
     >
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a
+                    onclick="return confirm('Are you sure log out of this Admin Page?')"
                     class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-                    href="#"
+                    href="user?action=home"
             >
-                Windmill
+                TOUR
             </a>
             <ul class="mt-6">
                 <li class="relative px-6 py-3">
@@ -54,7 +56,7 @@
               ></span>
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="index.html"
+                            href="admin?action=showUser"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -70,7 +72,7 @@
                                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                             ></path>
                         </svg>
-                        <span class="ml-4">Dashboard</span>
+                        <span class="ml-4">User Manager</span>
                     </a>
                 </li>
             </ul>
@@ -761,28 +763,28 @@
                                     class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                                     aria-label="submenu"
                             >
-                                <li class="flex">
-                                    <a
-                                            class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                            href="/user?action=showInformation&id=${user.id}"
-                                    >
-                                        <svg
-                                                class="w-4 h-4 mr-3"
-                                                aria-hidden="true"
-                                                fill="none"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                        >
-                                            <path
-                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                            ></path>
-                                        </svg>
-                                        <span>Thông tin cá nhân</span>
-                                    </a>
-                                </li>
+<%--                                <li class="flex">--%>
+<%--                                    <a--%>
+<%--                                            class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"--%>
+<%--                                            href="/user?action=showInformation&id=${user.id}"--%>
+<%--                                    >--%>
+<%--                                        <svg--%>
+<%--                                                class="w-4 h-4 mr-3"--%>
+<%--                                                aria-hidden="true"--%>
+<%--                                                fill="none"--%>
+<%--                                                stroke-linecap="round"--%>
+<%--                                                stroke-linejoin="round"--%>
+<%--                                                stroke-width="2"--%>
+<%--                                                viewBox="0 0 24 24"--%>
+<%--                                                stroke="currentColor"--%>
+<%--                                        >--%>
+<%--                                            <path--%>
+<%--                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"--%>
+<%--                                            ></path>--%>
+<%--                                        </svg>--%>
+<%--                                        <span>Thông tin cá nhân</span>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
                                 <li class="flex">
                                     <a
                                             class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
@@ -803,7 +805,7 @@
                                             ></path>
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
-                                        <span>Đổi mật khẩu</span>
+                                        <span>Change Password</span>
                                     </a>
                                 </li>
                                 <li class="flex">

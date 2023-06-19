@@ -98,7 +98,7 @@
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
                             <li><a>Hello ${user.name}!</a></li>
-                            <li><a href="user?action=userPage">Home</a></li>
+                            <li><a href="user?action=cart&user_id=${user.id}">Card</a></li>
                             <%--                            <li class="has-dropdown active">--%>
                             <%--                                <a href="tours.html">Tours</a>--%>
                             <%--                                <ul class="dropdown">--%>
@@ -109,9 +109,9 @@
                             <%--                                </ul>--%>
                             <%--                            </li>--%>
                             <li><a href="information.jsp">Infomation</a></li>
-                            <li><a href="/user?action=updatePassword&id=${user.id}">Change Password</a></li>
-                            <li><a href="/user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
-                            <li><a href="login.jsp">Log Out</a></li>
+                            <li><a href="user?action=updatePassword&id=${user.id}">Change Password</a></li>
+                            <li><a href="user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
+                            <li><a href="user?action=home">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -246,6 +246,7 @@
                         <label class="block mt-4 text-sm" for="description">
                             <span class="text-gray-700 dark:text-gray-400">Nhập chú thích</span>
                             <textarea
+<%--                                    aria-valuetext="${tourTicket.getDescription()}"--%>
                                     name="description" id="description"
                                     class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                     rows="3"
@@ -281,7 +282,7 @@
                             </c:if>
                         </div>
             </form>
-            <a href="user?action=cart&user_id=${user.id}">Cart</a>
+<%--            <a href="user?action=cart&user_id=${user.id}">Cart</a>--%>
         </div>
     </div>
 </div>

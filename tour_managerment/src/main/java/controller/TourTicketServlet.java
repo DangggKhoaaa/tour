@@ -226,12 +226,14 @@ public class TourTicketServlet extends HttpServlet {
         LocalDate buyDate=LocalDate.now();
         TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
         tourTicketService.createTOurTicket(tourTicket);
 
         req.setAttribute("message","Đặt thành công");
-//        req.setAttribute("quantity",quantity);
         req.setAttribute("tour",tour);
         req.setAttribute("service",serviceModel1);
         req.setAttribute("hotels",hotelService.findAll());

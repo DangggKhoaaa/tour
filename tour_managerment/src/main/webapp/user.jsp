@@ -94,7 +94,7 @@
                     <div class="col-xs-10 text-right menu-1">
                         <ul>
                             <li><a>Hello ${user.name}!</a></li>
-                            <li><a href="user?action=userPage">Home</a></li>
+                            <li><a href="user?action=cart&user_id=${user.id}">Card</a></li>
                             <%--                            <li class="has-dropdown active">--%>
                             <%--                                <a href="tours.html">Tours</a>--%>
                             <%--                                <ul class="dropdown">--%>
@@ -171,12 +171,12 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <ul class="pagination">
-                                <li class="disabled"><a href="#">&laquo;</a></li>
+<%--                                <li class="disabled"><a href="#">&laquo;</a></li>--%>
 
                                 <c:forEach begin="1" end="${pageable.totalPage}" var="page">
                                     <li class="active"><a href="tours?action=searchTour&page=${page}&search=${pageable.search}">${page}</a></li>
                                 </c:forEach>
-                                <li><a href="#">&raquo;</a></li>
+<%--                                <li><a href="#">&raquo;</a></li>--%>
                             </ul>
                         </div>
                     </div>
