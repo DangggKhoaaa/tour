@@ -141,6 +141,11 @@ public class TourTicketDAO extends ConectionDatabase {
                 ServiceModel serviceModel = serviceSV.findById(service);
                 int quantity = rs.getInt("quantity");
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
                 double total_price = (tour.getPrice() + serviceModel.getHotelName().getPrice() + serviceModel.getTransportName().getPrice()) * quantity;
 
                 String status = rs.getString("status");

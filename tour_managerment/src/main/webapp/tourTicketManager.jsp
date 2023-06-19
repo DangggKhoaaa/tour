@@ -215,7 +215,7 @@
 
 
                 </td>
->>>>>>> Stashed changes
+
                 <c:if test="${tour_ticket.isStatus().equals('pay')}">
                     <td class="px-4 py-3 text-xs">
         <span
@@ -236,6 +236,7 @@
                 </c:if>
 
                 <td class="px-4 py-3">
+                    <c:if test="${tour_ticket.isStatus().equals('pay')}">
                     <div class="flex items-center space-x-4 text-sm">
                         <a onclick="return confirm('Do you want accept this Ticket?')"
                                 href="tour_ticket?action=accept&tour_ticket_id=${tour_ticket.getTourTicketId()}">
@@ -252,6 +253,7 @@
                         </a>
 
                     </div>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>
