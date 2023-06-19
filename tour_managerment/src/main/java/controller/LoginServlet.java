@@ -40,12 +40,12 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect("/admin?action=showUser");
                 }
             } else {
-                req.setAttribute("errors", "Mật khẩu không đúng!");
+                req.setAttribute("errorsPassword", "Mật khẩu không đúng!");
                 req.getRequestDispatcher("login.jsp")
                         .forward(req,resp);
             }
         }else {
-            req.setAttribute("errors", "Tài khoản không tồn tại!");
+            req.setAttribute("errorsUsername", "Tài khoản không tồn tại!");
             req.getRequestDispatcher("login.jsp")
                     .forward(req,resp);
         }

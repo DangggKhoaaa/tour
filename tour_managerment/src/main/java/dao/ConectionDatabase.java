@@ -5,24 +5,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectionDatabase {
-    protected String jdbcURL = "jdbc:mysql://localhost:3306/tour";
+    protected String jdbcURL = "jdbc:mysql://localhost:3306/case_study_md3";
     protected String jdbcUsername = "root";
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-
-
-
-
-    protected String jdbcPassword = "123456";
-
-
-
+<<<<<<< Updated upstream
 =======
+>>>>>>> Stashed changes
+
+
+
+
+
     protected String jdbcPassword = "Kutronboy2701";
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 
     protected String jdbcPassword = "0766784418";
+>>>>>>> Stashed changes
+=======
+
 >>>>>>> Stashed changes
 
     protected Connection getConnection() {

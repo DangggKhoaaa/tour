@@ -46,6 +46,17 @@ public class UserService {
     public static boolean checkString(String name) {
         return !Objects.equals(name, "");
     }
+
+    public static boolean checkQuantity(String quanS) {
+       try {
+           int quan = Integer.parseInt(quanS);
+           if (quan > 0 && quan <= 100)
+               return true;
+       } catch (Exception e) {
+           return false;
+       }
+       return false;
+    }
     public static  final String USERNAME_REGEX = "^[a-zA-Z0-9]{1,15}$";
     public static boolean checkUsername(String username) {
         return Pattern.compile(USERNAME_REGEX).matcher(username).matches();

@@ -38,7 +38,7 @@
         ></path>
     </svg>
     <h1 class="text-6xl font-semibold text-gray-700 dark:text-gray-200">
-        404
+        ERROR
     </h1>
     <p class="text-gray-700 dark:text-gray-300">
         Bạn không có quyền truy cập. Nếu muốn tuy cập phải

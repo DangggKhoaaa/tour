@@ -22,7 +22,7 @@ public class FilterAdmin implements Filter {
         if(role == null || role.equals(Role.USER.toString())){
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 //            httpServletResponse.sendRedirect("");
-            httpServletRequest.getRequestDispatcher("404.jsp").forward(httpServletRequest,httpServletResponse);
+            httpServletRequest.getRequestDispatcher("error.jsp").forward(httpServletRequest,httpServletResponse);
             return;
         }
         //bo qua

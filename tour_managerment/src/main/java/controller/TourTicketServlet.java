@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import static service.UserService.checkQuantity;
+import static service.UserService.checkString;
+
 @WebServlet(name = "TourTicketServlet", value = "/tour_ticket")
 public class TourTicketServlet extends HttpServlet {
     int totalItem =5;
@@ -216,17 +219,36 @@ public class TourTicketServlet extends HttpServlet {
 
         int idsv=serviceSV.find_id();
         ServiceModel serviceModel1 = serviceSV.findById(idsv);
-        int quantity = Integer.parseInt(req.getParameter("quantity"));
-        if (quantity <= 0 || quantity > 100) {
+
+        String quantityS = req.getParameter("quantity");
+        boolean checkEmptyQuantity = checkString(quantityS);
+
+        if (!checkEmptyQuantity) {
+            req.setAttribute("messageQuantity", "Số người không được để trống");
+            req.setAttribute("quantity",quantityS);
+            req.setAttribute("tour",tour);
+            req.setAttribute("service",serviceModel1);
+            req.setAttribute("hotels",hotelService.findAll());
+            req.setAttribute("transports",transportService.findAll());
+            req.getRequestDispatcher("booking.jsp").forward(req, resp);
+        } else if (!checkQuantity(quantityS)) {
             req.setAttribute("messageQuantity", "Số người phải lớn hơn 0 và bé hơn 100");
-        }
-        String  description = req.getParameter("description");
-        double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
+            req.setAttribute("quantity",quantityS);
+            req.setAttribute("tour",tour);
+            req.setAttribute("service",serviceModel1);
+            req.setAttribute("hotels",hotelService.findAll());
+            req.setAttribute("transports",transportService.findAll());
+            req.getRequestDispatcher("booking.jsp").forward(req, resp);
+        } else {
+            int quantity = Integer.parseInt(quantityS);
+            String  description = req.getParameter("description");
+            double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
 
-        LocalDate buyDate=LocalDate.now();
-        TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
+            LocalDate buyDate=LocalDate.now();
+            TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
 
 
+<<<<<<< Updated upstream
         tourTicketService.createTOurTicket(tourTicket);
 
         req.setAttribute("message","Đặt thành công");
@@ -236,5 +258,20 @@ public class TourTicketServlet extends HttpServlet {
         req.setAttribute("transports",transportService.findAll());
         req.setAttribute("tourTicket",tourTicket);
         req.getRequestDispatcher("booking.jsp").forward(req,resp);
+=======
+
+            tourTicketService.createTOurTicket(tourTicket);
+
+            req.setAttribute("message","Đặt thành công");
+//        req.setAttribute("quantity",quantity);
+            req.setAttribute("tour",tour);
+            req.setAttribute("service",serviceModel1);
+            req.setAttribute("hotels",hotelService.findAll());
+            req.setAttribute("transports",transportService.findAll());
+            req.setAttribute("tourTicket",tourTicket);
+            req.getRequestDispatcher("booking.jsp").forward(req,resp);
+        }
+
+>>>>>>> Stashed changes
     }
 }
