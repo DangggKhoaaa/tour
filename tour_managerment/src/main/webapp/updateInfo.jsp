@@ -8,11 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="headerUser.jsp"/>
-<h2
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
->
-    Đổi thông tin cá nhân
-</h2>
 
 
 <form action="/user?action=updateInfo" method="post">
@@ -21,6 +16,11 @@
     <div
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
+        <h2
+                class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+        >
+            Đổi thông tin cá nhân
+        </h2>
         <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Họ và tên

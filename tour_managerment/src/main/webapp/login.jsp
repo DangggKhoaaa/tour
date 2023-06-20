@@ -81,14 +81,7 @@
 <%--                            <span class="input-group-text cursor-pointer" id="password"  onclick="togglePassword()"><i class="bx bx-hide"></i></span>--%>
                         </label>
 
-                        <!-- You should use a button here, as the anchor is only used for the example  -->
-
-                        <a style="border: none"
-                           class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-
-                        >
-                            <button>Đăng nhập</button>
-                        </a>
+                        <button class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Đăng nhập</button>
 
                     </form>
 
@@ -100,7 +93,7 @@
                                 class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                                 href="/user?action=create"
                         >
-                            Đăng ký
+                        Bạn chưa có tài khoản? Đăng ký
                         </a>
                     </p>
                 </div>

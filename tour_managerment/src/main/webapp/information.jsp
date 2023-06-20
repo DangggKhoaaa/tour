@@ -9,20 +9,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="headerUser.jsp"/>
 
-<h2
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
->
-    Thông tin cá nhân
-</h2>
 <c:if test="${requestScope['message'] != null}"  >
     <script>
-        alert("${message}")
     </script>
+    alert("${message}")
 </c:if>
 <form action="/user?action=showInformation" method="post">
     <div
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
+        <h2
+                class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+        >
+            Thông tin cá nhân
+        </h2>
 
         <input type="hidden" name="user_id" value="${user.id}">
         <label class="block mt-4 text-sm">

@@ -11,16 +11,16 @@
 <p class="mt-4" style="color: red">
     ${message}
 </p>
-<h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
->
-    Đổi mật khẩu
-</h4>
 <form action="/user?action=updatePassword" method="post">
     <input type="hidden" name="user_id" value="${user.id}">
     <div
             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
+        <h2
+                class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+        >
+            Đổi mật khẩu
+        </h2>
         <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                   Mật khẩu cũ
