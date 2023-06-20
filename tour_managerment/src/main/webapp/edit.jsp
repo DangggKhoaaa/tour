@@ -18,11 +18,11 @@
 >
     Edit Tour
 </h4>
-
 <div
         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
 >
     <form action="tours?action=edit" method="post">
+<%--        <input type="hidden" name="tour_id" value="${tour.id}">--%>
         <label for="name" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Name</span>
             <input

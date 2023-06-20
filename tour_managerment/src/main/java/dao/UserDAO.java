@@ -189,7 +189,7 @@ public class UserDAO extends ConectionDatabase{
         try (Connection connection = getConnection();
 
              PreparedStatement preparedStatement = connection
-                     .prepareStatement(SELECT_USERS_BY_PHONE);) {
+                     .prepareStatement(SELECT_USERS_BY_EMAIL);) {
             System.out.println(preparedStatement);
             preparedStatement.setString(1, email);
 
@@ -221,7 +221,7 @@ public class UserDAO extends ConectionDatabase{
         try (Connection connection = getConnection();
 
              PreparedStatement preparedStatement = connection
-                     .prepareStatement(SELECT_USERS_BY_PHONE);) {
+                     .prepareStatement(SELECT_USERS_BY_CCCD);) {
             System.out.println(preparedStatement);
             preparedStatement.setString(1, cccd);
 

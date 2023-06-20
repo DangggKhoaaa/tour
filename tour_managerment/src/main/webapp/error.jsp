@@ -49,6 +49,13 @@
             đăng nhập tài khoản admin
         </a>
         .
+    </p >
+    <br>
+    <p class="text-gray-700 dark:text-gray-300">
+        <a class="text-purple-600 hover:underline dark:text-purple-300"
+           href="/user?action=userPage">
+            Go back home
+        </a>
     </p>
 </div>
 </body>

@@ -152,6 +152,9 @@
                                    placeholder="JaneDoe@gmail.com"
                                    type="email"
                             />
+                            <p class="mt-4" style="color: red">
+                                ${messageEmail}
+                            </p>
                         </label>
 
                         <label class="block mt-4 text-sm">

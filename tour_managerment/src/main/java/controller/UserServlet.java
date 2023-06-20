@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static service.UserService.*;
+import static ultils.FormatForm.*;
 
 
 @WebServlet(name = "userServlet", value = "/user")
@@ -126,7 +127,6 @@ public class UserServlet extends HttpServlet {
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
         req.setAttribute("tourTickets",tourTickets);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
-
     }
 
     private void deleteTourTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -271,11 +271,12 @@ public class UserServlet extends HttpServlet {
         boolean checkEmptyPhone = checkString(phone);
         boolean checkPhone = isPhoneValid(phone);
         User userPhone = userService.findByPhone(phone);
+        User userId = userService.findById(id);
         if (!checkEmptyPhone) {
             req.setAttribute("messagePhone", "Số điện thoại không được để trống");
         } else if (!checkPhone) {
             req.setAttribute("messagePhone", "Số điện thoại gồm 10 số bắt đầu bằng số 0");
-        } else if (userPhone != null) {
+        } else if (userPhone != null && !Objects.equals(userId.getPhone(), phone)) {
             req.setAttribute("messagePhone", "Số điện thoại đã tồn tại");
         }
         String email = req.getParameter("email");
@@ -286,7 +287,7 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("messageEmail", "Email không được để trống");
         } else if (!checkEmail) {
             req.setAttribute("messageEmail", "Email không hợp lệ");
-        } else if (userEmail != null) {
+        } else if (userEmail != null && !Objects.equals(userId.getEmail(), email)) {
             req.setAttribute("messageEmail", "Email đã tồn tại");
         }
         String address = req.getParameter("address");
@@ -302,10 +303,10 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("messageCccd", "Căn cước công dân không được để trống");
         } else if (!checkCCCD) {
             req.setAttribute("messageCccd", "Căn cước công dân gồm 12 số bắt đầu bằng số 0");
-        } else if (userCccd != null) {
+        } else if (userCccd != null && !Objects.equals(userId.getCccd(), cccd)) {
             req.setAttribute("messageCccd", "Căn cước công dân đã tồn tại");
         }
-        if (checkName && checkEmptyPhone && checkPhone && userPhone == null && checkEmptyEmail && checkEmail && userEmail == null && checkEmptyAddress && checkEmptyCccd && checkCCCD && userCccd == null) {
+        if (checkName && checkEmptyPhone && checkPhone && (userPhone == null || Objects.equals(userId.getPhone(), phone)) && checkEmptyEmail && checkEmail && (userEmail == null || Objects.equals(userId.getEmail(), email)) && checkEmptyAddress && checkEmptyCccd && checkCCCD && (userCccd == null || Objects.equals(userId.getCccd(), cccd))) {
             User user = new User(id, name, dob, gender, phone, email, address, cccd);
             userService.updateInfo(user);
             req.setAttribute("message", "Đổi thông tin thành công!");

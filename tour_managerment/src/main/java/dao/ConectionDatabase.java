@@ -7,44 +7,9 @@ import java.sql.SQLException;
 public class ConectionDatabase {
     protected String jdbcURL = "jdbc:mysql://localhost:3306/case_study_md3";
     protected String jdbcUsername = "root";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
-
-
-
-
-<<<<<<< Updated upstream
     protected String jdbcPassword = "Kutronboy2701";
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 
-    protected String jdbcPassword = "0766784418";
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
-    protected String jdbcPassword = "0766784418";
-
->>>>>>> Stashed changes
-=======
-    protected String jdbcPassword = "123456";
-
-
-
-
-
->>>>>>> Stashed changes
 
     protected Connection getConnection() {
         Connection connection = null;

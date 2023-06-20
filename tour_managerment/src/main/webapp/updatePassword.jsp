@@ -41,7 +41,7 @@
             />
         </label>
     </div>
-        <button
+        <button onclick="return confirm('Are you sure to change this password?')"
                 class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
         >
             Xác nhận

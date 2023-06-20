@@ -31,6 +31,9 @@
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="Name Tour"
             />
+            <p class="mt" style="color: red">
+                ${messageTourName}
+            </p>
         </label>
         <label for="price" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Price</span>
@@ -39,6 +42,9 @@
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="Input Price"
             />
+            <p class="mt" style="color: red">
+                ${messagePrice}
+            </p>
         </label>
         <label for="start_time" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Start Time</span>
