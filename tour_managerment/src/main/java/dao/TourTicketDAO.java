@@ -51,7 +51,7 @@ public class TourTicketDAO extends ConectionDatabase {
             " order by %s %s\n" +
             " limit %d offset %d";
     private final String TOTAL_FINDTOUR_TICKET_BY_MONTH="select count(1) as total_tour_ticket from tour_ticket\n" +
-            "             where `status` = 'true' and month(payDate)= '%s' and year(payDate)='%s' ";
+            "             where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s' ";
     private final String DOANH_THU="select sum(total_price) as total from tour_ticket\n" +
             "             where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s'";
     public List<TourTicket> findAllFalse(Pageable pageAble) {
@@ -271,13 +271,13 @@ public class TourTicketDAO extends ConectionDatabase {
         if(month!=null){
           months= String.valueOf(month);
         }else {
-            months="%%";
+            months="%"+LocalDate.now().getMonthValue()+"%";
         }
         String years=null;
         if(year!=null){
             years= String.valueOf(year);
         }else {
-            years="%"+2023+"%";
+            years="%"+LocalDate.now().getYear()+"%";
         }
         search = "%" + search + "%";
         String sortby = pageAble.getSortBy();
@@ -339,13 +339,13 @@ public double doanhThu(Integer month ,Integer year){
     if(month!=null){
         months= String.valueOf(month);
     }else {
-        months="%%";
+        months="%"+LocalDate.now().getMonthValue()+"%";
     }
     String years=null;
     if(year!=null){
         years= String.valueOf(year);
     }else {
-        years="%"+2023+"%";
+        years="%"+LocalDate.now().getYear()+"%";
     }
     try (Connection connection = getConnection();
          PreparedStatement preparedStatement = connection

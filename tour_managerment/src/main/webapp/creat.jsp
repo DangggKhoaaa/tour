@@ -23,7 +23,7 @@
 <div
         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
 >
-    <form action="tours?action=create" method="post">
+    <form action="tours?action=create" method="post" enctype="multipart/form-data">
         <label for="name" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Name</span>
             <input
@@ -65,9 +65,10 @@
         <label for="img" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Image</span>
             <input
-                    type="text" name="img" id="img" value="${tour.img}"
+                    type="file" name="filePart" id="img" value="${tour.img}"
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
             />
+
         </label>
 
         <label for="description" class="block mt-4 text-sm">

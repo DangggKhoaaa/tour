@@ -6,6 +6,7 @@ import model.Tour_tag;
 import java.util.List;
 
 public class Tour_tagService {
+    TourService tourService =new TourService();
     Tour_tag_dao tour_tag_dao =new Tour_tag_dao();
     public void create (Tour_tag tourTag){
         tour_tag_dao.insertTour_tag(tourTag);
@@ -15,5 +16,6 @@ public class Tour_tagService {
     }
     public void deleteByTourId(int tour_id){
         tour_tag_dao.deleteTourTagByTourId(tour_id);
+//        tourService.delete(tour_id);
     }
 }

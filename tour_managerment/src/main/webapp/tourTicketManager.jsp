@@ -183,20 +183,15 @@
                 <td class="px-4 py-3 text-sm">
                         ${tour_ticket.getQuantity()}
                 </td>
-<<<<<<< Updated upstream
-                <td class="px-4 py-3 text-sm">
-                        ${tour_ticket.getTotalPrice()}
-                </td>
-                <td class="px-4 py-3 text-sm">
-                        ${tour_ticket.getBuyDay()}
-                </td>
-                <c:if test="${tour_ticket.getPayDay()!= null}">
-                    <td>${tour_ticket.getPayDay()}</td>
-                </c:if>
-                <c:if test="${tour_ticket.getPayDay()== null}">
-                    <td>----------- </td>
-                </c:if>
-=======
+
+<%--                <td class="px-4 py-3 text-sm">--%>
+<%--                        ${tour_ticket.getTotalPrice()}--%>
+<%--                </td>--%>
+<%--                <td class="px-4 py-3 text-sm">--%>
+<%--                        ${tour_ticket.getBuyDay()}--%>
+<%--                </td>--%>
+
+
                 <td class="px-4 py-3 text-xs">
         <span
                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
@@ -215,6 +210,15 @@
 
 
                 </td>
+<<<<<<< Updated upstream
+=======
+                <c:if test="${tour_ticket.getPayDay()!= null}">
+                    <td>${tour_ticket.getPayDay()}</td>
+                </c:if>
+                <c:if test="${tour_ticket.getPayDay()== null}">
+                    <td>----------- </td>
+                </c:if>
+>>>>>>> Stashed changes
 
                 <c:if test="${tour_ticket.isStatus().equals('pay')}">
                     <td class="px-4 py-3 text-xs">
@@ -257,6 +261,14 @@
                 </td>
             </tr>
         </c:forEach>
+        <ul class="pagination">
+            <%--                                <li class="disabled"><a href="#">&laquo;</a></li>--%>
+
+            <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+                <li class="active"><a href="tour_ticket?action=revenue&page=${page}&search=${pageable.search}">${page}</a></li>
+            </c:forEach>
+            <%--                                <li><a href="#">&raquo;</a></li>--%>
+        </ul>
         </tbody>
     </table>
 </div>

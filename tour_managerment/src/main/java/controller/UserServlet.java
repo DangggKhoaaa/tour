@@ -101,7 +101,9 @@ public class UserServlet extends HttpServlet {
         tourTicketService.deleteOutOfDate();
         List<TourTicket> tourTickets= tourTicketService.findAllByUserId(pageAble,user);
         req.setAttribute("user",user);
+        Pageable p =pageAble;
         req.setAttribute("tourTickets",tourTickets);
+        req.setAttribute("pageable",pageAble);
         req.getRequestDispatcher("cart.jsp").forward(req,resp);
     }
     private void pay(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

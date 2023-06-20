@@ -21,8 +21,13 @@
 <div
         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
 >
+<<<<<<< Updated upstream
     <form action="tours?action=edit" method="post">
 <%--        <input type="hidden" name="tour_id" value="${tour.id}">--%>
+=======
+    <form action="tours?action=edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="id" value="${tour.tour_id}">
+>>>>>>> Stashed changes
         <label for="name" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Name</span>
             <input
@@ -58,8 +63,12 @@
         <label for="img" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Image</span>
             <input
-                    type="text" name="img" id="img" value="${tour.img}"
+                    type="file" name="filePart" id="img" value="${tour.img}"
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+            />
+            <input
+                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                    type="text" name="filePart1" id="filePart1" value="${filePart1}" readonly
             />
         </label>
 

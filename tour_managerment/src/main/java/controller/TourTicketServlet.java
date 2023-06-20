@@ -1,6 +1,5 @@
 package controller;
 
-import dao.HotelDAO;
 import dto.Pageable;
 import model.*;
 import service.*;
@@ -13,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import static ultils.FormatForm.checkQuantity;
 import static ultils.FormatForm.checkString;
 
@@ -62,7 +65,49 @@ public class TourTicketServlet extends HttpServlet {
     }
 
     private void showRevenue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+<<<<<<< Updated upstream
         req.getRequestDispatcher("revenue.jsp").forward(req, resp);
+=======
+        Integer month;
+        try{
+            month = Integer.parseInt(req.getParameter("month"));
+        }catch (Exception e){
+            month=null;
+        }
+        Integer year;
+        try{
+            year = Integer.parseInt(req.getParameter("year"));
+        }catch (Exception e){
+            year=null;
+        }
+
+        String search = req.getParameter("search");
+
+        int page = 1;
+        if (req.getParameter("page") != null) {
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        String sortBy = req.getParameter("sortBy");
+        if (sortBy == null) {
+            sortBy = "asc";
+        }
+        String nameField = req.getParameter("nameField");
+        if (nameField == null) {
+            nameField = "tour_ticket_id";
+        }
+
+        Pageable pageable = new Pageable(search, page, TOTAL_ITEMS, nameField, sortBy);
+        double doanhThu=tourTicketService.doanhThu(month,year);
+        List<TourTicket> tourTickets = tourTicketService.findTicketByMonth(month,year,pageable);
+        req.setAttribute("month",month);
+        req.setAttribute("year",year);
+        req.setAttribute("doanhThu",doanhThu);
+        Pageable pa =pageable;
+        req.setAttribute("pageable",pageable);
+        req.setAttribute("tourTickets",tourTickets);
+
+        req.getRequestDispatcher("revenue.jsp").forward(req,resp);
+>>>>>>> Stashed changes
     }
 
     private void pay(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -151,8 +196,13 @@ public class TourTicketServlet extends HttpServlet {
             case "booked":
                 booked(req, resp);
                 break;
+<<<<<<< Updated upstream
             case "revenue":
                 Revenue(req, resp);
+=======
+            case"revenue":
+                revenue(req,resp);
+>>>>>>> Stashed changes
                 break;
             default:
                 showBookingPage(req, resp);
@@ -160,7 +210,7 @@ public class TourTicketServlet extends HttpServlet {
         }
     }
 
-    private void Revenue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void revenue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer month;
         try {
             month = Integer.parseInt(req.getParameter("month"));
@@ -190,12 +240,24 @@ public class TourTicketServlet extends HttpServlet {
         }
 
         Pageable pageable = new Pageable(search, page, TOTAL_ITEMS, nameField, sortBy);
+<<<<<<< Updated upstream
         double doanhThu = tourTicketService.doanhThu(month, year);
         List<TourTicket> tourTickets = tourTicketService.findTicketByMonth(month, year, pageable);
         req.setAttribute("doanhThu", doanhThu);
         req.setAttribute("pageable", pageable);
         req.setAttribute("tourTickets", tourTickets);
         req.getRequestDispatcher("revenue.jsp").forward(req, resp);
+=======
+        double doanhThu=tourTicketService.doanhThu(month,year);
+         List<TourTicket> tourTickets = tourTicketService.findTicketByMonth(month,year,pageable);
+         req.setAttribute("month",month);
+         req.setAttribute("year",year);
+         req.setAttribute("doanhThu",doanhThu);
+        req.setAttribute("pageable",pageable);
+        req.setAttribute("tourTickets",tourTickets);
+       // showRevenue(req,resp);
+        req.getRequestDispatcher("revenue.jsp").forward(req,resp);
+>>>>>>> Stashed changes
 
     }
 
@@ -205,6 +267,7 @@ public class TourTicketServlet extends HttpServlet {
 
     private void createTicket(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int tour_id = Integer.parseInt(req.getParameter("tour_id"));
+<<<<<<< Updated upstream
         Tour tour = tourService.findById(tour_id);
         int user_id = Integer.parseInt(req.getParameter("user_id"));
         User user = userService.findById(user_id);
@@ -217,10 +280,24 @@ public class TourTicketServlet extends HttpServlet {
 
         int idsv = serviceSV.find_id();
         ServiceModel serviceModel1 = serviceSV.findById(idsv);
+=======
+        Tour tour=tourService.findById(tour_id);
 
-        String quantityS = req.getParameter("quantity");
-        boolean checkEmptyQuantity = checkString(quantityS);
+        try {
+            int user_id = Integer.parseInt(req.getParameter("user_id"));
+            User user =userService.findById(user_id);
+            int hotel_id = Integer.parseInt(req.getParameter("hotel"));
+            Hotel hotel=hotelService.findById(hotel_id);
+            int transport_id = Integer.parseInt(req.getParameter("transport"));
+            Transport transport=transportService.findById(transport_id);
+            ServiceModel serviceModel=new ServiceModel(hotel,transport);
+            serviceSV.createService(serviceModel);
+>>>>>>> Stashed changes
 
+            int idsv=serviceSV.find_id();
+            ServiceModel serviceModel1 = serviceSV.findById(idsv);
+
+<<<<<<< Updated upstream
         if (!checkEmptyQuantity) {
             req.setAttribute("messageQuantity", "Số người không được để trống");
             req.setAttribute("quantity", quantityS);
@@ -256,5 +333,60 @@ public class TourTicketServlet extends HttpServlet {
             req.setAttribute("tourTicket", tourTicket);
             req.getRequestDispatcher("booking.jsp").forward(req, resp);
         }
+=======
+            String quantityS = req.getParameter("quantity");
+            boolean checkEmptyQuantity = checkString(quantityS);
+
+            if (!checkEmptyQuantity) {
+                req.setAttribute("messageQuantity", "Số người không được để trống");
+                req.setAttribute("quantity",quantityS);
+                req.setAttribute("tour",tour);
+                req.setAttribute("service",serviceModel1);
+                req.setAttribute("hotels",hotelService.findAll());
+                req.setAttribute("transports",transportService.findAll());
+                req.getRequestDispatcher("booking.jsp").forward(req, resp);
+            } else if (!checkQuantity(quantityS)) {
+                req.setAttribute("messageQuantity", "Số người phải lớn hơn 0 và bé hơn 100");
+                req.setAttribute("quantity",quantityS);
+                req.setAttribute("tour",tour);
+                req.setAttribute("service",serviceModel1);
+                req.setAttribute("hotels",hotelService.findAll());
+                req.setAttribute("transports",transportService.findAll());
+                req.getRequestDispatcher("booking.jsp").forward(req, resp);
+            } else {
+                int quantity = Integer.parseInt(quantityS);
+                String  description = req.getParameter("description");
+                double total_price= (tour.getPrice()+hotel.getPrice()+transport.getPrice())*quantity;
+
+                LocalDate buyDate=LocalDate.now();
+                TourTicket tourTicket=new TourTicket(user,tour,serviceModel1,quantity,total_price,"false",description,buyDate);
+
+
+
+                tourTicketService.createTOurTicket(tourTicket);
+
+                req.setAttribute("message","Đặt thành công");
+                req.setAttribute("tour",tour);
+                req.setAttribute("service",serviceModel1);
+                req.setAttribute("hotels",hotelService.findAll());
+                req.setAttribute("transports",transportService.findAll());
+                req.setAttribute("tourTicket",tourTicket);
+                req.getRequestDispatcher("booking.jsp").forward(req,resp);
+
+
+            }
+        } catch (Exception exception){
+            message = "You must login and booking your favorite tour";
+            req.setAttribute("message",message);
+            req.setAttribute("tour",tour);
+            req.setAttribute("hotels",hotelService.findAll());
+            req.setAttribute("transports",transportService.findAll());
+            req.getRequestDispatcher("booking.jsp").forward(req, resp);
+        }
+
+
+
+
+>>>>>>> Stashed changes
     }
 }

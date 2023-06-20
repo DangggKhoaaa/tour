@@ -96,23 +96,31 @@
                         <div id="colorlib-logo"><a href="user?action=userPage">Tour</a></div>
                     </div>
                     <div class="col-xs-10 text-right menu-1">
+                        <c:if test="${user.id != null}">
+                            <ul>
+                                <li><a>Hello ${user.name}!</a></li>
+                                <li><a href="user?action=cart&user_id=${user.id}">Card</a></li>
+                                    <%--                            <li class="has-dropdown active">--%>
+                                    <%--                                <a href="tours.html">Tours</a>--%>
+                                    <%--                                <ul class="dropdown">--%>
+                                    <%--                                    <li><a href="#">Destination</a></li>--%>
+                                    <%--                                    <li><a href="#">Cruises</a></li>--%>
+                                    <%--                                    <li><a href="#">Hotels</a></li>--%>
+                                    <%--                                    <li><a href="#">Booking</a></li>--%>
+                                    <%--                                </ul>--%>
+                                    <%--                            </li>--%>
+                                <li><a href="information.jsp">Infomation</a></li>
+                                <li><a href="user?action=updatePassword&id=${user.id}">Change Password</a></li>
+                                <li><a href="user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
+                                <li><a onclick="return confirm('Are you sure log out account?')" href="user?action=home">Log Out</a></li>
+                            </ul>
+                        </c:if>
+                        <c:if test="${user.id == null}">
                         <ul>
-                            <li><a>Hello ${user.name}!</a></li>
-                            <li><a href="user?action=cart&user_id=${user.id}">Card</a></li>
-                            <%--                            <li class="has-dropdown active">--%>
-                            <%--                                <a href="tours.html">Tours</a>--%>
-                            <%--                                <ul class="dropdown">--%>
-                            <%--                                    <li><a href="#">Destination</a></li>--%>
-                            <%--                                    <li><a href="#">Cruises</a></li>--%>
-                            <%--                                    <li><a href="#">Hotels</a></li>--%>
-                            <%--                                    <li><a href="#">Booking</a></li>--%>
-                            <%--                                </ul>--%>
-                            <%--                            </li>--%>
-                            <li><a href="information.jsp">Infomation</a></li>
-                            <li><a href="user?action=updatePassword&id=${user.id}">Change Password</a></li>
-                            <li><a href="user?action=updateInfo&id=${user.id}">Change Infomation</a></li>
-                            <li><a href="user?action=home">Log Out</a></li>
+                            <li><a href="login.jsp">Login</a></li>
+                            <li><a href="user?action=create">Register</a></li>
                         </ul>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -253,7 +261,7 @@
                                     class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                     rows="3"
                                     placeholder="Enter some long form description."
-                            ></textarea>
+                            >${tourTicket.getDescription()}</textarea>
                         </label>
 
 <%--                        <div class="flex mt-6 text-sm">--%>
@@ -388,12 +396,19 @@
             </div>
         </div>
     </div>
+
 </footer>
+
 </div>
+
+
 
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 </div>
+<%--<script>--%>
+<%--    alert("${message}")--%>
+<%--</script>--%>
 
 <!-- jQuery -->
 <script src="src/js/jquery.min.js"></script>

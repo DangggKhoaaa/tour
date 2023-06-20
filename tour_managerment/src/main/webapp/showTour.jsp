@@ -190,6 +190,10 @@
     </div>
 </div>
 <script>
+    <c:if test="${message != null}">
+    alert("${message}")
+    </c:if>
+
     function onClearSearch() {
         searchButton.click();
     }

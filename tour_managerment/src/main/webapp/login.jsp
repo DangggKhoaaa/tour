@@ -38,7 +38,7 @@
                 <img
                         aria-hidden="true"
                         class="object-cover w-full h-full dark:hidden"
-                        src="../assets/img/login-office.jpeg"
+                        src="../assets/image/dao-vinh-thuc-du-lich-viet.jpg"
                         alt="Office"
                 />
                 <img

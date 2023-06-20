@@ -11,6 +11,7 @@ public class Tour {
     private String  img;
     private String description;
     private String tour_tag;
+    public Tour(){}
 
     public String getTour_tag() {
         return tour_tag;
