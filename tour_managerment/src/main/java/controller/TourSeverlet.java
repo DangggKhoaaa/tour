@@ -18,13 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-<<<<<<< Updated upstream
+
 import static ultils.FormatForm.checkPrice;
 import static ultils.FormatForm.checkString;
-=======
+
 import java.util.Objects;
 
->>>>>>> Stashed changes
 
 @WebServlet(name = "tourSeverlet", value = "/tours")
 public class TourSeverlet extends HttpServlet {
@@ -261,32 +260,6 @@ public class TourSeverlet extends HttpServlet {
 //        if (!checkEmptyName) {
 //            req.setAttribute("messageTourName", "Tên tour không được để trống");
 //        }
-//        Double price= Double.valueOf(req.getParameter("price"));
-//        if (Objects.equals(price.toString(), "")) {
-//            req.setAttribute("messagePrice", "Giá tour không được để trống");
-//        } else if (price <= 0) {
-//            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
-//        }
-//        LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
-//        LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
-//        String img =req.getParameter("img");
-//        String description =req.getParameter("description");
-//        if (description == null) {
-//            description = "";
-//        }
-//        Tour tour=new Tour(name,price,start_time,end_time,img,description);
-//        tourService.create(tour);
-//        int tour_id =tourService.findId();
-//        String[] selectedValues = req.getParameterValues("myCheckbox");
-//        if(selectedValues!=null){for (String str:selectedValues) {
-//            int tag_id= Integer.parseInt(str);
-//            Tour_tag tourTag =new Tour_tag(tour_id,tag_id);
-//            tour_tagService.create(tourTag);
-//        }}
-//        req.setAttribute("tour",tour);
-//        req.setAttribute("message", "Created");
-//        req.setAttribute("tagList", tagService.findAll());
-//        req.getRequestDispatcher("creat.jsp").forward(req,resp);
         Tour tour1 = new Tour();
         try {
             ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
@@ -301,9 +274,26 @@ public class TourSeverlet extends HttpServlet {
                     String fieldvalue = item.getString("UTF-8");
                     switch (fieldname) {
                         case "name":
+                            boolean checkEmptyName = checkString(fieldvalue);
+                            if (!checkEmptyName) {
+                                req.setAttribute("messageTourName", "Tên tour không được để trống");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            }
                             tour1.setName(fieldvalue);
                             break;
                         case "price":
+                            boolean checkEmptyPrice = checkString(fieldvalue);
+                            if (!checkEmptyPrice) {
+                                req.setAttribute("messagePrice", "Giá tour không được để trống");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            } else if (!checkPrice(fieldvalue)) {
+                                req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            }
+
                             tour1.setPrice(Double.parseDouble(fieldvalue));
                             break;
                         case "start_time":
@@ -326,6 +316,46 @@ public class TourSeverlet extends HttpServlet {
                     }
                 }
             }
+//            String name = tour1.getName();
+//            boolean checkEmptyName = checkString(name);
+//            if (!checkEmptyName) {
+//                req.setAttribute("messageTourName", "Tên tour không được để trống");
+//            }
+//            String priceS = String.valueOf(tour1.getPrice());
+//            boolean checkEmptyPrice = checkString(priceS);
+//            if (!checkEmptyPrice) {
+//                req.setAttribute("messagePrice", "Giá tour không được để trống");
+//            } else if (!checkPrice(priceS)) {
+//                req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+//            }
+//            if (checkEmptyName && checkEmptyPrice && checkPrice(priceS)) {
+//                double price = Double.parseDouble(priceS);
+//                LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
+//                LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
+//                String img = req.getParameter("img");
+//                String description = req.getParameter("description");
+//                if (description == null) {
+//                    description = "";
+//                }
+//                Tour tour = new Tour(name, price, start_time, end_time, img, description);
+//                tourService.create(tour);
+//                int tour_id = tourService.findId();
+//                String[] selectedValues = req.getParameterValues("myCheckbox");
+//                if (selectedValues != null) {
+//                    for (String str : selectedValues) {
+//                        int tag_id = Integer.parseInt(str);
+//                        Tour_tag tourTag = new Tour_tag(tour_id, tag_id);
+//                        tour_tagService.create(tourTag);
+//                    }
+//                }
+//                req.setAttribute("tour", tour);
+//                req.setAttribute("message", "Created");
+//                req.setAttribute("tagList", tagService.findAll());
+//                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+//            } else {
+//                req.setAttribute("tagList", tagService.findAll());
+//                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+//            }
             tourService.create(tour1);
             int tour_id = tourService.findId();
             String[] selectedValues = req.getParameterValues("myCheckbox");
@@ -345,95 +375,93 @@ public class TourSeverlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-<<<<<<< Updated upstream
-        String priceS = req.getParameter("price");
-        boolean checkEmptyPrice = checkString(priceS);
-        if (!checkEmptyPrice) {
-            req.setAttribute("messagePrice", "Giá tour không được để trống");
-        } else if (!checkPrice(priceS)) {
-            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
-        }
-        if (checkEmptyName && checkEmptyPrice && checkPrice(priceS)) {
-            double price = Double.parseDouble(priceS);
-            LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
-            LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
-            String img =req.getParameter("img");
-            String description =req.getParameter("description");
-            if (description == null) {
-                description = "";
-            }
-            Tour tour=new Tour(name,price,start_time,end_time,img,description);
-            tourService.create(tour);
-            int tour_id =tourService.findId();
-            String[] selectedValues = req.getParameterValues("myCheckbox");
-            if(selectedValues!=null){for (String str:selectedValues) {
-                int tag_id= Integer.parseInt(str);
-                Tour_tag tourTag =new Tour_tag(tour_id,tag_id);
-                tour_tagService.create(tourTag);
-            }}
-            req.setAttribute("tour",tour);
-            req.setAttribute("message", "Created");
-            req.setAttribute("tagList", tagService.findAll());
-            req.getRequestDispatcher("creat.jsp").forward(req,resp);
-        } else {
-            req.setAttribute("tagList", tagService.findAll());
-            req.getRequestDispatcher("creat.jsp").forward(req,resp);
-        }
+
+//        String priceS = req.getParameter("price");
+//        boolean checkEmptyPrice = checkString(priceS);
+//        if (!checkEmptyPrice) {
+//            req.setAttribute("messagePrice", "Giá tour không được để trống");
+//        } else if (!checkPrice(priceS)) {
+//            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+//        }
+//        if (checkEmptyName && checkEmptyPrice && checkPrice(priceS)) {
+//            double price = Double.parseDouble(priceS);
+//            LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
+//            LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
+//            String img =req.getParameter("img");
+//            String description =req.getParameter("description");
+//            if (description == null) {
+//                description = "";
+//            }
+//            Tour tour=new Tour(name,price,start_time,end_time,img,description);
+//            tourService.create(tour);
+//            int tour_id =tourService.findId();
+//            String[] selectedValues = req.getParameterValues("myCheckbox");
+//            if(selectedValues!=null){for (String str:selectedValues) {
+//                int tag_id= Integer.parseInt(str);
+//                Tour_tag tourTag =new Tour_tag(tour_id,tag_id);
+//                tour_tagService.create(tourTag);
+//            }}
+//            req.setAttribute("tour",tour);
+//            req.setAttribute("message", "Created");
+//            req.setAttribute("tagList", tagService.findAll());
+//            req.getRequestDispatcher("creat.jsp").forward(req,resp);
+//        } else {
+//            req.setAttribute("tagList", tagService.findAll());
+//            req.getRequestDispatcher("creat.jsp").forward(req,resp);
+//        }
 
 
-=======
->>>>>>> Stashed changes
     }
 
     public void editTour(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-<<<<<<< Updated upstream
-        int id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        boolean checkEmptyName = checkString(name);
-        if (!checkEmptyName) {
-            req.setAttribute("messageTourName", "Tên tour không được để trống");
-        }
-        String priceS = req.getParameter("price");
-        boolean checkEmptyPrice = checkString(priceS);
-        if (!checkEmptyPrice) {
-            req.setAttribute("messagePrice", "Giá tour không được để trống");
-        } else if (!checkPrice(priceS)) {
-            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
-        }
-        if (checkEmptyName && checkEmptyPrice && checkPrice(priceS)) {
-            double price = Double.parseDouble(priceS);
-            LocalDate start_time= LocalDate.parse(req.getParameter("start_time"));
-            LocalDate end_time= LocalDate.parse(req.getParameter("end_time"));
-            String img =req.getParameter("img");
-            String description =req.getParameter("description");
 
-            Tour tour= new Tour(id,name,price,start_time,end_time,img,description);
-            tourService.edit(tour);
-            tour_tagService.deleteByTourId(id);
-            String[] selectedValues = req.getParameterValues("myCheckbox");
-            if(selectedValues!=null){for (String str:selectedValues) {
-                int tag_id= Integer.parseInt(str);
-                tour_tagService.create(new Tour_tag(tour.getTour_id(),tag_id));
-            }}
+//        int id = Integer.parseInt(req.getParameter("id"));
+//        String name = req.getParameter("name");
+//        boolean checkEmptyName = checkString(name);
+//        if (!checkEmptyName) {
+//            req.setAttribute("messageTourName", "Tên tour không được để trống");
+//        }
+//        String priceS = req.getParameter("price");
+//        boolean checkEmptyPrice = checkString(priceS);
+//        if (!checkEmptyPrice) {
+//            req.setAttribute("messagePrice", "Giá tour không được để trống");
+//        } else if (!checkPrice(priceS)) {
+//            req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+//        }
+//        if (checkEmptyName && checkEmptyPrice && checkPrice(priceS)) {
+//            double price = Double.parseDouble(priceS);
+//            LocalDate start_time= LocalDate.parse(req.getParameter("start_time"));
+//            LocalDate end_time= LocalDate.parse(req.getParameter("end_time"));
+//            String img =req.getParameter("img");
+//            String description =req.getParameter("description");
+//
+//            Tour tour= new Tour(id,name,price,start_time,end_time,img,description);
+//            tourService.edit(tour);
+//            tour_tagService.deleteByTourId(id);
+//            String[] selectedValues = req.getParameterValues("myCheckbox");
+//            if(selectedValues!=null){for (String str:selectedValues) {
+//                int tag_id= Integer.parseInt(str);
+//                tour_tagService.create(new Tour_tag(tour.getTour_id(),tag_id));
+//            }}
+//
+//            req.setAttribute("tour",tour);
+//            req.setAttribute("tagList", tagService.findAll());
+//            req.setAttribute("message", "edited");
+//            req.getRequestDispatcher("edit.jsp").forward(req,resp);
+//        } else {
+//            Tour tour = tourService.findById(id);
+//            req.setAttribute("tour",tour);
+//            req.setAttribute("tagList", tagService.findAll());
+//            req.getRequestDispatcher("edit.jsp").forward(req,resp);
+//        }
 
-            req.setAttribute("tour",tour);
-            req.setAttribute("tagList", tagService.findAll());
-            req.setAttribute("message", "edited");
-            req.getRequestDispatcher("edit.jsp").forward(req,resp);
-        } else {
-            Tour tour = tourService.findById(id);
-            req.setAttribute("tour",tour);
-            req.setAttribute("tagList", tagService.findAll());
-            req.getRequestDispatcher("edit.jsp").forward(req,resp);
-        }
-=======
         Tour tour = new Tour();
         try {
             ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
             sf.setHeaderEncoding("UTF-8");
             List<FileItem> multifiles = sf.parseRequest(req);
             String listImage = "";
-            String value = null;
+//            String value = null;
             for (FileItem item : multifiles) {
                 if (item.isFormField()) {
 
@@ -444,9 +472,25 @@ public class TourSeverlet extends HttpServlet {
                             tour.setTour_id(Integer.parseInt(fieldvalue));
                             break;
                         case "name":
+                            boolean checkEmptyName = checkString(fieldvalue);
+                            if (!checkEmptyName) {
+                                req.setAttribute("messageTourName", "Tên tour không được để trống");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            }
                             tour.setName(fieldvalue);
                             break;
                         case "price":
+                            boolean checkEmptyPrice = checkString(fieldvalue);
+                            if (!checkEmptyPrice) {
+                                req.setAttribute("messagePrice", "Giá tour không được để trống");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            } else if (!checkPrice(fieldvalue)) {
+                                req.setAttribute("messagePrice", "Giá tour phải lớn hơn 0");
+                                req.getRequestDispatcher("creat.jsp").forward(req, resp);
+                                return;
+                            }
                             tour.setPrice(Double.parseDouble(fieldvalue));
                             break;
                         case "start_time":
@@ -458,9 +502,9 @@ public class TourSeverlet extends HttpServlet {
                         case "description":
                             tour.setDescription(fieldvalue);
                             break;
-                        case "filePart1":
-                            value = fieldvalue;
-                            break;
+//                        case "filePart1":
+//                            value = fieldvalue;
+//                            break;
                     }
                 } else {
                     if (!item.getName().isEmpty() && !item.getFieldName().equals("files")) {
@@ -468,8 +512,8 @@ public class TourSeverlet extends HttpServlet {
                         tour.setImg("/assets/image/" + filename);
                         item.write(new File(link
                                 + filename));
-                    } else {
-                        tour.setImg(value);
+//                    } else {
+//                        tour.setImg(value);
                     }
                 }
             }
@@ -492,31 +536,6 @@ public class TourSeverlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
-//        int id = Integer.parseInt(req.getParameter("id"));
-//        String name = req.getParameter("name");
-//        double price = Double.parseDouble(req.getParameter("price"));
-//        LocalDate start_time = LocalDate.parse(req.getParameter("start_time"));
-//        LocalDate end_time = LocalDate.parse(req.getParameter("end_time"));
-//        String img = req.getParameter("img");
-//        String description = req.getParameter("description");
-//
-//        Tour tour = new Tour(id, name, price, start_time, end_time, img, description);
-//        tourService.edit(tour);
-//        tour_tagService.deleteByTourId(id);
-//        String[] selectedValues = req.getParameterValues("myCheckbox");
-//        if (selectedValues != null) {
-//            for (String str : selectedValues) {
-//                int tag_id = Integer.parseInt(str);
-//                tour_tagService.create(new Tour_tag(tour.getTour_id(), tag_id));
-//            }
-//
-//            req.setAttribute("tour", tour);
-//            req.setAttribute("tagList", tagService.findAll());
-//            req.setAttribute("message", "edited");
-//            req.getRequestDispatcher("edit.jsp").forward(req, resp);
-//        }
->>>>>>> Stashed changes
 
     }
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
 
 <head>
@@ -35,10 +36,10 @@
             >
                 <c:forEach items="${requestScope.hotels}" var="hotel">
                     <c:if test="${service.getHotelName().id != hotel.id}">
-                        <option value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
+                        <option value="${hotel.id}">${hotel.name} - <fmt:formatNumber type="number" value="${hotel.price}"/> VND - ${hotel.description}</option>
                     </c:if>
                     <c:if test="${service.getHotelName().id == hotel.id}">
-                        <option selected value="${hotel.id}">${hotel.name} - ${hotel.price} đ - ${hotel.description}</option>
+                        <option selected value="${hotel.id}">${hotel.name} - <fmt:formatNumber type="number" value="${hotel.price}"/> VND - ${hotel.description}</option>
                     </c:if>
                 </c:forEach>
             </select>
@@ -55,10 +56,10 @@
             >
                 <c:forEach items="${requestScope.transports}" var="transport">
                     <c:if test="${service.getTransportName().id != transport.id}">
-                        <option value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
+                        <option value="${transport.id}">${transport.name} - <fmt:formatNumber type="number" value="${transport.price}"/> VND - ${transport.description}</option>
                     </c:if>
                     <c:if test="${service.getTransportName().id == transport.id}">
-                        <option selected value="${transport.id}">${transport.name} - ${transport.price} đ - ${transport.description}</option>
+                        <option selected value="${transport.id}">${transport.name} - <fmt:formatNumber type="number" value="${transport.price}"/> VND - ${transport.description}</option>
                     </c:if>
                 </c:forEach>
             </select>

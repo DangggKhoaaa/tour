@@ -41,7 +41,7 @@ public class TourTicketDAO extends ConectionDatabase {
             "                            left join service on service.service_id =tour_ticket.service_id\n" +
             "                            left join transport on service.transport_id =transport.transport_id\n" +
             "                            left join hotel on service.hotel_id =hotel.hotel_id\n" +
-            "                            where tour_ticket.`status` = false and `user`.user_name like ? or `user`.full_name like ? or tours.`name` like ? or transport.`name` like ? or hotel.`name` like ?";
+            "                            where tour_ticket.`status`<> 'true' and (`user`.user_name like ? or `user`.full_name like ? or tours.`name` like ? or transport.`name` like ? or hotel.`name` like ?)";
 
     private final String ACCEPT ="UPDATE `tour_ticket` SET `status` = 'true' WHERE (`tour_ticket_id` = ?);";
     private final String PAY="UPDATE `tour_ticket` SET `status` = 'pay',payDate = curdate()  WHERE (`tour_ticket_id` = ?);";
@@ -50,6 +50,12 @@ public class TourTicketDAO extends ConectionDatabase {
             " where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s' \n" +
             " order by %s %s\n" +
             " limit %d offset %d";
+    private final String TOTAL_TOUR_TICKET_USER="select count(1) as total_tour_ticket from tour_ticket left  join `user` on `user`.user_id =tour_ticket.user_id\n" +
+            "           left join tours on tours.tour_id =tour_ticket.tour_id\n" +
+            "                                        left join service on service.service_id =tour_ticket.service_id\n" +
+            "                                        left join transport on service.transport_id =transport.transport_id\n" +
+            "                                        left join hotel on service.hotel_id =hotel.hotel_id\n" +
+            "                                        where tour_ticket.`status` = false and `user`.user_name like ? or `user`.full_name like ? or tours.`name` like ? or transport.`name` like ? or hotel.`name` like ?";
     private final String TOTAL_FINDTOUR_TICKET_BY_MONTH="select count(1) as total_tour_ticket from tour_ticket\n" +
             "             where `status` = 'true' and month(payDate) like '%s' and year(payDate) like '%s' ";
     private final String DOANH_THU="select sum(total_price) as total from tour_ticket\n" +
@@ -149,7 +155,7 @@ public class TourTicketDAO extends ConectionDatabase {
 
                 tourTickets.add(new TourTicket(id, user, tour, serviceModel, quantity, total_price, status, description,buyDate));
             }
-            PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET);
+            PreparedStatement statementTotalUsers = connection.prepareStatement(TOTAL_TOUR_TICKET_USER);
             statementTotalUsers.setString(1, search);
             statementTotalUsers.setString(2, search);
             statementTotalUsers.setString(3, search);

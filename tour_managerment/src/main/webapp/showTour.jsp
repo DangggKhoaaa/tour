@@ -144,9 +144,9 @@
                     </td>
                     <td>
                         <a href="tours?action=edit&id=${tour.tour_id}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="tours?action=delete&id=${tour.tour_id}"
-                           onclick="return confirm('Do you want to remove ${tour.name}?')"> <i
-                                class="fa-sharp fa-solid fa-trash"></i></a>
+<%--                        <a href="tours?action=delete&id=${tour.tour_id}"--%>
+<%--                           onclick="return confirm('Do you want to remove ${tour.name}?')"> <i--%>
+<%--                                class="fa-sharp fa-solid fa-trash"></i></a>--%>
                     </td>
                 </tr>
             </c:forEach>

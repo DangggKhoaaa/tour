@@ -13,107 +13,107 @@
         >
             <th class="px-4 py-3">
                 ID TICKET
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=service.service_id">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=service.service_id">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=service.service_id">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=service.service_id">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 TOUR NAME
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=hotel_name">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=hotel_name">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=hotel_name">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=hotel_name">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 CUSTOMER NAME
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=transport_name">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=transport_name">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=transport_name">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=transport_name">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 HOTEL - TRANSPORT
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=total_price">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=total_price">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=total_price">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=total_price">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 QUANTITY
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 ORDER DAY
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 TOTAL PRICE
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">
                 STATUS
-                <c:if test="${pageable.sortBy == 'desc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
-                <c:if test="${pageable.sortBy == 'asc'}">
-                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">
-                        <i class="fa-solid fa-sort"></i>
-                    </a>
-                </c:if>
+<%--                <c:if test="${pageable.sortBy == 'desc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=asc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${pageable.sortBy == 'asc'}">--%>
+<%--                    <a href="service_manager?page=${pageable.page}&search=${pageable.search}&sortBy=desc&nameField=description">--%>
+<%--                        <i class="fa-solid fa-sort"></i>--%>
+<%--                    </a>--%>
+<%--                </c:if>--%>
             </th>
             <th class="px-4 py-3">NOTE</th>
         </tr>
@@ -248,16 +248,30 @@
                 </td>
             </tr>
         </c:forEach>
-        <tr>
-            <%--                                <li class="disabled"><a href="#">&laquo;</a></li>--%>
-
-            <c:forEach begin="1" end="${pageable.totalPage}" var="page">
-                <li class="active"><a href="user?action=cart&page=${page}&search=${pageable.search}&user_id=${user.getId()}">${page}</a></li>
-            </c:forEach>
-            <%--                                <li><a href="#">&raquo;</a></li>--%>
-        </tr>
         </tbody>
     </table>
+</div>
+<div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+    <span class="flex items-center col-span-3">
+    Showing ${pageable.totalPage}
+    </span>
+    <span class="col-span-2"></span>
+    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+    <nav aria-label="Table navigation">
+    <ul class="inline-flex items-center">
+    <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+                      <li>
+                          <a href="user?action=cart&page=${page}&search=${pageable.search}&user_id=${user.getId()}">
+                              <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                      ${page}
+                              </button>
+                          </a>
+                      </li>
+    </c:forEach>
+    </ul>
+    </nav>
+    </span>
+
 </div>
 
 <jsp:include page="footer.jsp"/>

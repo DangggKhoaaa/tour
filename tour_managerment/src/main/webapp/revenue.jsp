@@ -307,20 +307,41 @@
                 </p>
             </div>
         </div>
-        <%--        <td>Tổng doanh thu:</td>--%>
+<%--        &lt;%&ndash;        <td>Tổng doanh thu:</td>&ndash;%&gt;--%>
 
-        <%--        <td></td>--%>
-        <ul class="pagination">
-            <%--                                <li class="disabled"><a href="#">&laquo;</a></li>--%>
+<%--        &lt;%&ndash;        <td></td>&ndash;%&gt;--%>
+<%--        <ul class="pagination">--%>
+<%--            &lt;%&ndash;                                <li class="disabled"><a href="#">&laquo;</a></li>&ndash;%&gt;--%>
 
-            <c:forEach begin="1" end="${pageable.totalPage}" var="page">
-                <li class="active"><a href="tour_ticket?action=revenue&page=${page}&search=${pageable.search}">${page}</a></li>
-            </c:forEach>
-            <%--                                <li><a href="#">&raquo;</a></li>--%>
-        </ul>
+<%--            <c:forEach begin="1" end="${pageable.totalPage}" var="page">--%>
+<%--                <li class="active"><a href="tour_ticket?action=revenue&page=${page}&search=${pageable.search}">${page}</a></li>--%>
+<%--            </c:forEach>--%>
+<%--            &lt;%&ndash;                                <li><a href="#">&raquo;</a></li>&ndash;%&gt;--%>
+<%--        </ul>--%>
         </tbody>
     </table>
 </div>
+<div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+    <span class="flex items-center col-span-3">
+    Showing ${pageable.totalPage}
+    </span>
+    <span class="col-span-2"></span>
+    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+    <nav aria-label="Table navigation">
+    <ul class="inline-flex items-center">
+    <c:forEach begin="1" end="${pageable.totalPage}" var="page">
+                      <li>
+                          <a href="tour_ticket?action=revenue&page=${page}&search=${pageable.search}">
+                              <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                      ${page}
+                              </button>
+                          </a>
+                      </li>
+    </c:forEach>
+    </ul>
+    </nav>
+    </span>
 
+</div>
 
 <jsp:include page="footer.jsp"/>

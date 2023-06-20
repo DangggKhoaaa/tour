@@ -7,10 +7,7 @@ public class FormatForm {
     public static boolean checkString(String name) {
         return !Objects.equals(name, "");
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
     public static boolean checkQuantity(String quanS) {
         try {
             int quan = Integer.parseInt(quanS);
@@ -21,7 +18,7 @@ public class FormatForm {
         }
         return false;
     }
-<<<<<<< Updated upstream
+
     public static boolean checkPrice(String priceS) {
         try {
             double price = Double.parseDouble(priceS);
@@ -32,19 +29,17 @@ public class FormatForm {
         }
         return false;
     }
-=======
->>>>>>> Stashed changes
+
     public static  final String USERNAME_REGEX = "^[a-zA-Z0-9]{1,15}$";
     public static boolean checkUsername(String username) {
         return Pattern.compile(USERNAME_REGEX).matcher(username).matches();
     }
-<<<<<<< Updated upstream
+
     public static final String NAME_REGEX = "^[a-zA-ZÀ-Ỹà-ỹ ]+$";
     public static  boolean checkName(String name) {
         return Pattern.compile(NAME_REGEX).matcher(name).matches();
     }
-=======
->>>>>>> Stashed changes
+
     public static final String DATE_REGEX = "\\d{2}\\\\d{2}\\\\d{4}";
     public static boolean isDateValid(String date) {
         return Pattern.compile(DATE_REGEX).matcher(date).matches();
@@ -55,11 +50,9 @@ public class FormatForm {
     public static boolean isPhoneValid(String number) {
         return Pattern.compile(PHONE_REGEX).matcher(number).matches();
     }
-<<<<<<< Updated upstream
+
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|edu|net|org|biz|info|vn|pro|[A-Za-z]{2})$";
-=======
-    public static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
->>>>>>> Stashed changes
+
     public static boolean isEmailValid(String email) {
         return Pattern.compile(EMAIL_REGEX).matcher(email).matches();
     }

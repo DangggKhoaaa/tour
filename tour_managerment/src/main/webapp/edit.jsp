@@ -21,13 +21,10 @@
 <div
         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
 >
-<<<<<<< Updated upstream
-    <form action="tours?action=edit" method="post">
-<%--        <input type="hidden" name="tour_id" value="${tour.id}">--%>
-=======
+
     <form action="tours?action=edit" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" id="id" value="${tour.tour_id}">
->>>>>>> Stashed changes
+
         <label for="name" class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Name</span>
             <input
@@ -114,6 +111,5 @@
     <script>
         alert("${message}")
     </script>
-    <%--    <span>${message}</span>--%>
 </c:if>
 <jsp:include page="footer.jsp"/>

@@ -93,7 +93,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="colorlib-logo"><a href="user?action=userPage">Tour</a></div>
+                        <c:if test="${user.id != null}">
+                            <div id="colorlib-logo"><a href="user?action=userPage">Tour</a></div>
+                        </c:if>
+                        <c:if test="${user.id == null}">
+                            <div id="colorlib-logo"><a href="user?action=home">Tour</a></div>
+                        </c:if>
+
                     </div>
                     <div class="col-xs-10 text-right menu-1">
                         <c:if test="${user.id != null}">
