@@ -269,7 +269,19 @@ public class UserServlet extends HttpServlet {
         } else if (!checkName) {
             req.setAttribute("messageName", "Họ và tên không được có kí tự đặc biệt");
         }
-        Date dob = Date.valueOf(req.getParameter("dob"));
+        String dobS = req.getParameter("dob");
+        boolean checkDob = true;
+        Date dob = null;
+        if (dobS == null || dobS.equals("")) {
+            checkDob = false;
+            req.setAttribute("messageDob", "Vui lòng chọn ngày sinh hợp lệ");
+        } else {
+            dob = Date.valueOf(req.getParameter("dob"));
+            if (dob.compareTo(new java.util.Date()) > 0) {
+                checkDob = false;
+                req.setAttribute("messageDob", "Không được chọn ngày quá ngày hiện tại");
+            }
+        }
         String genderS = req.getParameter("gender");
         Gender gender = Gender.valueOf(genderS);
         String phone = req.getParameter("phone");
@@ -297,8 +309,11 @@ public class UserServlet extends HttpServlet {
         }
         String address = req.getParameter("address");
         boolean checkEmptyAddress = checkString(address);
+        boolean checkAddress = isAddressValid(address);
         if (!checkEmptyAddress) {
             req.setAttribute("messageAddress", "Địa chỉ không được để trống");
+        } else if (!checkAddress) {
+            req.setAttribute("messageAddress", "Địa chỉ không được dùng kí tự đặc biệt ngoài ',' '.' '/'");
         }
         String cccd = req.getParameter("cccd");
         boolean checkEmptyCccd = checkString(cccd);
@@ -311,7 +326,7 @@ public class UserServlet extends HttpServlet {
         } else if (userCccd != null && !Objects.equals(userId.getCccd(), cccd)) {
             req.setAttribute("messageCccd", "Căn cước công dân đã tồn tại");
         }
-        if (checkEmptyName && checkName && checkEmptyPhone && checkPhone && (userPhone == null || Objects.equals(userId.getPhone(), phone)) && checkEmptyEmail && checkEmail && (userEmail == null || Objects.equals(userId.getEmail(), email)) && checkEmptyAddress && checkEmptyCccd && checkCCCD && (userCccd == null || Objects.equals(userId.getCccd(), cccd))) {
+        if (checkEmptyName && checkName && checkDob && checkEmptyPhone && checkPhone && (userPhone == null || Objects.equals(userId.getPhone(), phone)) && checkEmptyEmail && checkEmail && (userEmail == null || Objects.equals(userId.getEmail(), email)) && checkEmptyAddress && checkAddress && checkEmptyCccd && checkCCCD && (userCccd == null || Objects.equals(userId.getCccd(), cccd))) {
             User user = new User(id, name, dob, gender, phone, email, address, cccd);
             userService.updateInfo(user);
             req.setAttribute("message", "Đổi thông tin thành công!");
@@ -371,15 +386,19 @@ public class UserServlet extends HttpServlet {
         } else if (!checkName) {
             req.setAttribute("messageName", "Họ và tên không được có kí tự đặc biệt");
         }
-        Date dob = Date.valueOf(req.getParameter("dob"));
-        
-//        boolean checkEmptyDob = checkString(dob.toString());
-//        boolean checkDob = isDateValid(dob.toString());
-//        if (!checkEmptyDob) {
-//            req.setAttribute("messageDob", "Ngày sinh không được để trống");
-//        } else if (!checkDob) {
-//            req.setAttribute("messageDob", "Ngày sinh không được để trống");
-//        }
+        String dobS = req.getParameter("dob");
+        boolean checkDob = true;
+        Date dob = null;
+        if (dobS == null || dobS.equals("")) {
+           checkDob = false;
+            req.setAttribute("messageDob", "Vui lòng chọn ngày sinh hợp lệ");
+        } else {
+            dob = Date.valueOf(req.getParameter("dob"));
+            if (dob.compareTo(new java.util.Date()) > 0) {
+                checkDob = false;
+                req.setAttribute("messageDob", "Không được chọn ngày quá ngày hiện tại");
+            }
+        }
         String genderS = req.getParameter("gender");
         Gender gender = Gender.valueOf(genderS);
         String phone = req.getParameter("phone");
@@ -400,14 +419,17 @@ public class UserServlet extends HttpServlet {
         if (!checkEmptyEmail) {
             req.setAttribute("messageEmail", "Email không được để trống");
         } else if (!checkEmail) {
-            req.setAttribute("messageEmail", "Email không hợp lệ(tên miền chỉ hỗ trợ các dạng .com|edu|net|org|biz|info|vn|pro)");
+            req.setAttribute("messageEmail", "Email không hợp lệ(tên miền chỉ hỗ trợ các dạng .com|edu|net|org|biz|info|pro) hoặc tên miền quốc gia ví dụ .vn,...");
         } else if (userEmail != null) {
             req.setAttribute("messageEmail", "Email đã tồn tại");
         }
         String address = req.getParameter("address");
         boolean checkEmptyAddress = checkString(address);
+        boolean checkAddress = isAddressValid(address);
         if (!checkEmptyAddress) {
             req.setAttribute("messageAddress", "Địa chỉ không được để trống");
+        } else if (!checkAddress) {
+            req.setAttribute("messageAddress", "Địa chỉ không được dùng kí tự đặc biệt ngoài ',' '.' '/'");
         }
         String cccd = req.getParameter("cccd");
         boolean checkEmptyCccd = checkString(cccd);
@@ -420,12 +442,12 @@ public class UserServlet extends HttpServlet {
         } else if (userCccd != null) {
             req.setAttribute("messageCccd", "Căn cước công dân đã tồn tại");
         }
-        if (!checkEmptyUsername || !checkUsername || username != null || !checkEmptyPassword || !checkEmptyName || !checkName || !checkEmptyPhone || !checkPhone || userPhone != null || !checkEmptyEmail || !checkEmail || userEmail != null || !checkEmptyAddress || !checkEmptyCccd || !checkCCCD || userCccd != null) {
+        if (!checkEmptyUsername || !checkUsername || username != null || !checkEmptyPassword || !checkEmptyName || !checkName || !checkEmptyPhone || !checkPhone || userPhone != null || !checkEmptyEmail || !checkEmail || userEmail != null || !checkEmptyAddress || !checkAddress || !checkEmptyCccd || !checkCCCD || userCccd != null || !checkDob) {
             User oldUser = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
             req.setAttribute("user", oldUser);
             req.getRequestDispatcher("register.jsp").forward(req, resp);
         }
-        if (checkEmptyUsername && checkUsername && username == null && checkEmptyPassword && checkEmptyName && checkName && checkEmptyPhone && checkPhone && userPhone == null && checkEmptyEmail && checkEmail && userEmail == null && checkEmptyAddress && checkEmptyCccd && checkCCCD && userCccd == null) {
+        if (checkEmptyUsername && checkUsername && username == null && checkEmptyPassword && checkEmptyName && checkName && checkEmptyPhone && checkPhone && userPhone == null && checkEmptyEmail && checkEmail && userEmail == null && checkEmptyAddress && checkAddress && checkEmptyCccd && checkCCCD && userCccd == null && checkDob) {
             User newUser = new User(userName, userPassword, name, dob, gender, phone, email, address, cccd);
             newUser.setRole(Role.USER);
             userService.create(newUser);
