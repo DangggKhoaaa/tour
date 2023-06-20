@@ -39,12 +39,8 @@ public class FormatForm {
     public static  boolean checkName(String name) {
         return Pattern.compile(NAME_REGEX).matcher(name).matches();
     }
-<<<<<<< Updated upstream
-
-    public static final String DATE_REGEX = "\\d{2}\\\\d{2}\\\\d{4}";
-=======
     public static final String DATE_REGEX = "^(0?[1-9]|[12]\\d|3[01])[\\-](0?[1-9]|1[0-2])[\\-](19|20)\\d{2}$";
->>>>>>> Stashed changes
+
     public static boolean isDateValid(String date) {
         return Pattern.compile(DATE_REGEX).matcher(date).matches();
     }
